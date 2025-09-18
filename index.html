@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentasi MySQL - Kelas 10 RPL</title>
+    <style>
+        /* CSS Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .slide {
+            display: none;
+            max-width: 900px;
+            margin: 20px auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #1a2a6c;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #b21f1f;
+            border-bottom: 2px solid #fdbb2d;
+            padding-bottom: 10px;
+        }
+
+        .content {
+            line-height: 1.6;
+            font-size: 18px;
+        }
+
+        .nav-buttons {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        button {
+            background: #1a2a6c;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 0 10px;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #b21f1f;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #1a2a6c;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .code {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        .slide-counter {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .important {
+            background: #fff9e6;
+            padding: 15px;
+            border-left: 5px solid #fdbb2d;
+            margin: 20px 0;
+        }
+
+        .analogy {
+            background: #e6f7ff;
+            padding: 15px;
+            border-left: 5px solid #1a2a6c;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide active">
+        <h1>Memahami Tipe Data & Primary Key dalam MySQL</h1>
+        <div class="content">
+            <p>Materi Untuk Kelas 10 Rekayasa Perangkat Lunak</p>
+            <p><strong>Guru Kalian</strong></p>
+            <div class="important">
+                <p>Gunakan tombol <strong>Next</strong> dan <strong>Previous</strong> untuk navigasi antar slide</p>
+            </div>
+        </div>
+        <div class="nav-buttons">
+            <button onclick="nextSlide()">Next →</button>
+        </div>
+        <div class="slide-counter">Slide 1 of 14</div>
+    </div>
+
+    <div class="slide">
+        <h1>Apa Itu Tipe Data?</h1>
+        <div class="content">
+            <div class="analogy">
+                <p><strong>Analoginya:</strong> Sebelum menyimpan air, kita butuh <strong>botol</strong>. Sebelum
+                    menyimpan buku, kita butuh <strong>rak</strong>. Sebelum menyimpan data di database, kita harus
+                    tentukan <strong>Tipe Datanya</strong>!</p>
+            </div>
+
+            <p><strong>Definisi:</strong> Tipe data adalah pengelompokan data yang memberi tahu MySQL:</p>
+            <ul>
+                <li><strong>Jenis nilai</strong> apa yang bisa disimpan di sebuah kolom.</li>
+                <li><strong>Berapa besar</strong> ruang penyimpanannya.</li>
+                <li><strong>Operasi</strong> apa yang bisa dilakukan terhadap data tersebut.</li>
+            </ul>
+
+            <div class="important">
+                <p><strong>Mengapa Penting?</strong> Agar penyimpanan data EFISIEN dan proses pencarian/penghitungan
+                    menjadi CEPAT dan AKURAT.</p>
+            </div>
+        </div>
+        <div class="nav-buttons">
+            <button onclick="prevSlide()">← Previous</button>
+            <button onclick="nextSlide()">Next →</button>
+        </div>
+        <div class="slide-counter">Slide 2 of 14</div>
+    </div>
+
+    <div class="slide">
+        <h1>Keluarga Tipe Data Teks (String)</h1>
+        <div class="content">
+            <p>Untuk menyimpan data berupa kumpulan karakter (huruf, angka, simbol).</p>
+
+            <table>
+                <tr>
+                    <th>Tipe Data</th>
+                    <th>Penjelasan</th>
+                    <th>Analogi</th>
+                    <th>Contoh</th>
+                </tr>
+                <tr>
+                    <td><strong>CHAR(n)</strong></td>
+                    <td>Teks dengan <strong>panjang pasti</strong>. Hemat jika isi selalu penuh.</td>
+                    <td><strong>Tempat Telur</strong> (ukurannya pasti)</td>
+                    <td><code>CHAR(5)</code> → <code>'AB123'</code> (Kode)</td>
+                </tr>
+                <tr>
+                    <td><strong>VARCHAR(n)</strong></td>
+                    <td>Teks dengan <strong>panjang bervariasi</strong>. <strong>PALING SERING DIPAKAI!</strong></td>
+                    <td><strong>Tas Jinjing</strong> (sesuai isinya)</td>
+                    <td><code>VARCHAR(100)</code> → <code>'Budi Santoso'</code> (Nama)</td>
+                </tr>
+                <tr>
+                    <td><strong>TEXT</strong></td>
+                    <td>Untuk teks yang <strong>sangat panjang</strong>.</td>
+                    <td><strong>Kontainer</strong> (untuk barang banyak)</td>
+                    <td>Deskripsi produk, artikel blog.</td>
+                </tr>
+            </table>
+        </div>
+        <div class="nav-buttons">
+            <button onclick="prevSlide()">← Previous</button>
+            <button onclick="nextSlide()">Next →</button>
+        </div>
+        <div class="slide-counter">Slide 3 of 14</div>
+    </div>
+
+    <div class="slide">
+        <h1>Keluarga Tipe Data Angka (Numeric)</h1>
+        <div class="content">
+            <p>Digunakan untuk data yang akan dilakukan operasi matematika.</p>
+
+            <table>
+                <tr>
+                    <th>Tipe Data</th>
+                    <th>Penjelasan</th>
+                    <th>Kegunaan</th>
+                    <th>Contoh</th>
+                </tr>
+                <tr>
+                    <td><strong>INT</strong></td>
+                    <td>Bilangan <strong>bulat</strong> (tanpa koma). <strong>SANGAT SERING DIPAKAI.</strong></td>
+                    <td>ID, Usia, Jumlah, Tahun</td>
+                    <td><code>25</code>, <code>-5</code>, <code>1000</code></td>
+                </tr>
+                <tr>
+                    <td><strong>DECIMAL(M, D)</strong></td>
+                    <td>Bilangan <strong>desimal dengan ketepatan tinggi</strong>.<br>
+                        <code>M</code> = Total digit, <code>D</code> = Digit di belakang koma.
+                    </td>
+                    <td>Harga, Nilai Rata-rata, Berat</td>
+                    <td><code>DECIMAL(10,2)</code> → <code>125000.50</code></td>
+                </tr>
+            </table>
+
+            <div class="important">
+                <p>💡 <strong>Tips:</strong> Untuk menyimpan data uang (harga), <strong>selalu gunakan DECIMAL</strong>
+                    untuk menghindari kesalahan pembulatan.</p>
+            </div>
+        </div>
+        <div class="nav-buttons">
+            <button onclick="prevSlide()">← Previous</button>
+            <button onclick="nextSlide()">Next →</button>
+        </div>
+        <div class="slide-counter">Slide 4 of 14</div>
+    </div>
+
+    <div class="slide">
+        <h1>Keluarga Tipe Data Tanggal & Waktu</h1>
+        <div class="content">
+            <p>Untuk menyimpan informasi kronologis.</p>
+
+            <table>
+                <tr>
+                    <th>Tipe Data</th>
+                    <th>Penjelasan</th>
+                    <th>Format & Contoh</th>
+                    <th>Kegunaan</th>
+                </tr>
+                <tr>
+                    <td><strong>DATE</strong></td>
+                    <td>Hanya menyimpan <strong>Tanggal</strong>.</td>
+                    <td><code>'YYYY-MM-DD'</code><br><code>'2007-08-17'</code></td>
+                    <td>Tanggal Lahir, Deadline</td>
+                </tr>
+                <tr>
+                    <td><strong>DATETIME</strong></td>
+                    <td>Menyimpan <strong>Tanggal dan Waktu</strong>.</td>
+                    <td><code>'YYYY-MM-DD HH:MI:SS'</code><br><code>'2024-01-25 14:30:00'</code></td>
+                    <td>Waktu Transaksi, Posting</td>
+                </tr>
+                <tr>
+                    <td><strong>TIMESTAMP</strong></td>
+                    <td>Mirip <code>DATETIME</code>, sering <strong>berubah otomatis</strong>.</td>
+                    <td><code>'2024-01-25 14:30:00'</code></td>
+                    <td><code>dibuat_pada</code>, <code>diupdate_pada</code></td>
+                </tr>
+            </table>
+        </div>
+        <div class="nav-buttons">
+            <button onclick="prevSlide()">← Previous</button>
+            <button onclick="nextSlide()">Next →</button>
+        </div>
+        <div class="slide-counter">Slide 5 of 14</div>
+    </div>
+
+    <div class="slide">
+        <h1>Tipe Data Spesial Lainnya</h1>
+        <div class="content">
+            <table>
+                <tr>
+                    <th>Tipe Data</th>
+                    <th>Penjelasan</th>
+                    <th>Kegunaan</th>
+                    <th>Contoh</th>
+                </tr>
+                <tr>
+                    <td><strong>ENUM</strong></td>
+                    <td>Data dengan <strong>pilihan nilai tetap</strong>.</td>
+                    <td>Jenis Kelamin, Status</td>
+                    <td><code>ENUM('L', 'P')</code> → <code>'L'</code></td>
+                </tr>
+                <tr>
+                    <td><strong>BOOLEAN</strong></td>
+                    <td>Nilai <strong>TRUE (1)</strong> atau <strong>FALSE (0)</strong>.</td>
+                    <td>Status Aktif, Ya/Tidak</td>
+                    <td><code>TRUE</code>, <code>1</code></td>
+                </tr>
+            </table>
+        </div>
+        <div class="nav-buttons">
+            <button onclick="prevSlide()">← Previous</button>
+            <button onclick="nextSlide()">Next →</button>
+        </div>
+        <div class="slide-counter">Slide 6 of 14</div>
+    </div>
+
+    <div class="slide">
+        <h1>Pengenalan PRIMARY KEY</h1>
+        <div class="content">
+            <div class="analogy">
+                <p><strong>Apa Itu Primary Key?</strong><br>
+                    Identifier (pengenal) <strong>unik</strong> untuk setiap baris data dalam sebuah tabel.</p>
+
+                <p><strong>Analoginya:</strong><br>
+                    Setiap siswa di sekolah punya <strong>NIS (Nomor Induk Siswa)</strong> yang <strong>unik dan tidak
+                        mungkin sama</strong>. NIS inilah Primary Key-nya.</p>
+            </div>
+
+            <p><strong>Sifat Wajib Primary Key:</strong></p>
+            <ol>
+                <li><strong>UNIK:</strong> Nilainya harus berbeda untuk setiap baris.</li>
+                <li><strong>TIDAK BOLEH KOSONG (NOT NULL):</strong> Harus selalu memiliki nilai.</li>
+                <li><strong>Hanya ada SATU</strong> dalam satu tabel.</li>
+            </ol>
+        </div>
+        <div class="nav-buttons">
+            <button onclick="prevSlide()">← Previous</button>
+            <button onclick="nextSlide()">Next →</button>
+        </div>
+        <div class="slide-counter">Slide 7 of 14</div>
+    </div>
+
+    <div class="slide">
+        <h1>Cara Membuat Primary Key</h1>
+        <div class="content">
+            <p><strong>Praktik Terbaik:</strong><br>
+                Gunakan kolom <code>id</code> bertipe <strong>INT</strong> dengan atribut
+                <strong>AUTO_INCREMENT</strong>.
+            </p>
+
+            <ul>
+                <li><strong>INT:</strong> Efisien untuk diproses.</li>
+                <li><strong>AUTO_INCREMENT:</strong> MySQL otomatis memberikan angka berurutan (+1) untuk data baru.
+                    Kita tidak perlu masukkan manual.</li>
+            </ul>
+
+            <p><strong>Contoh Syntax:</strong></p>
+            <div class="code">
+                CREATE TABLE nama_tabel (<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;id INT PRIMARY KEY AUTO_INCREMENT, -- Primary Key di sini!<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;nama_column Lainnya TipeData_Lain<br>
+                );
+            </div>
+        </div>
+        <div class="nav-buttons">
+            <button onclick="prevSlide()">← Previous</button>
+            <button onclick="nextSlide()">Next →</button>
+        </div>
+        <div class="slide-counter">Slide 8 of 14</div>
+    </div>
+
+    <div class="slide">
+        <h1>Contoh Tabel Lengkap dengan Primary Key</h1>
+        <div class="content">
+            <p>Mari buat tabel <code>siswa</code>:</p>
+
+            <div class="code">
+                CREATE TABLE siswa (<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;id_siswa INT PRIMARY KEY AUTO_INCREMENT, -- PRIMARY KEY<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;nis CHAR(10) UNIQUE, -- Unik tapi bukan PK<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;nama_depan VARCHAR(50) NOT NULL,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;nama_belakang VARCHAR(50),<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;jenis_kelamin ENUM('L', 'P'),<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;tanggal_lahir DATE,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;rata_rata_nilai DECIMAL(5,2),<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;aktif BOOLEAN DEFAULT TRUE,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;dibuat_pada TIMESTAMP DEFAULT CURRENT_TIMESTAMP<br>
+                );
+            </div>
+        </div>
+        <div class="nav-buttons">
+            <button onclick="prevSlide()">← Previous</button>
+            <button onclick="nextSlide()">Next →</button>
+        </div>
+        <div class="slide-counter">Slide 9 of 14</div>
+    </div>
+
+    <div class="slide">
+        <h1>Data Contoh dalam Tabel <code>siswa</code></h1>
+        <div class="content">
+            <table>
+                <tr>
+                    <th>id_siswa</th>
+                    <th>nis</th>
+                    <th>nama_depan</th>
+                    <th>nama_belakang</th>
+                    <th>jenis_kelamin</th>
+                    <th>...</th>
+                </tr>
+                <tr>
+                    <td><strong>1</strong></td>
+                    <td><code>'202401001'</code></td>
+                    <td>Danis</td>
+                    <td>Santoso</td>
+                    <td><code>'L'</code></td>
+                    <td>...</td>
+                </tr>
+                <tr>
+                    <td><strong>2</strong></td>
+                    <td><code>'202401002'</code></td>
+                    <td>Siti</td>
+                    <td>Rahayu</td>
+                    <td><code>'P'</code></td>
+                    <td>...</td>
+                </tr>
+                <tr>
+                    <td><strong>3</strong></td>
+                    <td><code>'202401003'</code></td>
+                    <td>Brilian</td>
+                    <td>Darmawan</td>
+                    <td><code>'L'</code></td>
+                    <td>...</td>
+                </tr>
+            </table>
+
+            <div class="important">
+                <p>Perhatikan! Kolom <code>id_siswa</code> selalu unik dan terisi otomatis!</p>
+            </div>
+        </div>
+        <div class="nav-buttons">
+            <button onclick="prevSlide()">← Previous</button>
+            <button onclick="nextSlide()">Next →</button>
+        </div>
+        <div class="slide-counter">Slide 10 of 14</div>
+    </div>
+
+    <div class="slide">
+        <h1>Mengapa Pakai <code>id</code> INT? Kenapa NIS Tidak Jadi PK?</h1>
+        <div class="content">
+            <p><strong>Alasan menggunakan <code>id INT AUTO_INCREMENT</code> sebagai PK:</strong></p>
+
+            <ol>
+                <li><strong>Efisiensi:</strong> <code>INT</code> (4 byte) lebih cepat diproses & dirujuk daripada
+                    <code>CHAR(10)</code> (10 byte).
+                </li>
+                <li><strong>Stabil:</strong> <code>NIS</code> adalah aturan bisnis. Jika format NIS berubah, mengubah
+                    Primary Key itu sangat rumit. <code>id</code> integer tidak pernah berubah.</li>
+                <li><strong>Privacy:</strong> <code>id</code> integer tidak punya makna publik, lebih aman.</li>
+            </ol>
+
+            <div class="important">
+                <p><strong>Kesimpulan:</strong> <code>id</code> untuk <strong>database</strong>, <code>nis</code> untuk
+                    <strong>dunia nyata</strong>.
+                </p>
+            </div>
+        </div>
+        <div class="nav-buttons">
+            <button onclick="prevSlide()">← Previous</button>
+            <button onclick="nextSlide()">Next →</button>
+        </div>
+        <div class="slide-counter">Slide 11 of 14</div>
+    </div>
+
+    <div class="slide">
+        <h1>Ringkasan & Tips Praktis</h1>
+        <div class="content">
+            <ol>
+                <li><strong>Wajib Primary Key:</strong> Setiap tabel harus punya Primary Key. Gunakan
+                    <code>INT AUTO_INCREMENT</code>.
+                </li>
+                <li><strong>Pilih Tipe Data yang Tepat:</strong>
+                    <ul>
+                        <li>Teks? <code>VARCHAR</code></li>
+                        <li>Angka Bulat? <code>INT</code></li>
+                        <li>Uang/Harga? <code>DECIMAL</code></li>
+                        <li>Tanggal? <code>DATE</code> atau <code>DATETIME</code></li>
+                        <li>Pilihan Tetap? <code>ENUM</code></li>
+                    </ul>
+                </li>
+                <li><strong>Selalu tentukan panjang (<code>n</code>) yang cukup untuk <code>VARCHAR</code> dan
+                        <code>CHAR</code>.</strong></li>
+            </ol>
+        </div>
+        <div class="nav-buttons">
+            <button onclick="prevSlide()">← Previous</button>
+            <button onclick="nextSlide()">Next →</button>
+        </div>
+        <div class="slide-counter">Slide 12 of 14</div>
+    </div>
+
+    <div class="slide">
+        <h1>Tugas / Challenge!</h1>
+        <div class="content">
+            <p><strong>Scenario:</strong> Kalian diminta membuat tabel database untuk <strong>"Postingan
+                    Instagram"</strong>.</p>
+
+            <p><strong>Tugas kalian:</strong></p>
+            <ol>
+                <li>Sebutkan <strong>kolom-kolom</strong> apa saja yang dibutuhkan? (minimal 5)</li>
+                <li>Tentukan <strong>Tipe Data</strong> yang paling cocok untuk setiap kolom!</li>
+                <li>Tentukan mana yang akan menjadi <strong>Primary Key</strong>-nya!</li>
+            </ol>
+
+            <div class="analogy">
+                <p><strong>Contoh kolom:</strong> id_post, username, caption, gambar_url, jumlah_like, waktu_post, ...
+                </p>
+            </div>
+        </div>
+        <div class="nav-buttons">
+            <button onclick="prevSlide()">← Previous</button>
+            <button onclick="nextSlide()">Next →</button>
+        </div>
+        <div class="slide-counter">Slide 13 of 14</div>
+    </div>
+
+    <div class="slide">
+        <h1>Terima Kasih</h1>
+        <div class="content">
+            <h2>Selamat belajar dan berkreasi dengan database!</h2>
+
+            <div class="important">
+                <p><strong>Pertanyaan?</strong></p>
+            </div>
+
+            <p>Gunakan pengetahuan ini untuk project-project kalian di kelas 10 RPL!</p>
+        </div>
+        <div class="nav-buttons">
+            <button onclick="prevSlide()">← Previous</button>
+        </div>
+        <div class="slide-counter">Slide 14 of 14</div>
+    </div>
+
+    <script>
+        // JavaScript for slide navigation
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[n].classList.add('active');
+            currentSlide = n;
+
+            // Update slide counter
+            document.querySelectorAll('.slide-counter').forEach((el, i) => {
+                el.textContent = `Slide ${currentSlide + 1} of ${slides.length}`;
+            });
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                showSlide(currentSlide + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+
+</html>
