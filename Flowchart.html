@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi Flowchart - Kelas 10 RPL</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: #333;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #2575fc;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #6a11cb, #2575fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        h2 {
+            color: #3498db;
+            font-size: 1.8em;
+            margin: 30px 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+        
+        h3 {
+            color: #2c3e50;
+            font-size: 1.4em;
+            margin: 25px 0 15px 0;
+            padding-left: 10px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2em;
+            font-weight: 300;
+        }
+        
+        .content-box {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 5px solid #3498db;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #e3f2fd, #f3e5f5);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            border: 2px dashed #3498db;
+        }
+        
+        .symbols-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .symbol-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .symbol-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+        
+        .symbol-shape {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            color: white;
+            border-radius: 8px;
+        }
+        
+        .flowchart-example {
+            background: #2c3e50;
+            color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 25px 0;
+            font-family: monospace;
+            line-height: 1.8;
+            overflow-x: auto;
+        }
+        
+        .example-container {
+            display: flex;
+            gap: 30px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+        
+        .example-box {
+            flex: 1;
+            min-width: 300px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid #ddd;
+        }
+        
+        .visual-flowchart {
+            position: relative;
+            height: 400px;
+            margin: 30px 0;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            background: #f8f9fa;
+            overflow: auto;
+        }
+        
+        .flowchart-element {
+            position: absolute;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            border-radius: 5px;
+            min-width: 120px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+        }
+        
+        .flowchart-arrow {
+            position: absolute;
+            height: 2px;
+            background: #2c3e50;
+        }
+        
+        .flowchart-arrow::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: -6px;
+            border: 7px solid transparent;
+            border-left-color: #2c3e50;
+        }
+        
+        .exercise-box {
+            background: #fff8e1;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            border-left: 5px solid #f39c12;
+        }
+        
+        .tip-box {
+            background: #e8f6f3;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #1abc9c;
+        }
+        
+        .step-container {
+            counter-reset: step-counter;
+            margin: 30px 0;
+        }
+        
+        .step {
+            counter-increment: step-counter;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid #3498db;
+            position: relative;
+            padding-left: 70px;
+        }
+        
+        .step::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: #3498db;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .symbol-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+        }
+        
+        .symbol-table th {
+            background: #3498db;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .symbol-table td {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .symbol-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .comparison-box {
+            display: flex;
+            gap: 20px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+        
+        .comparison-item {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(90deg, #6a11cb, #2575fc);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px 5px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(106, 17, 203, 0.3);
+        }
+        
+        .quiz-container {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 40px 0;
+            color: white;
+        }
+        
+        .quiz-question {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        
+        .key-points {
+            background: #fff3cd;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #ffeaa7;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 2px solid #ecf0f1;
+            color: #7f8c8d;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .example-container, .comparison-box {
+                flex-direction: column;
+            }
+            
+            .symbols-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 FLOWCHART</h1>
+            <p class="subtitle">Belajar Membaca dan Membuat Diagram Alir dengan Mudah</p>
+            <p>Materi untuk Kelas 10 Rekayasa Perangkat Lunak (RPL)</p>
+        </header>
+        
+        <!-- Pengenalan -->
+        <section>
+            <h2>🎯 Apa Itu Flowchart?</h2>
+            <div class="content-box">
+                <p><strong>Flowchart</strong> adalah diagram yang menggambarkan langkah-langkah penyelesaian masalah dalam bentuk simbol-simbol yang saling terhubung. Flowchart juga dikenal sebagai <strong>Diagram Alir</strong>.</p>
+                
+                <div class="highlight-box">
+                    <h3>💡 Analogi Sederhana:</h3>
+                    <p>Flowchart itu seperti <strong>peta perjalanan</strong> atau <strong>resep memasak</strong>:</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Mulai dari titik A (START)</li>
+                        <li>Ikuti petunjuk langkah demi langkah</li>
+                        <li>Jika ada persimpangan (keputusan), pilih jalur yang benar</li>
+                        <li>Sampai di tujuan (END)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Tujuan -->
+        <section>
+            <h2>✨ Mengapa Belajar Flowchart?</h2>
+            <div class="symbols-grid">
+                <div class="symbol-item">
+                    <div class="symbol-shape" style="background: #3498db;">🧠</div>
+                    <h3>Berpikir Logis</h3>
+                    <p>Melatih cara berpikir sistematis dan terstruktur</p>
+                </div>
+                <div class="symbol-item">
+                    <div class="symbol-shape" style="background: #2ecc71;">💬</div>
+                    <h3>Komunikasi</h3>
+                    <p>Memudahkan penyampaian ide ke orang lain</p>
+                </div>
+                <div class="symbol-item">
+                    <div class="symbol-shape" style="background: #e74c3c;">🐛</div>
+                    <h3>Minim Bug</h3>
+                    <p>Mengurangi kesalahan dalam pemrograman</p>
+                </div>
+                <div class="symbol-item">
+                    <div class="symbol-shape" style="background: #9b59b6;">📝</div>
+                    <h3>Dokumentasi</h3>
+                    <p>Sebagai dokumentasi algoritma yang mudah dipahami</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Simbol Flowchart -->
+        <section>
+            <h2>🔷 Simbol-Simbol Flowchart</h2>
+            
+            <div class="tip-box">
+                <p><strong>Tips:</strong> Setiap simbol memiliki bentuk khusus yang menunjukkan fungsi tertentu dalam algoritma.</p>
+            </div>
+            
+            <table class="symbol-table">
+                <thead>
+                    <tr>
+                        <th>Simbol</th>
+                        <th>Nama</th>
+                        <th>Fungsi</th>
+                        <th>Contoh Penggunaan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: center;">
+                            <div style="width: 50px; height: 50px; background: #2ecc71; border-radius: 5px; margin: 0 auto; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">START</div>
+                        </td>
+                        <td>Terminator</td>
+                        <td>Awal dan akhir flowchart</td>
+                        <td>"Mulai", "Selesai", "Start", "End"</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <div style="width: 70px; height: 50px; background: #3498db; margin: 0 auto; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">Proses</div>
+                        </td>
+                        <td>Process</td>
+                        <td>Proses/perhitungan</td>
+                        <td>"Hitung luas", "jumlah = a + b"</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <div style="width: 50px; height: 50px; background: #e74c3c; clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); margin: 0 auto; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">?</div>
+                        </td>
+                        <td>Decision</td>
+                        <td>Keputusan/percabangan</td>
+                        <td>"Apakah nilai > 70?"</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <div style="width: 60px; height: 60px; background: #f39c12; border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">⤵</div>
+                        </td>
+                        <td>Connector</td>
+                        <td>Penghubung antar halaman</td>
+                        <td>Jika flowchart panjang</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <div style="width: 70px; height: 50px; background: #9b59b6; border-radius: 0 15px 0 15px; margin: 0 auto; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">Input</div>
+                        </td>
+                        <td>Input/Output</td>
+                        <td>Input atau output data</td>
+                        <td>"Masukkan nilai", "Tampilkan hasil"</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <div style="width: 70px; height: 40px; background: #34495e; margin: 0 auto; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">→</div>
+                        </td>
+                        <td>Flow Line</td>
+                        <td>Garis alur/arah</td>
+                        <td>Menghubungkan simbol-simbol</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <!-- Cara Membuat Flowchart -->
+        <section>
+            <h2>🎨 Cara Membuat Flowchart</h2>
+            
+            <div class="step-container">
+                <div class="step">
+                    <h3>Pahami Masalah</h3>
+                    <p>Apa yang ingin diselesaikan? Tentukan input dan output yang dibutuhkan.</p>
+                    <p><strong>Contoh:</strong> "Saya ingin membuat program untuk menghitung luas segitiga"</p>
+                </div>
+                
+                <div class="step">
+                    <h3>Tentukan Langkah-langkah</h3>
+                    <p>Uraikan langkah penyelesaian secara berurutan.</p>
+                    <p><strong>Contoh:</strong> 
+                        1. Mulai <br>
+                        2. Input alas dan tinggi <br>
+                        3. Hitung luas = ½ × alas × tinggi <br>
+                        4. Tampilkan hasil <br>
+                        5. Selesai
+                    </p>
+                </div>
+                
+                <div class="step">
+                    <h3>Gambar Simbol-simbol</h3>
+                    <p>Gunakan simbol yang tepat untuk setiap langkah.</p>
+                    <div style="display: flex; gap: 10px; margin-top: 10px;">
+                        <div style="background: #2ecc71; padding: 8px; border-radius: 5px; color: white;">START</div>
+                        <div style="background: #9b59b6; padding: 8px; border-radius: 0 10px 0 10px; color: white;">INPUT</div>
+                        <div style="background: #3498db; padding: 8px; color: white;">PROSES</div>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <h3>Hubungkan dengan Garis</h3>
+                    <p>Buat garis panah untuk menunjukkan alur eksekusi.</p>
+                    <p>Pastikan arahnya jelas dan tidak saling silang.</p>
+                </div>
+                
+                <div class="step">
+                    <h3>Review dan Uji</h3>
+                    <p>Periksa apakah flowchart sudah benar dengan mengikuti langkah-langkahnya.</p>
+                    <p>Uji dengan contoh data nyata.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contoh Flowchart -->
+        <section>
+            <h2>📋 Contoh Flowchart Sederhana</h2>
+            
+            <div class="example-container">
+                <div class="example-box">
+                    <h3>Kasus: Menentukan Bilangan Ganjil/Genap</h3>
+                    <p><strong>Algoritma:</strong></p>
+                    <ol style="margin-left: 20px;">
+                        <li>START</li>
+                        <li>Input bilangan</li>
+                        <li>Apakah bilangan habis dibagi 2?</li>
+                        <li>Jika YA → "GENAP"</li>
+                        <li>Jika TIDAK → "GANJIL"</li>
+                        <li>Tampilkan hasil</li>
+                        <li>END</li>
+                    </ol>
+                </div>
+                
+                <div class="example-box">
+                    <h3>Flowchart dalam Teks:</h3>
+                    <div class="flowchart-example">
+START
+│
+▼
+INPUT bilangan
+│
+▼
+Apakah bilangan % 2 = 0?
+├── YA → hasil = "GENAP"
+└── TIDAK → hasil = "GANJIL"
+│
+▼
+TAMPILKAN hasil
+│
+▼
+END
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Visual Flowchart -->
+            <h3 style="margin-top: 30px;">🎨 Visualisasi Flowchart:</h3>
+            <div class="visual-flowchart" id="flowchartVisual">
+                <!-- Flowchart akan digambar dengan JavaScript -->
+            </div>
+        </section>
+        
+        <!-- Perbandingan dengan Pseudocode -->
+        <section>
+            <h2>🔄 Flowchart vs Pseudocode</h2>
+            
+            <div class="comparison-box">
+                <div class="comparison-item">
+                    <h3>📊 Flowchart</h3>
+                    <ul style="margin-left: 20px; margin-top: 15px;">
+                        <li>🟢 Visual, mudah dipahami</li>
+                        <li>🟢 Baik untuk presentasi</li>
+                        <li>🟢 Cocok untuk algoritma sederhana</li>
+                        <li>🔴 Sulit untuk algoritma kompleks</li>
+                        <li>🔴 Perlu tool/gambar</li>
+                        <li>🔴 Sulit dimodifikasi</li>
+                    </ul>
+                </div>
+                
+                <div class="comparison-item">
+                    <h3>📝 Pseudocode</h3>
+                    <ul style="margin-left: 20px; margin-top: 15px;">
+                        <li>🟢 Seperti bahasa pemrograman</li>
+                        <li>🟢 Cocok untuk algoritma kompleks</li>
+                        <li>🟢 Mudah dimodifikasi</li>
+                        <li>🟢 Cukup menggunakan teks</li>
+                        <li>🔴 Kurang visual</li>
+                        <li>🔴 Butuh pemahaman dasar pemrograman</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="tip-box">
+                <p><strong>Kesimpulan:</strong> Gunakan <strong>Flowchart</strong> untuk presentasi dan algoritma sederhana. Gunakan <strong>Pseudocode</strong> untuk algoritma kompleks dan persiapan coding.</p>
+            </div>
+        </section>
+        
+        <!-- Latihan Soal -->
+        <section>
+            <h2>💪 Latihan Soal Flowchart</h2>
+            
+            <div class="exercise-box">
+                <h3>Latihan 1: Flowchart Penjumlahan</h3>
+                <p>Buat flowchart untuk menjumlahkan dua bilangan!</p>
+                
+                <div style="background: #e8f4fc; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <strong>Petunjuk:</strong>
+                    <ol style="margin-left: 20px; margin-top: 10px;">
+                        <li>Mulai</li>
+                        <li>Input bilangan pertama</li>
+                        <li>Input bilangan kedua</li>
+                        <li>Hitung jumlah = bilangan1 + bilangan2</li>
+                        <li>Tampilkan hasil</li>
+                        <li>Selesai</li>
+                    </ol>
+                </div>
+                
+                <button class="btn" onclick="showAnswer(1)">Lihat Jawaban</button>
+                <div id="answer1" style="display: none; margin-top: 20px; padding: 15px; background: #d4edda; border-radius: 8px;">
+                    <strong>Flowchart:</strong><br>
+                    START → INPUT a → INPUT b → jumlah = a + b → TAMPILKAN jumlah → END
+                </div>
+            </div>
+            
+            <div class="exercise-box">
+                <h3>Latihan 2: Flowchart Nilai Kelulusan</h3>
+                <p>Buat flowchart untuk menentukan kelulusan siswa!</p>
+                <p><strong>Kriteria:</strong> Lulus jika nilai ≥ 75, tidak lulus jika nilai < 75</p>
+                
+                <button class="btn" onclick="showAnswer(2)">Lihat Jawaban</button>
+                <div id="answer2" style="display: none; margin-top: 20px; padding: 15px; background: #d4edda; border-radius: 8px;">
+                    <strong>Flowchart:</strong><br>
+                    START → INPUT nilai → Apakah nilai ≥ 75? → YA: "LULUS" / TIDAK: "TIDAK LULUS" → TAMPILKAN hasil → END
+                </div>
+            </div>
+            
+            <div class="exercise-box">
+                <h3>Latihan 3: Flowchart Perulangan</h3>
+                <p>Buat flowchart untuk menampilkan angka 1 sampai 5!</p>
+                
+                <button class="btn" onclick="showAnswer(3)">Lihat Jawaban</button>
+                <div id="answer3" style="display: none; margin-top: 20px; padding: 15px; background: #d4edda; border-radius: 8px;">
+                    <strong>Flowchart:</strong><br>
+                    START → i = 1 → TAMPILKAN i → i = i + 1 → Apakah i ≤ 5? → YA: kembali tampilkan / TIDAK: END
+                </div>
+            </div>
+        </section>
+        
+        <!-- Quiz -->
+        <section>
+            <div class="quiz-container">
+                <h2 style="color: white;">🧠 Quiz Singkat</h2>
+                
+                <div class="quiz-question">
+                    <p><strong>1. Simbol apa yang digunakan untuk awal dan akhir flowchart?</strong></p>
+                    <button class="btn" onclick="checkAnswer(1, 'terminator')" style="background: rgba(255,255,255,0.2); margin: 5px;">Terminator</button>
+                    <button class="btn" onclick="checkAnswer(1, 'process')" style="background: rgba(255,255,255,0.2); margin: 5px;">Process</button>
+                    <button class="btn" onclick="checkAnswer(1, 'decision')" style="background: rgba(255,255,255,0.2); margin: 5px;">Decision</button>
+                </div>
+                
+                <div class="quiz-question">
+                    <p><strong>2. Bentuk belah ketupat digunakan untuk simbol apa?</strong></p>
+                    <button class="btn" onclick="checkAnswer(2, 'decision')" style="background: rgba(255,255,255,0.2); margin: 5px;">Decision</button>
+                    <button class="btn" onclick="checkAnswer(2, 'process')" style="background: rgba(255,255,255,0.2); margin: 5px;">Process</button>
+                    <button class="btn" onclick="checkAnswer(2, 'input')" style="background: rgba(255,255,255,0.2); margin: 5px;">Input</button>
+                </div>
+                
+                <div class="quiz-question">
+                    <p><strong>3. Manakah yang BUKAN manfaat flowchart?</strong></p>
+                    <button class="btn" onclick="checkAnswer(3, 'membuat program langsung')" style="background: rgba(255,255,255,0.2); margin: 5px;">Membuat program langsung</button>
+                    <button class="btn" onclick="checkAnswer(3, 'melatih logika')" style="background: rgba(255,255,255,0.2); margin: 5px;">Melatih logika</button>
+                    <button class="btn" onclick="checkAnswer(3, 'dokumentasi')" style="background: rgba(255,255,255,0.2); margin: 5px;">Dokumentasi</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Tips dan Trik -->
+        <section>
+            <h2>🌟 Tips Membuat Flowchart yang Baik</h2>
+            
+            <div class="key-points">
+                <h3>✅ DO (Yang Harus Dilakukan):</h3>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Gunakan simbol yang standar</li>
+                    <li>Beri judul/title flowchart</li>
+                    <li>Tulis keterangan yang jelas di setiap simbol</li>
+                    <li>Gunakan arrow/panah untuk menunjukkan alur</li>
+                    <li>Pastikan alur berjalan dari atas ke bawah atau kiri ke kanan</li>
+                    <li>Test flowchart dengan contoh data</li>
+                </ul>
+            </div>
+            
+            <div class="key-points" style="background: #ffeaa7;">
+                <h3>❌ DON'T (Yang Harus Dihindari):</h3>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Garis alur yang saling bersilangan</li>
+                    <li>Simbol tanpa keterangan</li>
+                    <li>Alur yang tidak jelas ujungnya</li>
+                    <li>Menggambar terlalu kecil</li>
+                    <li>Tidak konsisten dalam penulisan</li>
+                    <li>Lupa memberi simbol START dan END</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Tools -->
+        <section>
+            <h2>🛠️ Tools untuk Membuat Flowchart</h2>
+            
+            <div class="content-box">
+                <h3>Gratis:</h3>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>Draw.io</strong> - Online, gratis, mudah digunakan</li>
+                    <li><strong>Lucidchart</strong> - Versi gratis dengan fitur terbatas</li>
+                    <li><strong>Microsoft Visio</strong> - Untuk pengguna Office (trial)</li>
+                    <li><strong>Pencil & Paper</strong> - Cara tradisional yang efektif!</li>
+                </ul>
+                
+                <h3 style="margin-top: 20px;">Berbayar:</h3>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>Microsoft Visio</strong> - Lengkap, profesional</li>
+                    <li><strong>SmartDraw</strong> - Banyak template</li>
+                    <li><strong>Edraw Max</strong> - Multi-purpose diagram</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Penutup -->
+        <section>
+            <h2>🎯 Kesimpulan</h2>
+            
+            <div class="highlight-box">
+                <p>Flowchart adalah <strong>alat penting</strong> dalam pemrograman yang membantu kita:</p>
+                <ol style="margin-left: 20px; margin-top: 15px;">
+                    <li>Memahami dan menganalisis masalah</li>
+                    <li>Merencanakan solusi dengan logis</li>
+                    <li>Mengkomunikasikan ide dengan jelas</li>
+                    <li>Membuat dokumentasi yang mudah dipahami</li>
+                    <li>Mempersiapkan coding dengan lebih baik</li>
+                </ol>
+                
+                <p style="margin-top: 20px;"><strong>Ingat:</strong> Semakin sering berlatih membuat flowchart, semakin mahir kamu dalam memecahkan masalah secara logis!</p>
+            </div>
+            
+            <div style="text-align: center; margin: 40px 0;">
+                <button class="btn" onclick="startPractice()">Mulai Latihan Flowchart</button>
+                <button class="btn" onclick="downloadCheatSheet()">Download Cheat Sheet</button>
+            </div>
+        </section>
+        
+        <footer>
+            <p>Materi Pembelajaran Flowchart - Kelas 10 RPL</p>
+            <p>© 2024 | "Flowchart yang baik adalah awal dari program yang baik"</p>
+        </footer>
+    </div>
+
+    <script>
+        // Fungsi untuk menampilkan jawaban
+        function showAnswer(questionNum) {
+            const answerDiv = document.getElementById(`answer${questionNum}`);
+            if (answerDiv.style.display === 'none' || answerDiv.style.display === '') {
+                answerDiv.style.display = 'block';
+            } else {
+                answerDiv.style.display = 'none';
+            }
+        }
+        
+        // Fungsi untuk quiz
+        function checkAnswer(questionNum, answer) {
+            const correctAnswers = {
+                1: 'terminator',
+                2: 'decision',
+                3: 'membuat program langsung'
+            };
+            
+            if (answer === correctAnswers[questionNum]) {
+                alert(`✅ Jawaban benar!`);
+            } else {
+                alert(`❌ Jawaban salah. Coba lagi!`);
+            }
+        }
+        
+        // Fungsi latihan
+        function startPractice() {
+            alert('🚀 Ayo mulai latihan! \n\nBuat flowchart untuk:\n1. Konversi suhu C ke F\n2. Kalkulator sederhana\n3. Deret bilangan 1-10\n\nGunakan tools seperti Draw.io atau kertas!');
+        }
+        
+        function downloadCheatSheet() {
+            alert('📥 Cheat sheet akan didownload! \n\nBerisi:\n- Simbol-simbol flowchart\n- Contoh-contoh sederhana\n- Template kosong\n\n(Silahkan implementasi download sesuai kebutuhan)');
+        }
+        
+        // Fungsi menggambar flowchart visual
+        function drawFlowchart() {
+            const container = document.getElementById('flowchartVisual');
+            container.innerHTML = '';
+            
+            // Koordinat untuk setiap elemen
+            const elements = [
+                { id: 'start', text: 'START', x: 150, y: 30, color: '#2ecc71', width: 100 },
+                { id: 'input', text: 'INPUT\nbilangan', x: 150, y: 100, color: '#9b59b6', width: 120 },
+                { id: 'decision', text: 'bilangan % 2\n= 0?', x: 150, y: 180, color: '#e74c3c', width: 120 },
+                { id: 'yes', text: 'GENAP', x: 50, y: 260, color: '#3498db', width: 100 },
+                { id: 'no', text: 'GANJIL', x: 250, y: 260, color: '#3498db', width: 100 },
+                { id: 'output', text: 'TAMPILKAN\nhasil', x: 150, y: 340, color: '#f39c12', width: 120 },
+                { id: 'end', text: 'END', x: 150, y: 420, color: '#2ecc71', width: 100 }
+            ];
+            
+            // Gambar elemen
+            elements.forEach(el => {
+                const elem = document.createElement('div');
+                elem.className = 'flowchart-element';
+                elem.textContent = el.text;
+                elem.style.left = el.x + 'px';
+                elem.style.top = el.y + 'px';
+                elem.style.backgroundColor = el.color;
+                elem.style.width = el.width + 'px';
+                
+                // Untuk decision (belah ketupat)
+                if (el.id === 'decision') {
+                    elem.style.clipPath = 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)';
+                }
+                // Untuk input/output (parallelogram)
+                else if (el.id === 'input' || el.id === 'output') {
+                    elem.style.clipPath = 'polygon(20% 0%, 100% 0%, 80% 100%, 0% 100%)';
+                }
+                // Untuk terminator (rounded rectangle)
+                else if (el.id === 'start' || el.id === 'end') {
+                    elem.style.borderRadius = '25px';
+                }
+                
+                container.appendChild(elem);
+            });
+            
+            // Gambar garis/panah
+            const arrows = [
+                { from: 'start', to: 'input' },
+                { from: 'input', to: 'decision' },
+                { from: 'decision', to: 'yes', angle: -45 },
+                { from: 'decision', to: 'no', angle: 45 },
+                { from: 'yes', to: 'output', angle: 45 },
+                { from: 'no', to: 'output', angle: -45 },
+                { from: 'output', to: 'end' }
+            ];
+            
+            // Fungsi untuk menggambar panah
+            function drawArrow(fromId, toId, angle = 0) {
+                const from = elements.find(e => e.id === fromId);
+                const to = elements.find(e => e.id === toId);
+                
+                if (!from || !to) return;
+                
+                const arrow = document.createElement('div');
+                arrow.className = 'flowchart-arrow';
+                
+                // Hitung posisi
+                const x1 = from.x + from.width/2;
+                const y1 = from.y + 40;
+                const x2 = to.x + to.width/2;
+                const y2 = to.y;
+                
+                // Panjang garis
+                const length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+                const rotation = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+                
+                arrow.style.width = length + 'px';
+                arrow.style.left = (x1) + 'px';
+                arrow.style.top = (y1) + 'px';
+                arrow.style.transform = `rotate(${rotation}deg)`;
+                arrow.style.transformOrigin = '0 0';
+                
+                container.appendChild(arrow);
+            }
+            
+            // Gambar semua panah
+            arrows.forEach(arr => drawArrow(arr.from, arr.to, arr.angle));
+        }
+        
+        // Gambar flowchart saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', drawFlowchart);
+    </script>
+</body>
+</html>

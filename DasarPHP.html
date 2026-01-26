@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentasi PHP - Kelas 10 RPL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3498db',
+                        secondary: '#2c3e50',
+                        accent: '#2ecc71',
+                        warning: '#e74c3c',
+                        dark: '#1a1a2e',
+                        light: '#f8f9fa'
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'slide-in': 'slideIn 0.5s ease-out',
+                        'fade-in': 'fadeIn 0.8s ease-out',
+                    },
+                    keyframes: {
+                        slideIn: {
+                            '0%': { transform: 'translateX(-20px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3498db;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2980b9;
+        }
+        .code-block {
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        }
+        .slide {
+            display: none;
+        }
+        .slide.active {
+            display: block;
+        }
+        .progress-bar {
+            transition: width 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="font-poppins bg-gradient-to-br from-blue-50 to-cyan-50 min-h-screen p-4 md:p-6">
+    <!-- Header Presentasi -->
+    <div class="max-w-7xl mx-auto mb-6">
+        <div class="bg-gradient-to-r from-secondary to-primary rounded-2xl shadow-xl p-6 md:p-8 text-white">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h1 class="text-3xl md:text-4xl font-bold mb-2">
+                        <i class="fab fa-php mr-3"></i>Materi Dasar PHP
+                    </h1>
+                    <p class="text-lg md:text-xl opacity-90">Untuk Kelas 10 Rekayasa Perangkat Lunak (RPL)</p>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="bg-white text-primary px-4 py-2 rounded-full font-bold text-sm md:text-base">Pemrograman Web</span>
+                    <span class="bg-accent text-white px-4 py-2 rounded-full font-bold text-sm md:text-base">RPL</span>
+                </div>
+            </div>
+            <div class="mt-6 flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center">
+                        <i class="fas fa-user-graduate mr-2"></i>
+                        <span>Kelas 10 RPL</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-clock mr-2"></i>
+                        <span>Semester 2</span>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm opacity-80">By: Guru RPL</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col lg:flex-row gap-6">
+            <!-- Sidebar Navigasi -->
+            <div class="lg:w-1/4">
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="bg-secondary text-white p-4">
+                        <h2 class="text-xl font-bold"><i class="fas fa-list-ol mr-2"></i>Daftar Materi</h2>
+                        <p class="text-sm opacity-80">8 Bab Materi PHP Dasar</p>
+                    </div>
+                    <div class="p-2 max-h-[600px] overflow-y-auto">
+                        <nav id="slideMenu" class="space-y-1">
+                            <!-- Menu items will be generated by JavaScript -->
+                        </nav>
+                    </div>
+                    
+                    <!-- Progress Bar -->
+                    <div class="p-4 border-t">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium text-gray-700">Progress Belajar</span>
+                            <span id="progressPercentage" class="font-bold text-primary">12%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-3">
+                            <div id="progressFill" class="progress-bar h-3 rounded-full bg-gradient-to-r from-primary to-accent" style="width: 12%"></div>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-2">Selesaikan semua materi untuk menyelesaikan pembelajaran</p>
+                    </div>
+                    
+                    <!-- Quick Actions -->
+                    <div class="p-4 border-t bg-blue-50">
+                        <h3 class="font-bold text-secondary mb-3"><i class="fas fa-bolt mr-2"></i>Aksi Cepat</h3>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button onclick="prevSlide()" class="bg-gray-700 hover:bg-gray-800 text-white p-2 rounded-lg flex items-center justify-center transition">
+                                <i class="fas fa-arrow-left mr-2"></i>Sebelumnya
+                            </button>
+                            <button onclick="nextSlide()" class="bg-primary hover:bg-blue-700 text-white p-2 rounded-lg flex items-center justify-center transition">
+                                Berikutnya<i class="fas fa-arrow-right ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Info Box -->
+                <div class="mt-6 bg-gradient-to-r from-cyan-50 to-blue-50 border border-cyan-200 rounded-2xl shadow p-5">
+                    <div class="flex items-center mb-3">
+                        <div class="bg-primary p-3 rounded-full mr-4">
+                            <i class="fas fa-lightbulb text-white text-xl"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-secondary">Tips Belajar</h3>
+                    </div>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                            <span>Praktikkan setiap contoh kode</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                            <span>Gunakan XAMPP untuk menjalankan PHP</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                            <span>Simpan file di folder hdocs/XAMPP</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Konten Presentasi -->
+            <div class="lg:w-3/4">
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden min-h-[600px]">
+                    <div class="content-area p-6 md:p-8">
+                        <!-- Slide 1: Pengenalan PHP -->
+                        <div class="slide active" id="slide1">
+                            <div class="flex items-center justify-between mb-6">
+                                <div>
+                                    <span class="inline-block bg-primary text-white px-4 py-1 rounded-full text-sm font-bold mb-2">BAB I</span>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-secondary">Pengenalan PHP</h2>
+                                </div>
+                                <div class="text-right">
+                                    <span class="bg-blue-100 text-primary px-3 py-1 rounded-lg font-medium">Slide 1/8</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-8">
+                                <h3 class="text-xl font-bold text-primary mb-4 flex items-center">
+                                    <i class="fas fa-code mr-2"></i>1.1 Apa itu PHP?
+                                </h3>
+                                <div class="bg-gradient-to-r from-blue-50 to-cyan-50 p-5 rounded-xl border-l-4 border-primary mb-5">
+                                    <p class="text-gray-800 mb-3">
+                                        <span class="font-bold text-primary">PHP</span> (Hypertext Preprocessor) adalah bahasa pemrograman server-side yang digunakan untuk pengembangan web dinamis.
+                                    </p>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                                            <h4 class="font-bold text-secondary mb-2 flex items-center">
+                                                <i class="fas fa-server text-primary mr-2"></i>Karakteristik PHP
+                                            </h4>
+                                            <ul class="space-y-2 text-gray-700">
+                                                <li class="flex items-start">
+                                                    <i class="fas fa-check-circle text-accent mt-1 mr-2"></i>
+                                                    <span>Dijalankan di server, bukan browser</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <i class="fas fa-check-circle text-accent mt-1 mr-2"></i>
+                                                    <span>Ekstensi file: <code class="bg-gray-100 px-2 py-1 rounded">.php</code></span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <i class="fas fa-check-circle text-accent mt-1 mr-2"></i>
+                                                    <span>Dapat disisipkan dalam HTML</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                                            <h4 class="font-bold text-secondary mb-2 flex items-center">
+                                                <i class="fas fa-history text-primary mr-2"></i>Sejarah Singkat
+                                            </h4>
+                                            <ul class="space-y-2 text-gray-700">
+                                                <li class="flex items-start">
+                                                    <i class="fas fa-user text-primary mr-2"></i>
+                                                    <span>Dibuat oleh <strong>Rasmus Lerdorf</strong> (1994)</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <i class="fas fa-star text-yellow-500 mr-2"></i>
+                                                    <span>Versi terbaru: <strong>PHP 8.x</strong></span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <i class="fas fa-lock-open text-green-500 mr-2"></i>
+                                                    <span>Open Source & Gratis</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-6">
+                                    <h4 class="font-bold text-lg text-gray-800 mb-3">Contoh Kode PHP Sederhana</h4>
+                                    <div class="code-block bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
+                                        <pre><code class="text-sm"><span class="text-pink-500">&lt;?php</span>
+    <span class="text-green-400">// Ini adalah komentar</span>
+    <span class="text-blue-400">echo</span> <span class="text-yellow-300">"Halo, Dunia!"</span>;
+    <span class="text-blue-400">print</span> <span class="text-yellow-300">"Saya belajar PHP"</span>;
+<span class="text-pink-500">?&gt;</span></code></pre>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gradient-to-r from-green-50 to-emerald-50 p-5 rounded-xl border-l-4 border-accent">
+                                    <h4 class="font-bold text-gray-800 mb-2 flex items-center">
+                                        <i class="fas fa-trophy text-accent mr-2"></i>Keunggulan PHP
+                                    </h4>
+                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                        <div class="bg-white p-3 rounded-lg text-center shadow-sm">
+                                            <i class="fas fa-graduation-cap text-primary text-xl mb-2"></i>
+                                            <p class="font-medium text-sm">Mudah Dipelajari</p>
+                                        </div>
+                                        <div class="bg-white p-3 rounded-lg text-center shadow-sm">
+                                            <i class="fas fa-database text-primary text-xl mb-2"></i>
+                                            <p class="font-medium text-sm">Kompatibel dengan Database</p>
+                                        </div>
+                                        <div class="bg-white p-3 rounded-lg text-center shadow-sm">
+                                            <i class="fas fa-users text-primary text-xl mb-2"></i>
+                                            <p class="font-medium text-sm">Komunitas Besar</p>
+                                        </div>
+                                        <div class="bg-white p-3 rounded-lg text-center shadow-sm">
+                                            <i class="fas fa-globe text-primary text-xl mb-2"></i>
+                                            <p class="font-medium text-sm">Cross Platform</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between mt-8 pt-6 border-t">
+                                <button onclick="prevSlide()" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-5 rounded-lg transition flex items-center">
+                                    <i class="fas fa-arrow-left mr-2"></i>Sebelumnya
+                                </button>
+                                <button onclick="nextSlide()" class="bg-primary hover:bg-blue-700 text-white font-medium py-2 px-5 rounded-lg transition flex items-center">
+                                    Berikutnya <i class="fas fa-arrow-right ml-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 2: Lingkungan Pengembangan -->
+                        <div class="slide" id="slide2">
+                            <div class="flex items-center justify-between mb-6">
+                                <div>
+                                    <span class="inline-block bg-primary text-white px-4 py-1 rounded-full text-sm font-bold mb-2">BAB II</span>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-secondary">Lingkungan Pengembangan PHP</h2>
+                                </div>
+                                <div class="text-right">
+                                    <span class="bg-blue-100 text-primary px-3 py-1 rounded-lg font-medium">Slide 2/8</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-8">
+                                <h3 class="text-xl font-bold text-primary mb-4 flex items-center">
+                                    <i class="fas fa-laptop-code mr-2"></i>2.1 Software yang Diperlukan
+                                </h3>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                                    <div class="bg-gradient-to-br from-blue-50 to-white p-5 rounded-xl border border-blue-100 shadow-sm">
+                                        <div class="flex items-center mb-4">
+                                            <div class="bg-primary p-3 rounded-lg mr-4">
+                                                <i class="fas fa-cogs text-white text-xl"></i>
+                                            </div>
+                                            <h4 class="font-bold text-lg text-secondary">Paket Development</h4>
+                                        </div>
+                                        <ul class="space-y-3">
+                                            <li class="flex items-start">
+                                                <div class="bg-blue-100 text-primary p-1 rounded mr-3">
+                                                    <i class="fas fa-server text-sm"></i>
+                                                </div>
+                                                <span><strong>Web Server</strong> (Apache, Nginx)</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <div class="bg-blue-100 text-primary p-1 rounded mr-3">
+                                                    <i class="fab fa-php"></i>
+                                                </div>
+                                                <span><strong>PHP Interpreter</strong></span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <div class="bg-blue-100 text-primary p-1 rounded mr-3">
+                                                    <i class="fas fa-database"></i>
+                                                </div>
+                                                <span><strong>Database</strong> (MySQL/MariaDB)</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <div class="bg-blue-100 text-primary p-1 rounded mr-3">
+                                                    <i class="fas fa-edit"></i>
+                                                </div>
+                                                <span><strong>Text Editor/IDE</strong> (VS Code, PHPStorm)</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="bg-gradient-to-br from-green-50 to-white p-5 rounded-xl border border-green-100 shadow-sm">
+                                        <div class="flex items-center mb-4">
+                                            <div class="bg-accent p-3 rounded-lg mr-4">
+                                                <i class="fas fa-box-open text-white text-xl"></i>
+                                            </div>
+                                            <h4 class="font-bold text-lg text-secondary">Paket All-in-One</h4>
+                                        </div>
+                                        <p class="text-gray-700 mb-4">
+                                            <strong>XAMPP</strong> adalah solusi terbaik untuk pemula karena sudah termasuk semua software yang diperlukan.
+                                        </p>
+                                        <div class="bg-white p-4 rounded-lg">
+                                            <h5 class="font-bold text-gray-800 mb-2">Komponen XAMPP:</h5>
+                                            <div class="flex flex-wrap gap-2">
+                                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-3 py-1 rounded">Apache</span>
+                                                <span class="bg-purple-100 text-purple-800 text-xs font-medium px-3 py-1 rounded">PHP</span>
+                                                <span class="bg-green-100 text-green-800 text-xs font-medium px-3 py-1 rounded">MySQL</span>
+                                                <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-3 py-1 rounded">phpMyAdmin</span>
+                                                <span class="bg-red-100 text-red-800 text-xs font-medium px-3 py-1 rounded">Merry</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-xl font-bold text-primary mb-4 flex items-center">
+                                    <i class="fas fa-download mr-2"></i>2.2 Instalasi XAMPP
+                                </h3>
+                                
+                                <div class="mb-6">
+                                    <div class="bg-gradient-to-r from-amber-50 to-orange-50 p-5 rounded-xl border-l-4 border-amber-500">
+                                        <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                                            <i class="fas fa-list-ol text-amber-600 mr-2"></i>Langkah Instalasi
+                                        </h4>
+                                        <ol class="space-y-3 ml-5">
+                                            <li class="flex items-start">
+                                                <span class="bg-amber-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">1</span>
+                                                <span>Download XAMPP dari <a href="https://www.apachefriends.org" class="text-primary font-medium hover:underline" target="_blank">apachefriends.org</a></span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <span class="bg-amber-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">2</span>
+                                                <span>Install dengan mengikuti wizard (next, next, finish)</span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <span class="bg-amber-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">3</span>
+                                                <span>Jalankan <strong>XAMPP Control Panel</strong></span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <span class="bg-amber-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">4</span>
+                                                <span>Start <strong>Apache</strong> dan <strong>MySQL</strong></span>
+                                            </li>
+                                            <li class="flex items-start">
+                                                <span class="bg-amber-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">5</span>
+                                                <span>Akses <code class="bg-gray-100 px-2 py-1 rounded">http://localhost</code> untuk verifikasi</span>
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gradient-to-r from-red-50 to-pink-50 p-5 rounded-xl border-l-4 border-red-500">
+                                    <h4 class="font-bold text-gray-800 mb-2 flex items-center">
+                                        <i class="fas fa-exclamation-triangle text-red-500 mr-2"></i>Penting!
+                                    </h4>
+                                    <p class="text-gray-700">
+                                        Simpan semua file PHP di folder <code class="bg-gray-100 px-2 py-1 rounded">htdocs</code> dalam direktori XAMPP. 
+                                        Akses file via browser dengan URL: <code class="bg-gray-100 px-2 py-1 rounded">http://localhost/nama-file.php</code>
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between mt-8 pt-6 border-t">
+                                <button onclick="prevSlide()" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-5 rounded-lg transition flex items-center">
+                                    <i class="fas fa-arrow-left mr-2"></i>Sebelumnya
+                                </button>
+                                <button onclick="nextSlide()" class="bg-primary hover:bg-blue-700 text-white font-medium py-2 px-5 rounded-lg transition flex items-center">
+                                    Berikutnya <i class="fas fa-arrow-right ml-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 3: Struktur Dasar PHP -->
+                        <div class="slide" id="slide3">
+                            <div class="flex items-center justify-between mb-6">
+                                <div>
+                                    <span class="inline-block bg-primary text-white px-4 py-1 rounded-full text-sm font-bold mb-2">BAB III</span>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-secondary">Struktur Dasar PHP</h2>
+                                </div>
+                                <div class="text-right">
+                                    <span class="bg-blue-100 text-primary px-3 py-1 rounded-lg font-medium">Slide 3/8</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-8">
+                                <h3 class="text-xl font-bold text-primary mb-4 flex items-center">
+                                    <i class="fas fa-file-code mr-2"></i>3.1 Sintaks Dasar PHP
+                                </h3>
+                                
+                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                                    <div>
+                                        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-4">
+                                            <pre class="text-sm overflow-x-auto"><code><span class="text-pink-500">&lt;?php</span>
+    <span class="text-green-400">// Kode PHP disini</span>
+    <span class="text-blue-400">echo</span> <span class="text-yellow-300">"Hello World!"</span>;
+<span class="text-pink-500">?&gt;</span></code></pre>
+                                        </div>
+                                        <div class="bg-blue-50 p-4 rounded-lg">
+                                            <h4 class="font-bold text-gray-800 mb-2">Aturan Dasar:</h4>
+                                            <ul class="space-y-2 text-gray-700">
+                                                <li class="flex items-start">
+                                                    <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                                                    <span>Kode PHP diawali dengan <code class="bg-gray-100 px-2 py-1 rounded">&lt;?php</code></span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                                                    <span>Diakhiri dengan <code class="bg-gray-100 px-2 py-1 rounded">?&gt;</code> (opsional jika hanya PHP)</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <i class="fas fa-check text-accent mt-1 mr-2"></i>
+                                                    <span>Setiap statement diakhiri titik koma (<code class="bg-gray-100 px-2 py-1 rounded">;</code>)</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 mb-3">3.2 Penulisan Komentar</h4>
+                                        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg">
+                                            <pre class="text-sm overflow-x-auto"><code><span class="text-green-400">// Ini komentar satu baris</span>
+
+<span class="text-green-400"># Ini juga komentar satu baris</span>
+
+<span class="text-green-400">/*
+    Ini komentar
+    multi baris
+*/</span></code></pre>
+                                        </div>
+                                        <p class="text-gray-600 mt-3">Komentar tidak dieksekusi oleh PHP, digunakan untuk dokumentasi kode.</p>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-xl font-bold text-primary mb-4 flex items-center">
+                                    <i class="fas fa-tags mr-2"></i>3.3 Variabel dalam PHP
+                                </h3>
+                                
+                                <div class="bg-gradient-to-r from-purple-50 to-pink-50 p-5 rounded-xl mb-6">
+                                    <p class="text-gray-800 mb-4">
+                                        Variabel di PHP diawali dengan tanda <code class="bg-gray-800 text-white px-2 py-1 rounded">$</code> dan bersifat <strong>case-sensitive</strong>.
+                                    </p>
+                                    
+                                    <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-4">
+                                        <pre class="text-sm overflow-x-auto"><code><span class="text-pink-500">&lt;?php</span>
+    <span class="text-green-400">// Deklarasi variabel</span>
+    <span class="text-blue-400">$nama</span> = <span class="text-yellow-300">"Andi"</span>;
+    <span class="text-blue-400">$umur</span> = <span class="text-yellow-300">16</span>;
+    <span class="text-blue-400">$tinggi</span> = <span class="text-yellow-300">165.5</span>;
+    <span class="text-blue-400">$status</span> = <span class="text-blue-400">true</span>;
+    
+    <span class="text-green-400">// Menampilkan variabel</span>
+    <span class="text-blue-400">echo</span> <span class="text-yellow-300">"Nama: "</span> . <span class="text-blue-400">$nama</span>;  <span class="text-green-400">// Concatenation</span>
+    <span class="text-blue-400">echo</span> <span class="text-yellow-300">"Umur: <span class="text-blue-400">$umur</span> tahun"</span>;  <span class="text-green-400">// Interpolasi string</span>
+<span class="text-pink-500">?&gt;</span></code></pre>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-xl font-bold text-primary mb-4 flex items-center">
+                                    <i class="fas fa-list mr-2"></i>3.4 Tipe Data PHP
+                                </h3>
+                                
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                    <div class="bg-white p-4 rounded-xl shadow-sm border border-blue-100">
+                                        <div class="bg-blue-100 text-primary p-3 rounded-lg mb-3 text-center">
+                                            <i class="fas fa-font text-xl"></i>
+                                        </div>
+                                        <h4 class="font-bold text-gray-800 text-center">String</h4>
+                                        <p class="text-gray-600 text-sm text-center mt-1">Teks (contoh: "Hello")</p>
+                                    </div>
+                                    
+                                    <div class="bg-white p-4 rounded-xl shadow-sm border border-green-100">
+                                        <div class="bg-green-100 text-green-600 p-3 rounded-lg mb-3 text-center">
+                                            <i class="fas fa-hashtag text-xl"></i>
+                                        </div>
+                                        <h4 class="font-bold text-gray-800 text-center">Integer</h4>
+                                        <p class="text-gray-600 text-sm text-center mt-1">Bilangan bulat (contoh: 42)</p>
+                                    </div>
+                                    
+                                    <div class="bg-white p-4 rounded-xl shadow-sm border border-purple-100">
+                                        <div class="bg-purple-100 text-purple-600 p-3 rounded-lg mb-3 text-center">
+                                            <i class="fas fa-divide text-xl"></i>
+                                        </div>
+                                        <h4 class="font-bold text-gray-800 text-center">Float</h4>
+                                        <p class="text-gray-600 text-sm text-center mt-1">Bilangan desimal (contoh: 3.14)</p>
+                                    </div>
+                                    
+                                    <div class="bg-white p-4 rounded-xl shadow-sm border border-red-100">
+                                        <div class="bg-red-100 text-red-600 p-3 rounded-lg mb-3 text-center">
+                                            <i class="fas fa-check-double text-xl"></i>
+                                        </div>
+                                        <h4 class="font-bold text-gray-800 text-center">Boolean</h4>
+                                        <p class="text-gray-600 text-sm text-center mt-1">True/False</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between mt-8 pt-6 border-t">
+                                <button onclick="prevSlide()" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-5 rounded-lg transition flex items-center">
+                                    <i class="fas fa-arrow-left mr-2"></i>Sebelumnya
+                                </button>
+                                <button onclick="nextSlide()" class="bg-primary hover:bg-blue-700 text-white font-medium py-2 px-5 rounded-lg transition flex items-center">
+                                    Berikutnya <i class="fas fa-arrow-right ml-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 4: Operator dalam PHP -->
+                        <div class="slide" id="slide4">
+                            <div class="flex items-center justify-between mb-6">
+                                <div>
+                                    <span class="inline-block bg-primary text-white px-4 py-1 rounded-full text-sm font-bold mb-2">BAB IV</span>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-secondary">Operator dalam PHP</h2>
+                                </div>
+                                <div class="text-right">
+                                    <span class="bg-blue-100 text-primary px-3 py-1 rounded-lg font-medium">Slide 4/8</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-8">
+                                <h3 class="text-xl font-bold text-primary mb-4 flex items-center">
+                                    <i class="fas fa-calculator mr-2"></i>4.1 Operator Aritmatika
+                                </h3>
+                                
+                                <div class="bg-gradient-to-r from-cyan-50 to-blue-50 p-5 rounded-xl mb-6">
+                                    <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-4">
+                                        <pre class="text-sm overflow-x-auto"><code><span class="text-pink-500">&lt;?php</span>
+    <span class="text-blue-400">$a</span> = <span class="text-yellow-300">10</span>;
+    <span class="text-blue-400">$b</span> = <span class="text-yellow-300">3</span>;
+    
+    <span class="text-green-400">// Operator Aritmatika</span>
+    <span class="text-blue-400">echo</span> <span class="text-blue-400">$a</span> + <span class="text-blue-400">$b</span>;  <span class="text-green-400">// Penjumlahan: 13</span>
+    <span class="text-blue-400">echo</span> <span class="text-blue-400">$a</span> - <span class="text-blue-400">$b</span>;  <span class="text-green-400">// Pengurangan: 7</span>
+    <span class="text-blue-400">echo</span> <span class="text-blue-400">$a</span> * <span class="text-blue-400">$b</span>;  <span class="text-green-400">// Perkalian: 30</span>
+    <span class="text-blue-400">echo</span> <span class="text-blue-400">$a</span> / <span class="text-blue-400">$b</span>;  <span class="text-green-400">// Pembagian: 3.333</span>
+    <span class="text-blue-400">echo</span> <span class="text-blue-400">$a</span> % <span class="text-blue-400">$b</span>;  <span class="text-green-400">// Modulus: 1</span>
+    <span class="text-blue-400">echo</span> <span class="text-blue-400">$a</span> ** <span class="text-blue-400">$b</span>; <span class="text-green-400">// Pangkat: 1000</span>
+<span class="text-pink-500">?&gt;</span></code></pre>
+                                    </div>
+                                    
+                                    <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                                        <div class="bg-white p-3 rounded-lg text-center shadow-sm">
+                                            <div class="text-2xl font-bold text-primary mb-1">+</div>
+                                            <p class="text-sm font-medium">Penjumlahan</p>
+                                        </div>
+                                        <div class="bg-white p-3 rounded-lg text-center shadow-sm">
+                                            <div class="text-2xl font-bold text-primary mb-1">-</div>
+                                            <p class="text-sm font-medium">Pengurangan</p>
+                                        </div>
+                                        <div class="bg-white p-3 rounded-lg text-center shadow-sm">
+                                            <div class="text-2xl font-bold text-primary mb-1">*</div>
+                                            <p class="text-sm font-medium">Perkalian</p>
+                                        </div>
+                                        <div class="bg-white p-3 rounded-lg text-center shadow-sm">
+                                            <div class="text-2xl font-bold text-primary mb-1">/</div>
+                                            <p class="text-sm font-medium">Pembagian</p>
+                                        </div>
+                                        <div class="bg-white p-3 rounded-lg text-center shadow-sm">
+                                            <div class="text-2xl font-bold text-primary mb-1">%</div>
+                                            <p class="text-sm font-medium">Modulus (Sisa Bagi)</p>
+                                        </div>
+                                        <div class="bg-white p-3 rounded-lg text-center shadow-sm">
+                                            <div class="text-2xl font-bold text-primary mb-1">**</div>
+                                            <p class="text-sm font-medium">Pangkat</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                                    <div>
+                                        <h3 class="text-xl font-bold text-primary mb-4 flex items-center">
+                                            <i class="fas fa-balance-scale mr-2"></i>4.2 Operator Perbandingan
+                                        </h3>
+                                        
+                                        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-4">
+                                            <pre class="text-sm overflow-x-auto"><code><span class="text-pink-500">&lt;?php</span>
+    <span class="text-blue-400">$x</span> = <span class="text-yellow-300">10</span>;
+    <span class="text-blue-400">$y</span> = <span class="text-yellow-300">"10"</span>;
+    
+    <span class="text-blue-400">var_dump</span>(<span class="text-blue-400">$x</span> == <span class="text-blue-400">$y</span>);   <span class="text-green-400">// true (nilai sama)</span>
+    <span class="text-blue-400">var_dump</span>(<span class="text-blue-400">$x</span> === <span class="text-blue-400">$y</span>);  <span class="text-green-400">// false (tipe berbeda)</span>
+    <span class="text-blue-400">var_dump</span>(<span class="text-blue-400">$x</span> != <span class="text-blue-400">$y</span>);   <span class="text-green-400">// false</span>
+    <span class="text-blue-400">var_dump</span>(<span class="text-blue-400">$x</span> > <span class="text-blue-400">$y</span>);    <span class="text-green-400">// false</span>
+<span class="text-pink-500">?&gt;</span></code></pre>
+                                        </div>
+                                        
+                                        <div class="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-500">
+                                            <h4 class="font-bold text-gray-800 mb-2">Perbedaan == dan ===</h4>
+                                            <p><span class="font-bold text-primary">==</span> membandingkan nilai saja (loose comparison)</p>
+                                            <p><span class="font-bold text-primary">===</span> membandingkan nilai DAN tipe data (strict comparison)</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <h3 class="text-xl font-bold text-primary mb-4 flex items-center">
+                                            <i class="fas fa-project-diagram mr-2"></i>4.3 Operator Logika
+                                        </h3>
+                                        
+                                        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-4">
+                                            <pre class="text-sm overflow-x-auto"><code><span class="text-pink-500">&lt;?php</span>
+    <span class="text-blue-400">$benar</span> = <span class="text-blue-400">true</span>;
+    <span class="text-blue-400">$salah</span> = <span class="text-blue-400">false</span>;
+    
+    <span class="text-blue-400">var_dump</span>(<span class="text-blue-400">$benar</span> && <span class="text-blue-400">$salah</span>); <span class="text-green-400">// AND: false</span>
+    <span class="text-blue-400">var_dump</span>(<span class="text-blue-400">$benar</span> || <span class="text-blue-400">$salah</span>); <span class="text-green-400">// OR: true</span>
+    <span class="text-blue-400">var_dump</span>(!<span class="text-blue-400">$benar</span>);          <span class="text-green-400">// NOT: false</span>
+<span class="text-pink-500">?&gt;</span></code></pre>
+                                        </div>
+                                        
+                                        <div class="grid grid-cols-3 gap-3">
+                                            <div class="bg-white p-3 rounded-lg text-center shadow-sm border border-green-200">
+                                                <div class="text-xl font-bold text-green-600 mb-1">&&</div>
+                                                <p class="text-sm font-medium">AND</p>
+                                                <p class="text-xs text-gray-500">Keduanya harus true</p>
+                                            </div>
+                                            <div class="bg-white p-3 rounded-lg text-center shadow-sm border border-blue-200">
+                                                <div class="text-xl font-bold text-blue-600 mb-1">||</div>
+                                                <p class="text-sm font-medium">OR</p>
+                                                <p class="text-xs text-gray-500">Salah satu true</p>
+                                            </div>
+                                            <div class="bg-white p-3 rounded-lg text-center shadow-sm border border-red-200">
+                                                <div class="text-xl font-bold text-red-600 mb-1">!</div>
+                                                <p class="text-sm font-medium">NOT</p>
+                                                <p class="text-xs text-gray-500">Kebalikan nilai</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between mt-8 pt-6 border-t">
+                                <button onclick="prevSlide()" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-5 rounded-lg transition flex items-center">
+                                    <i class="fas fa-arrow-left mr-2"></i>Sebelumnya
+                                </button>
+                                <button onclick="nextSlide()" class="bg-primary hover:bg-blue-700 text-white font-medium py-2 px-5 rounded-lg transition flex items-center">
+                                    Berikutnya <i class="fas fa-arrow-right ml-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 5: Struktur Kendali -->
+                        <div class="slide" id="slide5">
+                            <div class="flex items-center justify-between mb-6">
+                                <div>
+                                    <span class="inline-block bg-primary text-white px-4 py-1 rounded-full text-sm font-bold mb-2">BAB V</span>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-secondary">Struktur Kendali</h2>
+                                </div>
+                                <div class="text-right">
+                                    <span class="bg-blue-100 text-primary px-3 py-1 rounded-lg font-medium">Slide 5/8</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-8">
+                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                                    <div>
+                                        <h3 class="text-xl font-bold text-primary mb-4 flex items-center">
+                                            <i class="fas fa-code-branch mr-2"></i>5.1 Percabangan IF-ELSE
+                                        </h3>
+                                        
+                                        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-4">
+                                            <pre class="text-sm overflow-x-auto"><code><span class="text-pink-500">&lt;?php</span>
+    <span class="text-blue-400">$nilai</span> = <span class="text-yellow-300">85</span>;
+    
+    <span class="text-blue-400">if</span> (<span class="text-blue-400">$nilai</span> >= <span class="text-yellow-300">90</span>) {
+        <span class="text-blue-400">echo</span> <span class="text-yellow-300">"Grade: A"</span>;
+    } <span class="text-blue-400">elseif</span> (<span class="text-blue-400">$nilai</span> >= <span class="text-yellow-300">80</span>) {
+        <span class="text-blue-400">echo</span> <span class="text-yellow-300">"Grade: B"</span>;
+    } <span class="text-blue-400">elseif</span> (<span class="text-blue-400">$nilai</span> >= <span class="text-yellow-300">70</span>) {
+        <span class="text-blue-400">echo</span> <span class="text-yellow-300">"Grade: C"</span>;
+    } <span class="text-blue-400">else</span> {
+        <span class="text-blue-400">echo</span> <span class="text-yellow-300">"Grade: D"</span>;
+    }
+<span class="text-pink-500">?&gt;</span></code></pre>
+                                        </div>
+                                        
+                                        <div class="bg-white p-4 rounded-lg shadow-sm border border-blue-200">
+                                            <h4 class="font-bold text-gray-800 mb-2">Diagram Alir IF-ELSE</h4>
+                                            <div class="flex flex-col items-center">
+                                                <div class="bg-primary text-white px-4 py-2 rounded-lg mb-2">Mulai</div>
+                                                <i class="fas fa-arrow-down text-gray-400 mb-2"></i>
+                                                <div class="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg mb-2">Kondisi?</div>
+                                                <i class="fas fa-arrow-down text-gray-400 mb-2"></i>
+                                                <div class="grid grid-cols-2 gap-2 w-full">
+                                                    <div class="bg-green-100 text-green-800 px-3 py-2 rounded-lg text-center">True</div>
+                                                    <div class="bg-red-100 text-red-800 px-3 py-2 rounded-lg text-center">False</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <h3 class="text-xl font-bold text-primary mb-4 flex items-center">
+                                            <i class="fas fa-exchange-alt mr-2"></i>5.2 Switch-Case
+                                        </h3>
+                                        
+                                        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-4">
+                                            <pre class="text-sm overflow-x-auto"><code><span class="text-pink-500">&lt;?php</span>
+    <span class="text-blue-400">$hari</span> = <span class="text-yellow-300">"Senin"</span>;
+    
+    <span class="text-blue-400">switch</span>(<span class="text-blue-400">$hari</span>) {
+        <span class="text-blue-400">case</span> <span class="text-yellow-300">"Senin"</span>:
+            <span class="text-blue-400">echo</span> <span class="text-yellow-300">"Hari pertama sekolah"</span>;
+            <span class="text-blue-400">break</span>;
+        <span class="text-blue-400">case</span> <span class="text-yellow-300">"Sabtu"</span>:
+            <span class="text-blue-400">echo</span> <span class="text-yellow-300">"Hari libur"</span>;
+            <span class="text-blue-400">break</span>;
+        <span class="text-blue-400">default</span>:
+            <span class="text-blue-400">echo</span> <span class="text-yellow-300">"Hari aktif"</span>;
+    }
+<span class="text-pink-500">?&gt;</span></code></pre>
+                                        </div>
+                                        
+                                        <div class="bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
+                                            <h4 class="font-bold text-gray-800 mb-2 flex items-center">
+                                                <i class="fas fa-exclamation-circle text-red-500 mr-2"></i>Penting!
+                                            </h4>
+                                            <p class="text-gray-700">
+                                                Jangan lupa menambahkan <code class="bg-gray-100 px-2 py-1 rounded">break</code> setelah setiap case. Jika tidak, eksekusi akan berlanjut ke case berikutnya!
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-xl font-bold text-primary mb-4 flex items-center">
+                                    <i class="fas fa-redo mr-2"></i>5.3 Perulangan (Looping)
+                                </h3>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                                    <div class="bg-white p-5 rounded-xl shadow-sm border border-blue-200">
+                                        <h4 class="font-bold text-gray-800 mb-3 text-center">FOR Loop</h4>
+                                        <div class="bg-gray-900 text-gray-100 p-3 rounded-lg mb-3">
+                                            <pre class="text-xs overflow-x-auto"><code><span class="text-blue-400">for</span>(<span class="text-blue-400">$i</span>=<span class="text-yellow-300">1</span>; <span class="text-blue-400">$i</span>&lt;=<span class="text-yellow-300">5</span>; <span class="text-blue-400">$i</span>++) {
+    <span class="text-blue-400">echo</span> <span class="text-yellow-300">"Iterasi ke-<span class="text-blue-400">$i</span>"</span>;
+}</code></pre>
+                                        </div>
+                                        <p class="text-gray-600 text-sm">Digunakan ketika jumlah iterasi diketahui</p>
+                                    </div>
+                                    
+                                    <div class="bg-white p-5 rounded-xl shadow-sm border border-green-200">
+                                        <h4 class="font-bold text-gray-800 mb-3 text-center">WHILE Loop</h4>
+                                        <div class="bg-gray-900 text-gray-100 p-3 rounded-lg mb-3">
+                                            <pre class="text-xs overflow-x-auto"><code><span class="text-blue-400">$j</span> = <span class="text-yellow-300">1</span>;
+<span class="text-blue-400">while</span>(<span class="text-blue-400">$j</span> &lt;= <span class="text-yellow-300">3</span>) {
+    <span class="text-blue-400">echo</span> <span class="text-yellow-300">"While loop <span class="text-blue-400">$j</span>"</span>;
+    <span class="text-blue-400">$j</span>++;
+}</code></pre>
+                                        </div>
+                                        <p class="text-gray-600 text-sm">Digunakan ketika jumlah iterasi tidak pasti</p>
+                                    </div>
+                                    
+                                    <div class="bg-white p-5 rounded-xl shadow-sm border border-purple-200">
+                                        <h4 class="font-bold text-gray-800 mb-3 text-center">DO-WHILE Loop</h4>
+                                        <div class="bg-gray-900 text-gray-100 p-3 rounded-lg mb-3">
+                                            <pre class="text-xs overflow-x-auto"><code><span class="text-blue-400">$k</span> = <span class="text-yellow-300">1</span>;
+<span class="text-blue-400">do</span> {
+    <span class="text-blue-400">echo</span> <span class="text-yellow-300">"Do-while <span class="text-blue-400">$k</span>"</span>;
+    <span class="text-blue-400">$k</span>++;
+} <span class="text-blue-400">while</span>(<span class="text-blue-400">$k</span> &lt;= <span class="text-yellow-300">3</span>);</code></pre>
+                                        </div>
+                                        <p class="text-gray-600 text-sm">Minimal 1x eksekusi meski kondisi false</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between mt-8 pt-6 border-t">
+                                <button onclick="prevSlide()" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-5 rounded-lg transition flex items-center">
+                                    <i class="fas fa-arrow-left mr-2"></i>Sebelumnya
+                                </button>
+                                <button onclick="nextSlide()" class="bg-primary hover:bg-blue-700 text-white font-medium py-2 px-5 rounded-lg transition flex items-center">
+                                    Berikutnya <i class="fas fa-arrow-right ml-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 6: Array dan Fungsi -->
+                        <div class="slide" id="slide6">
+                            <div class="flex items-center justify-between mb-6">
+                                <div>
+                                    <span class="inline-block bg-primary text-white px-4 py-1 rounded-full text-sm font-bold mb-2">BAB VI</span>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-secondary">Array dan Fungsi</h2>
+                                </div>
+                                <div class="text-right">
+                                    <span class="bg-blue-100 text-primary px-3 py-1 rounded-lg font-medium">Slide 6/8</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-8">
+                                <h3 class="text-xl font-bold text-primary mb-4 flex items-center">
+                                    <i class="fas fa-layer-group mr-2"></i>6.1 Array di PHP
+                                </h3>
+                                
+                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 mb-3">Array Numerik</h4>
+                                        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-4">
+                                            <pre class="text-sm overflow-x-auto"><code><span class="text-pink-500">&lt;?php</span>
+    <span class="text-green-400">// Array numerik</span>
+    <span class="text-blue-400">$siswa</span> = <span class="text-blue-400">array</span>(<span class="text-yellow-300">"Budi"</span>, <span class="text-yellow-300">"Ani"</span>, <span class="text-yellow-300">"Cici"</span>);
+    <span class="text-green-400">// atau</span>
+    <span class="text-blue-400">$siswa</span> = [<span class="text-yellow-300">"Budi"</span>, <span class="text-yellow-300">"Ani"</span>, <span class="text-yellow-300">"Cici"</span>];
+    
+    <span class="text-green-400">// Akses elemen array</span>
+    <span class="text-blue-400">echo</span> <span class="text-blue-400">$siswa</span>[<span class="text-yellow-300">0</span>];  <span class="text-green-400">// Output: Budi</span>
+<span class="text-pink-500">?&gt;</span></code></pre>
+                                        </div>
+                                        <div class="bg-blue-50 p-4 rounded-lg">
+                                            <h5 class="font-bold text-gray-800 mb-2">Indeks Array Numerik:</h5>
+                                            <div class="flex space-x-2">
+                                                <div class="bg-primary text-white px-3 py-1 rounded text-center">
+                                                    <div class="text-xs">Indeks</div>
+                                                    <div class="font-bold">0</div>
+                                                    <div class="text-xs">Budi</div>
+                                                </div>
+                                                <div class="bg-primary text-white px-3 py-1 rounded text-center">
+                                                    <div class="text-xs">Indeks</div>
+                                                    <div class="font-bold">1</div>
+                                                    <div class="text-xs">Ani</div>
+                                                </div>
+                                                <div class="bg-primary text-white px-3 py-1 rounded text-center">
+                                                    <div class="text-xs">Indeks</div>
+                                                    <div class="font-bold">2</div>
+                                                    <div class="text-xs">Cici</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 mb-3">Array Asosiatif</h4>
+                                        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-4">
+                                            <pre class="text-sm overflow-x-auto"><code><span class="text-pink-500">&lt;?php</span>
+    <span class="text-green-400">// Array asosiatif</span>
+    <span class="text-blue-400">$mahasiswa</span> = [
+        <span class="text-yellow-300">"nama"</span> => <span class="text-yellow-300">"Andi"</span>,
+        <span class="text-yellow-300">"nim"</span> => <span class="text-yellow-300">"2023001"</span>,
+        <span class="text-yellow-300">"jurusan"</span> => <span class="text-yellow-300">"RPL"</span>
+    ];
+    
+    <span class="text-green-400">// Akses elemen array</span>
+    <span class="text-blue-400">echo</span> <span class="text-blue-400">$mahasiswa</span>[<span class="text-yellow-300">"nama"</span>];  <span class="text-green-400">// Output: Andi</span>
+<span class="text-pink-500">?&gt;</span></code></pre>
+                                        </div>
+                                        <div class="bg-green-50 p-4 rounded-lg">
+                                            <h5 class="font-bold text-gray-800 mb-2">Struktur Array Asosiatif:</h5>
+                                            <div class="space-y-2">
+                                                <div class="flex justify-between items-center bg-white p-2 rounded">
+                                                    <span class="font-medium text-gray-700">"nama"</span>
+                                                    <span class="text-accent font-bold">=></span>
+                                                    <span class="text-primary">"Andi"</span>
+                                                </div>
+                                                <div class="flex justify-between items-center bg-white p-2 rounded">
+                                                    <span class="font-medium text-gray-700">"nim"</span>
+                                                    <span class="text-accent font-bold">=></span>
+                                                    <span class="text-primary">"2023001"</span>
+                                                </div>
+                                                <div class="flex justify-between items-center bg-white p-2 rounded">
+                                                    <span class="font-medium text-gray-700">"jurusan"</span>
+                                                    <span class="text-accent font-bold">=></span>
+                                                    <span class="text-primary">"RPL"</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-xl font-bold text-primary mb-4 flex items-center">
+                                    <i class="fas fa-cube mr-2"></i>6.2 Fungsi di PHP
+                                </h3>
+                                
+                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                    <div>
+                                        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-4">
+                                            <pre class="text-sm overflow-x-auto"><code><span class="text-pink-500">&lt;?php</span>
+    <span class="text-green-400">// Fungsi tanpa parameter</span>
+    <span class="text-blue-400">function</span> <span class="text-yellow-400">salam</span>() {
+        <span class="text-blue-400">return</span> <span class="text-yellow-300">"Selamat pagi!"</span>;
+    }
+    
+    <span class="text-green-400">// Fungsi dengan parameter</span>
+    <span class="text-blue-400">function</span> <span class="text-yellow-400">sapa</span>(<span class="text-blue-400">$nama</span>) {
+        <span class="text-blue-400">return</span> <span class="text-yellow-300">"Halo, <span class="text-blue-400">$nama</span>!"</span>;
+    }
+    
+    <span class="text-green-400">// Fungsi dengan nilai default</span>
+    <span class="text-blue-400">function</span> <span class="text-yellow-400">kenalan</span>(<span class="text-blue-400">$nama</span>, <span class="text-blue-400">$kota</span> = <span class="text-yellow-300">"Jakarta"</span>) {
+        <span class="text-blue-400">return</span> <span class="text-yellow-300">"Saya <span class="text-blue-400">$nama</span> dari <span class="text-blue-400">$kota</span>"</span>;
+    }
+    
+    <span class="text-green-400">// Memanggil fungsi</span>
+    <span class="text-blue-400">echo</span> <span class="text-yellow-400">salam</span>();  <span class="text-green-400">// Output: Selamat pagi!</span>
+    <span class="text-blue-400">echo</span> <span class="text-yellow-400">sapa</span>(<span class="text-yellow-300">"Budi"</span>);  <span class="text-green-400">// Output: Halo, Budi!</span>
+<span class="text-pink-500">?&gt;</span></code></pre>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <div class="bg-gradient-to-r from-purple-50 to-pink-50 p-5 rounded-xl h-full">
+                                            <h4 class="font-bold text-gray-800 mb-3">Manfaat Fungsi</h4>
+                                            <ul class="space-y-3">
+                                                <li class="flex items-start">
+                                                    <div class="bg-primary text-white p-2 rounded-full mr-3">
+                                                        <i class="fas fa-code text-sm"></i>
+                                                    </div>
+                                                    <div>
+                                                        <h5 class="font-bold text-gray-800">Reusability</h5>
+                                                        <p class="text-gray-600 text-sm">Kode dapat digunakan berulang kali</p>
+                                                    </div>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <div class="bg-accent text-white p-2 rounded-full mr-3">
+                                                        <i class="fas fa-tasks text-sm"></i>
+                                                    </div>
+                                                    <div>
+                                                        <h5 class="font-bold text-gray-800">Modularitas</h5>
+                                                        <p class="text-gray-600 text-sm">Memecah program menjadi bagian kecil</p>
+                                                    </div>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <div class="bg-purple-500 text-white p-2 rounded-full mr-3">
+                                                        <i class="fas fa-wrench text-sm"></i>
+                                                    </div>
+                                                    <div>
+                                                        <h5 class="font-bold text-gray-800">Maintainability</h5>
+                                                        <p class="text-gray-600 text-sm">Mudah diperbaiki dan dikembangkan</p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            
+                                            <div class="mt-6 bg-white p-4 rounded-lg">
+                                                <h5 class="font-bold text-gray-800 mb-2">Sintaks Fungsi:</h5>
+                                                <div class="bg-gray-800 text-white p-3 rounded">
+                                                    <code class="text-sm">function namaFungsi($parameter) {<br>&nbsp;&nbsp;// kode fungsi<br>&nbsp;&nbsp;return $nilai;<br>}</code>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between mt-8 pt-6 border-t">
+                                <button onclick="prevSlide()" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-5 rounded-lg transition flex items-center">
+                                    <i class="fas fa-arrow-left mr-2"></i>Sebelumnya
+                                </button>
+                                <button onclick="nextSlide()" class="bg-primary hover:bg-blue-700 text-white font-medium py-2 px-5 rounded-lg transition flex items-center">
+                                    Berikutnya <i class="fas fa-arrow-right ml-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 7: Form Processing -->
+                        <div class="slide" id="slide7">
+                            <div class="flex items-center justify-between mb-6">
+                                <div>
+                                    <span class="inline-block bg-primary text-white px-4 py-1 rounded-full text-sm font-bold mb-2">BAB VII</span>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-secondary">Form Processing dengan PHP</h2>
+                                </div>
+                                <div class="text-right">
+                                    <span class="bg-blue-100 text-primary px-3 py-1 rounded-lg font-medium">Slide 7/8</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-8">
+                                <h3 class="text-xl font-bold text-primary mb-4 flex items-center">
+                                    <i class="fas fa-window-restore mr-2"></i>7.1 Form HTML dengan PHP
+                                </h3>
+                                
+                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 mb-3">File: form.html</h4>
+                                        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg">
+                                            <pre class="text-sm overflow-x-auto"><code><span class="text-green-400">&lt;!DOCTYPE html&gt;</span>
+<span class="text-blue-400">&lt;html&gt;</span>
+<span class="text-blue-400">&lt;head&gt;</span>
+    <span class="text-blue-400">&lt;title&gt;</span>Form Input<span class="text-blue-400">&lt;/title&gt;</span>
+<span class="text-blue-400">&lt;/head&gt;</span>
+<span class="text-blue-400">&lt;body&gt;</span>
+    <span class="text-blue-400">&lt;form</span> <span class="text-yellow-400">action=</span><span class="text-yellow-300">"proses.php"</span> <span class="text-yellow-400">method=</span><span class="text-yellow-300">"POST"</span><span class="text-blue-400">&gt;</span>
+        <span class="text-blue-400">&lt;h2&gt;</span>Form Pendaftaran<span class="text-blue-400">&lt;/h2&gt;</span>
+        
+        <span class="text-blue-400">&lt;label&gt;</span>Nama:<span class="text-blue-400">&lt;/label&gt;</span><span class="text-blue-400">&lt;br&gt;</span>
+        <span class="text-blue-400">&lt;input</span> <span class="text-yellow-400">type=</span><span class="text-yellow-300">"text"</span> <span class="text-yellow-400">name=</span><span class="text-yellow-300">"nama"</span><span class="text-blue-400">&gt;</span><span class="text-blue-400">&lt;br&gt;&lt;br&gt;</span>
+        
+        <span class="text-blue-400">&lt;label&gt;</span>Email:<span class="text-blue-400">&lt;/label&gt;</span><span class="text-blue-400">&lt;br&gt;</span>
+        <span class="text-blue-400">&lt;input</span> <span class="text-yellow-400">type=</span><span class="text-yellow-300">"email"</span> <span class="text-yellow-400">name=</span><span class="text-yellow-300">"email"</span><span class="text-blue-400">&gt;</span><span class="text-blue-400">&lt;br&gt;&lt;br&gt;</span>
+        
+        <span class="text-blue-400">&lt;input</span> <span class="text-yellow-400">type=</span><span class="text-yellow-300">"submit"</span> <span class="text-yellow-400">value=</span><span class="text-yellow-300">"Kirim"</span><span class="text-blue-400">&gt;</span>
+    <span class="text-blue-400">&lt;/form&gt;</span>
+<span class="text-blue-400">&lt;/body&gt;</span>
+<span class="text-blue-400">&lt;/html&gt;</span></code></pre>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 mb-3">Atribut Form Penting:</h4>
+                                        <div class="space-y-4">
+                                            <div class="bg-white p-4 rounded-lg shadow-sm border border-blue-200">
+                                                <h5 class="font-bold text-primary mb-2">action</h5>
+                                                <p class="text-gray-700">Menentukan file yang akan memproses form</p>
+                                                <code class="bg-gray-100 text-gray-800 px-2 py-1 rounded text-sm">action="proses.php"</code>
+                                            </div>
+                                            
+                                            <div class="bg-white p-4 rounded-lg shadow-sm border border-green-200">
+                                                <h5 class="font-bold text-primary mb-2">method</h5>
+                                                <p class="text-gray-700">Metode pengiriman data: GET atau POST</p>
+                                                <div class="flex space-x-2 mt-2">
+                                                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded text-sm">GET</span>
+                                                    <span class="bg-green-100 text-green-800 px-3 py-1 rounded text-sm">POST</span>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-500">
+                                                <h5 class="font-bold text-gray-800 mb-2">Perbedaan GET vs POST</h5>
+                                                <p class="text-gray-700 text-sm"><strong>GET:</strong> Data terlihat di URL, untuk data tidak sensitif</p>
+                                                <p class="text-gray-700 text-sm"><strong>POST:</strong> Data tidak terlihat di URL, untuk data sensitif</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-xl font-bold text-primary mb-4 flex items-center">
+                                    <i class="fas fa-cogs mr-2"></i>7.2 Memproses Form dengan PHP
+                                </h3>
+                                
+                                <div class="bg-gradient-to-r from-blue-50 to-cyan-50 p-5 rounded-xl mb-6">
+                                    <h4 class="font-bold text-gray-800 mb-3">File: proses.php</h4>
+                                    
+                                    <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-4">
+                                        <pre class="text-sm overflow-x-auto"><code><span class="text-pink-500">&lt;?php</span>
+    <span class="text-green-400">// Mengambil data dari form</span>
+    <span class="text-blue-400">$nama</span> = <span class="text-blue-400">$_POST</span>[<span class="text-yellow-300">'nama'</span>];
+    <span class="text-blue-400">$email</span> = <span class="text-blue-400">$_POST</span>[<span class="text-yellow-300">'email'</span>];
+    
+    <span class="text-green-400">// Validasi sederhana</span>
+    <span class="text-blue-400">if</span>(<span class="text-blue-400">empty</span>(<span class="text-blue-400">$nama</span>) || <span class="text-blue-400">empty</span>(<span class="text-blue-400">$email</span>)) {
+        <span class="text-blue-400">echo</span> <span class="text-yellow-300">"&lt;div class='error'&gt;Semua field harus diisi!&lt;/div&gt;"</span>;
+    } <span class="text-blue-400">else</span> {
+        <span class="text-green-400">// Proses data (simpan ke database, dll)</span>
+        <span class="text-blue-400">echo</span> <span class="text-yellow-300">"&lt;h3&gt;Terima kasih &lt;span class='highlight'&gt;<span class="text-blue-400">$nama</span>&lt;/span&gt;!&lt;/h3&gt;"</span>;
+        <span class="text-blue-400">echo</span> <span class="text-yellow-300">"&lt;p&gt;Email &lt;strong&gt;<span class="text-blue-400">$email</span>&lt;/strong&gt; berhasil terdaftar.&lt;/p&gt;"</span>;
+    }
+<span class="text-pink-500">?&gt;</span></code></pre>
+                                    </div>
+                                    
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                                            <h5 class="font-bold text-gray-800 mb-2 flex items-center">
+                                                <i class="fas fa-shield-alt text-primary mr-2"></i>$_POST
+                                            </h5>
+                                            <p class="text-gray-600 text-sm">Superglobal untuk mengambil data dari method POST</p>
+                                        </div>
+                                        
+                                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                                            <h5 class="font-bold text-gray-800 mb-2 flex items-center">
+                                                <i class="fas fa-shield-alt text-primary mr-2"></i>$_GET
+                                            </h5>
+                                            <p class="text-gray-600 text-sm">Superglobal untuk mengambil data dari method GET</p>
+                                        </div>
+                                        
+                                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                                            <h5 class="font-bold text-gray-800 mb-2 flex items-center">
+                                                <i class="fas fa-check-circle text-accent mr-2"></i>empty()
+                                            </h5>
+                                            <p class="text-gray-600 text-sm">Fungsi untuk mengecek apakah variabel kosong</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gradient-to-r from-red-50 to-orange-50 p-5 rounded-xl border-l-4 border-red-500">
+                                    <h4 class="font-bold text-gray-800 mb-2 flex items-center">
+                                        <i class="fas fa-exclamation-triangle text-red-500 mr-2"></i>Keamanan Form
+                                    </h4>
+                                    <p class="text-gray-700 mb-3">Selalu validasi dan sanitasi input pengguna untuk mencegah serangan:</p>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                        <div class="bg-white p-3 rounded-lg">
+                                            <h5 class="font-bold text-gray-800 text-sm">SQL Injection</h5>
+                                            <p class="text-gray-600 text-xs">Gunakan <code>mysqli_real_escape_string()</code> atau prepared statements</p>
+                                        </div>
+                                        <div class="bg-white p-3 rounded-lg">
+                                            <h5 class="font-bold text-gray-800 text-sm">XSS (Cross-Site Scripting)</h5>
+                                            <p class="text-gray-600 text-xs">Gunakan <code>htmlspecialchars()</code> untuk output</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between mt-8 pt-6 border-t">
+                                <button onclick="prevSlide()" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-5 rounded-lg transition flex items-center">
+                                    <i class="fas fa-arrow-left mr-2"></i>Sebelumnya
+                                </button>
+                                <button onclick="nextSlide()" class="bg-primary hover:bg-blue-700 text-white font-medium py-2 px-5 rounded-lg transition flex items-center">
+                                    Berikutnya <i class="fas fa-arrow-right ml-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 8: Proyek Akhir -->
+                        <div class="slide" id="slide8">
+                            <div class="flex items-center justify-between mb-6">
+                                <div>
+                                    <span class="inline-block bg-primary text-white px-4 py-1 rounded-full text-sm font-bold mb-2">PROYEK AKHIR</span>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-secondary">Sistem Login Sederhana</h2>
+                                </div>
+                                <div class="text-right">
+                                    <span class="bg-blue-100 text-primary px-3 py-1 rounded-lg font-medium">Slide 8/8</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-8">
+                                <div class="bg-gradient-to-r from-secondary to-primary p-5 rounded-xl text-white mb-6">
+                                    <h3 class="text-xl font-bold mb-3 flex items-center">
+                                        <i class="fas fa-star mr-2"></i>Tugas Akhir Semester
+                                    </h3>
+                                    <p>Buat sistem login sederhana menggunakan PHP dan MySQL yang menerapkan konsep-konsep yang telah dipelajari.</p>
+                                </div>
+                                
+                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                                    <div>
+                                        <h3 class="text-xl font-bold text-primary mb-4">Struktur Database</h3>
+                                        
+                                        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-4">
+                                            <pre class="text-sm overflow-x-auto"><code><span class="text-green-400">-- Buat database</span>
+<span class="text-blue-400">CREATE DATABASE</span> sekolah;
+
+<span class="text-green-400">-- Buat tabel users</span>
+<span class="text-blue-400">CREATE TABLE</span> users (
+    id <span class="text-blue-400">INT</span> <span class="text-blue-400">AUTO_INCREMENT PRIMARY KEY</span>,
+    username <span class="text-blue-400">VARCHAR</span>(50) <span class="text-blue-400">NOT NULL</span>,
+    password <span class="text-blue-400">VARCHAR</span>(255) <span class="text-blue-400">NOT NULL</span>,
+    nama_lengkap <span class="text-blue-400">VARCHAR</span>(100),
+    level <span class="text-blue-400">ENUM</span>(<span class="text-yellow-300">'admin'</span>, <span class="text-yellow-300">'siswa'</span>) <span class="text-blue-400">DEFAULT</span> <span class="text-yellow-300">'siswa'</span>
+);
+
+<span class="text-green-400">-- Insert data contoh</span>
+<span class="text-blue-400">INSERT INTO</span> users (username, password, nama_lengkap, level)
+<span class="text-blue-400">VALUES</span> (<span class="text-yellow-300">'admin'</span>, <span class="text-yellow-300">'21232f297a57a5a743894a0e4a801fc3'</span>, <span class="text-yellow-300">'Administrator'</span>, <span class="text-yellow-300">'admin'</span>);</code></pre>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <h3 class="text-xl font-bold text-primary mb-4">File: login.php</h3>
+                                        
+                                        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-4">
+                                            <pre class="text-sm overflow-x-auto"><code><span class="text-pink-500">&lt;?php</span>
+    <span class="text-blue-400">session_start</span>();
+    <span class="text-blue-400">$koneksi</span> = <span class="text-blue-400">mysqli_connect</span>(
+        <span class="text-yellow-300">"localhost"</span>, 
+        <span class="text-yellow-300">"root"</span>, 
+        <span class="text-yellow-300">""</span>, 
+        <span class="text-yellow-300">"sekolah"</span>
+    );
+    
+    <span class="text-blue-400">if</span>(<span class="text-blue-400">isset</span>(<span class="text-blue-400">$_POST</span>[<span class="text-yellow-300">'login'</span>])) {
+        <span class="text-blue-400">$username</span> = <span class="text-blue-400">$_POST</span>[<span class="text-yellow-300">'username'</span>];
+        <span class="text-blue-400">$password</span> = <span class="text-blue-400">md5</span>(<span class="text-blue-400">$_POST</span>[<span class="text-yellow-300">'password'</span>]);
+        
+        <span class="text-blue-400">$query</span> = <span class="text-yellow-300">"SELECT * FROM users WHERE 
+                 username='<span class="text-blue-400">$username</span>' AND 
+                 password='<span class="text-blue-400">$password</span>'"</span>;
+        
+        <span class="text-blue-400">$result</span> = <span class="text-blue-400">mysqli_query</span>(<span class="text-blue-400">$koneksi</span>, <span class="text-blue-400">$query</span>);
+        
+        <span class="text-blue-400">if</span>(<span class="text-blue-400">mysqli_num_rows</span>(<span class="text-blue-400">$result</span>) == <span class="text-yellow-300">1</span>) {
+            <span class="text-blue-400">$_SESSION</span>[<span class="text-yellow-300">'username'</span>] = <span class="text-blue-400">$username</span>;
+            <span class="text-blue-400">header</span>(<span class="text-yellow-300">"Location: dashboard.php"</span>);
+        } <span class="text-blue-400">else</span> {
+            <span class="text-blue-400">echo</span> <span class="text-yellow-300">"Login gagal! Username atau password salah."</span>;
+        }
+    }
+<span class="text-pink-500">?&gt;</span></code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-8">
+                                    <h3 class="text-xl font-bold text-primary mb-4 flex items-center">
+                                        <i class="fas fa-tasks mr-2"></i>Fitur yang Harus Ada
+                                    </h3>
+                                    
+                                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                        <div class="bg-white p-4 rounded-xl shadow-sm border border-blue-200">
+                                            <div class="bg-blue-100 text-blue-800 p-3 rounded-lg mb-3 text-center">
+                                                <i class="fas fa-sign-in-alt text-xl"></i>
+                                            </div>
+                                            <h4 class="font-bold text-gray-800 text-center">Login System</h4>
+                                            <p class="text-gray-600 text-sm text-center mt-1">Form login dengan validasi</p>
+                                        </div>
+                                        
+                                        <div class="bg-white p-4 rounded-xl shadow-sm border border-green-200">
+                                            <div class="bg-green-100 text-green-800 p-3 rounded-lg mb-3 text-center">
+                                                <i class="fas fa-user-shield text-xl"></i>
+                                            </div>
+                                            <h4 class="font-bold text-gray-800 text-center">Session Management</h4>
+                                            <p class="text-gray-600 text-sm text-center mt-1">Menggunakan session untuk login state</p>
+                                        </div>
+                                        
+                                        <div class="bg-white p-4 rounded-xl shadow-sm border border-purple-200">
+                                            <div class="bg-purple-100 text-purple-800 p-3 rounded-lg mb-3 text-center">
+                                                <i class="fas fa-database text-xl"></i>
+                                            </div>
+                                            <h4 class="font-bold text-gray-800 text-center">CRUD Operations</h4>
+                                            <p class="text-gray-600 text-sm text-center mt-1">Create, Read, Update, Delete data</p>
+                                        </div>
+                                        
+                                        <div class="bg-white p-4 rounded-xl shadow-sm border border-red-200">
+                                            <div class="bg-red-100 text-red-800 p-3 rounded-lg mb-3 text-center">
+                                                <i class="fas fa-sign-out-alt text-xl"></i>
+                                            </div>
+                                            <h4 class="font-bold text-gray-800 text-center">Logout System</h4>
+                                            <p class="text-gray-600 text-sm text-center mt-1">Fitur logout dengan session destroy</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gradient-to-r from-green-50 to-emerald-50 p-5 rounded-xl border-l-4 border-accent">
+                                    <h3 class="text-xl font-bold text-gray-800 mb-3 flex items-center">
+                                        <i class="fas fa-graduation-cap text-accent mr-2"></i>Kriteria Penilaian
+                                    </h3>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div>
+                                            <h4 class="font-bold text-gray-800 mb-2">Teknis (70%)</h4>
+                                            <ul class="space-y-1 text-gray-700">
+                                                <li class="flex items-center">
+                                                    <i class="fas fa-check-circle text-accent mr-2"></i>
+                                                    <span>Koneksi database berfungsi</span>
+                                                </li>
+                                                <li class="flex items-center">
+                                                    <i class="fas fa-check-circle text-accent mr-2"></i>
+                                                    <span>Sistem login/logout bekerja</span>
+                                                </li>
+                                                <li class="flex items-center">
+                                                    <i class="fas fa-check-circle text-accent mr-2"></i>
+                                                    <span>CRUD berfungsi dengan baik</span>
+                                                </li>
+                                                <li class="flex items-center">
+                                                    <i class="fas fa-check-circle text-accent mr-2"></i>
+                                                    <span>Keamanan dasar (validasi input)</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-gray-800 mb-2">Non-Teknis (30%)</h4>
+                                            <ul class="space-y-1 text-gray-700">
+                                                <li class="flex items-center">
+                                                    <i class="fas fa-check-circle text-accent mr-2"></i>
+                                                    <span>Antarmuka user-friendly</span>
+                                                </li>
+                                                <li class="flex items-center">
+                                                    <i class="fas fa-check-circle text-accent mr-2"></i>
+                                                    <span>Dokumentasi kode (komentar)</span>
+                                                </li>
+                                                <li class="flex items-center">
+                                                    <i class="fas fa-check-circle text-accent mr-2"></i>
+                                                    <span>Kreativitas dan inovasi</span>
+                                                </li>
+                                                <li class="flex items-center">
+                                                    <i class="fas fa-check-circle text-accent mr-2"></i>
+                                                    <span>Presentasi proyek</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between mt-8 pt-6 border-t">
+                                <button onclick="prevSlide()" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-5 rounded-lg transition flex items-center">
+                                    <i class="fas fa-arrow-left mr-2"></i>Sebelumnya
+                                </button>
+                                <button onclick="finishPresentation()" class="bg-accent hover:bg-green-600 text-white font-medium py-2 px-5 rounded-lg transition flex items-center">
+                                    Selesai <i class="fas fa-check ml-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Footer -->
+                <div class="mt-6 bg-white rounded-2xl shadow-lg p-6">
+                    <div class="flex flex-col md:flex-row justify-between items-center">
+                        <div class="mb-4 md:mb-0">
+                            <h4 class="font-bold text-secondary">Materi PHP Kelas 10 RPL</h4>
+                            <p class="text-gray-600 text-sm">Semester 2 - Tahun Ajaran 2023/2024</p>
+                        </div>
+                        <div class="flex space-x-4">
+                            <button onclick="firstSlide()" class="bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 px-4 rounded-lg transition flex items-center">
+                                <i class="fas fa-fast-backward mr-2"></i>Awal
+                            </button>
+                            <button onclick="prevSlide()" class="bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 px-4 rounded-lg transition flex items-center">
+                                <i class="fas fa-backward mr-2"></i>Prev
+                            </button>
+                            <button onclick="nextSlide()" class="bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 px-4 rounded-lg transition flex items-center">
+                                Next <i class="fas fa-forward ml-2"></i>
+                            </button>
+                            <button onclick="lastSlide()" class="bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 px-4 rounded-lg transition flex items-center">
+                                Akhir <i class="fas fa-fast-forward ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript untuk Presentasi -->
+    <script>
+        // Data slide
+        const slides = [
+            { id: "slide1", title: "Pengenalan PHP", number: "BAB I" },
+            { id: "slide2", title: "Lingkungan Pengembangan", number: "BAB II" },
+            { id: "slide3", title: "Struktur Dasar PHP", number: "BAB III" },
+            { id: "slide4", title: "Operator dalam PHP", number: "BAB IV" },
+            { id: "slide5", title: "Struktur Kendali", number: "BAB V" },
+            { id: "slide6", title: "Array dan Fungsi", number: "BAB VI" },
+            { id: "slide7", title: "Form Processing", number: "BAB VII" },
+            { id: "slide8", title: "Proyek Akhir", number: "PROYEK" }
+        ];
+        
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+        
+        // Inisialisasi menu slide
+        function initSlideMenu() {
+            const menuContainer = document.getElementById('slideMenu');
+            menuContainer.innerHTML = '';
+            
+            slides.forEach((slide, index) => {
+                const menuItem = document.createElement('li');
+                menuItem.className = `slide-menu-item ${index === currentSlide ? 'active' : ''}`;
+                menuItem.innerHTML = `
+                    <div class="flex items-center p-3 rounded-lg cursor-pointer transition ${index === currentSlide ? 'bg-primary text-white' : 'hover:bg-blue-50 text-gray-700'}">
+                        <div class="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full ${index === currentSlide ? 'bg-white text-primary' : 'bg-blue-100 text-primary'} font-bold mr-3">
+                            ${index + 1}
+                        </div>
+                        <div>
+                            <div class="font-medium">${slide.title}</div>
+                            <div class="text-xs ${index === currentSlide ? 'text-blue-100' : 'text-gray-500'}">${slide.number}</div>
+                        </div>
+                    </div>
+                `;
+                
+                menuItem.addEventListener('click', () => {
+                    goToSlide(index);
+                });
+                
+                menuContainer.appendChild(menuItem);
+            });
+        }
+        
+        // Update progress bar
+        function updateProgress() {
+            const progress = ((currentSlide + 1) / totalSlides) * 100;
+            const progressFill = document.getElementById('progressFill');
+            const progressPercentage = document.getElementById('progressPercentage');
+            
+            progressFill.style.width = `${progress}%`;
+            progressPercentage.textContent = `${Math.round(progress)}%`;
+        }
+        
+        // Navigasi ke slide tertentu
+        function goToSlide(slideIndex) {
+            // Sembunyikan semua slide
+            document.querySelectorAll('.slide').forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // Tampilkan slide yang dipilih
+            currentSlide = slideIndex;
+            document.getElementById(slides[slideIndex].id).classList.add('active');
+            
+            // Update menu
+            initSlideMenu();
+            
+            // Update progress
+            updateProgress();
+            
+            // Scroll ke atas konten
+            document.querySelector('.content-area').scrollTop = 0;
+        }
+        
+        // Navigasi ke slide berikutnya
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                goToSlide(currentSlide + 1);
+            }
+        }
+        
+        // Navigasi ke slide sebelumnya
+        function prevSlide() {
+            if (currentSlide > 0) {
+                goToSlide(currentSlide - 1);
+            }
+        }
+        
+        // Navigasi ke slide pertama
+        function firstSlide() {
+            goToSlide(0);
+        }
+        
+        // Navigasi ke slide terakhir
+        function lastSlide() {
+            goToSlide(totalSlides - 1);
+        }
+        
+        // Tampilkan pesan selesai
+        function finishPresentation() {
+            alert('Selamat! Anda telah menyelesaikan presentasi materi PHP dasar. Jangan lupa untuk mempraktikkan setiap contoh kode dan mengerjakan proyek akhir.\n\n"Practice makes perfect!" 🚀');
+            lastSlide();
+        }
+        
+        // Navigasi dengan keyboard
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowRight' || event.key === ' ') {
+                nextSlide();
+            } else if (event.key === 'ArrowLeft') {
+                prevSlide();
+            } else if (event.key === 'Home') {
+                firstSlide();
+            } else if (event.key === 'End') {
+                lastSlide();
+            }
+        });
+        
+        // Inisialisasi presentasi
+        document.addEventListener('DOMContentLoaded', () => {
+            initSlideMenu();
+            updateProgress();
+            
+            // Tambahkan efek animasi untuk konten
+            document.querySelectorAll('.slide').forEach(slide => {
+                slide.style.animation = 'fadeIn 0.8s ease-out';
+            });
+        });
+    </script>
+</body>
+</html>

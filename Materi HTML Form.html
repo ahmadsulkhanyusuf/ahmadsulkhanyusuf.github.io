@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Form - Kelas 10 RPL</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .presentation-container {
+            width: 100%;
+            max-width: 1200px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .slide {
+            display: none;
+            padding: 40px;
+            min-height: 600px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .slide.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        h1 {
+            color: #1a2a6c;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 3px solid #fdbb2d;
+            padding-bottom: 15px;
+        }
+        
+        h2 {
+            color: #b21f1f;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #fdbb2d;
+        }
+        
+        h3 {
+            color: #1a2a6c;
+            font-size: 1.8rem;
+            margin: 15px 0;
+        }
+        
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+        
+        li {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        
+        .code-block {
+            background-color: #f5f5f5;
+            border-left: 4px solid #1a2a6c;
+            padding: 15px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            border-radius: 0 5px 5px 0;
+            overflow-x: auto;
+        }
+        
+        .example {
+            background-color: #e8f4f8;
+            border: 1px solid #1a2a6c;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 40px;
+            background-color: #1a2a6c;
+        }
+        
+        button {
+            background-color: #fdbb2d;
+            color: #1a2a6c;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            background-color: #ffcc44;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .slide-counter {
+            color: white;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .slide-indicators {
+            display: flex;
+            justify-content: center;
+            padding: 15px;
+            background-color: #1a2a6c;
+        }
+        
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        
+        .indicator.active {
+            background-color: #fdbb2d;
+        }
+        
+        .form-preview {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .form-preview label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .form-preview input, .form-preview select, .form-preview textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        .two-column {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .col {
+            flex: 1;
+        }
+        
+        .center-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 500px;
+        }
+        
+        .logo {
+            font-size: 4rem;
+            color: #1a2a6c;
+            margin-bottom: 20px;
+        }
+        
+        .highlight {
+            background-color: #fdbb2d;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        
+        .important {
+            border-left: 5px solid #b21f1f;
+            padding-left: 15px;
+            background-color: #ffeaea;
+            margin: 15px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .two-column {
+                flex-direction: column;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Slide 1: Judul -->
+        <div class="slide active" id="slide1">
+            <div class="center-content">
+                <div class="logo">{ }</div>
+                <h1>HTML Form</h1>
+                <h2>Kelas 10 Rekayasa Perangkat Lunak</h2>
+                <p>Materi Pembelajaran Interaktif</p>
+            </div>
+        </div>
+        
+        <!-- Slide 2: Tujuan Pembelajaran -->
+        <div class="slide" id="slide2">
+            <h2>Tujuan Pembelajaran</h2>
+            <p>Setelah menyelesaikan materi ini, siswa diharapkan mampu:</p>
+            <ol>
+                <li>Memahami konsep dan fungsi HTML Form</li>
+                <li>Mengidentifikasi berbagai jenis elemen form</li>
+                <li>Membuat form HTML dengan elemen-elemen yang tepat</li>
+                <li>Memahami atribut-atribut penting dalam form</li>
+                <li>Menerapkan validasi dasar pada form</li>
+            </ol>
+            
+            <div class="important">
+                <h3>Penting!</h3>
+                <p>HTML Form adalah dasar untuk membuat aplikasi web yang interaktif dan dinamis.</p>
+            </div>
+        </div>
+        
+        <!-- Slide 3: Pengenalan HTML Form -->
+        <div class="slide" id="slide3">
+            <h2>Pengenalan HTML Form</h2>
+            
+            <h3>Apa itu HTML Form?</h3>
+            <p>HTML Form adalah elemen HTML yang digunakan untuk mengumpulkan input dari pengguna.</p>
+            
+            <h3>Fungsi HTML Form:</h3>
+            <ul>
+                <li>Mengumpulkan data dari pengguna</li>
+                <li>Mengirim data ke server untuk diproses</li>
+                <li>Membuat interaksi antara pengguna dan website</li>
+            </ul>
+            
+            <h3>Struktur Dasar Form:</h3>
+            <div class="code-block">
+&lt;form action="proses.php" method="post"&gt;
+  &lt;!-- Elemen-elemen form di sini --&gt;
+  &lt;input type="submit" value="Kirim"&gt;
+&lt;/form&gt;
+            </div>
+        </div>
+        
+        <!-- Slide 4: Elemen-elemen Form (1) -->
+        <div class="slide" id="slide4">
+            <h2>Elemen-elemen Form (1)</h2>
+            
+            <div class="two-column">
+                <div class="col">
+                    <h3>Input Text</h3>
+                    <div class="code-block">
+&lt;label for="nama"&gt;Nama:&lt;/label&gt;
+&lt;input type="text" id="nama" name="nama"&gt;
+                    </div>
+                    
+                    <h3>Textarea</h3>
+                    <div class="code-block">
+&lt;label for="pesan"&gt;Pesan:&lt;/label&gt;
+&lt;textarea id="pesan" name="pesan" rows="4" cols="50"&gt;&lt;/textarea&gt;
+                    </div>
+                </div>
+                
+                <div class="col">
+                    <h3>Preview:</h3>
+                    <div class="form-preview">
+                        <label for="preview-nama">Nama:</label>
+                        <input type="text" id="preview-nama" name="preview-nama">
+                        
+                        <label for="preview-pesan">Pesan:</label>
+                        <textarea id="preview-pesan" name="preview-pesan" rows="4"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 5: Elemen-elemen Form (2) -->
+        <div class="slide" id="slide5">
+            <h2>Elemen-elemen Form (2)</h2>
+            
+            <div class="two-column">
+                <div class="col">
+                    <h3>Radio Button</h3>
+                    <div class="code-block">
+&lt;label&gt;Jenis Kelamin:&lt;/label&gt;
+&lt;input type="radio" id="laki" name="jenis_kelamin" value="L"&gt;
+&lt;label for="laki"&gt;Laki-laki&lt;/label&gt;
+&lt;input type="radio" id="perempuan" name="jenis_kelamin" value="P"&gt;
+&lt;label for="perempuan"&gt;Perempuan&lt;/label&gt;
+                    </div>
+                    
+                    <h3>Checkbox</h3>
+                    <div class="code-block">
+&lt;label&gt;Hobi:&lt;/label&gt;
+&lt;input type="checkbox" id="hobi1" name="hobi" value="membaca"&gt;
+&lt;label for="hobi1"&gt;Membaca&lt;/label&gt;
+&lt;input type="checkbox" id="hobi2" name="hobi" value="olahraga"&gt;
+&lt;label for="hobi2"&gt;Olahraga&lt;/label&gt;
+                    </div>
+                </div>
+                
+                <div class="col">
+                    <h3>Preview:</h3>
+                    <div class="form-preview">
+                        <label>Jenis Kelamin:</label>
+                        <input type="radio" id="preview-laki" name="preview-jk" value="L">
+                        <label for="preview-laki">Laki-laki</label>
+                        <input type="radio" id="preview-perempuan" name="preview-jk" value="P">
+                        <label for="preview-perempuan">Perempuan</label>
+                        
+                        <label>Hobi:</label>
+                        <input type="checkbox" id="preview-membaca" name="preview-hobi" value="membaca">
+                        <label for="preview-membaca">Membaca</label>
+                        <input type="checkbox" id="preview-olahraga" name="preview-hobi" value="olahraga">
+                        <label for="preview-olahraga">Olahraga</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 6: Elemen-elemen Form (3) -->
+        <div class="slide" id="slide6">
+            <h2>Elemen-elemen Form (3)</h2>
+            
+            <div class="two-column">
+                <div class="col">
+                    <h3>Select (Dropdown)</h3>
+                    <div class="code-block">
+&lt;label for="kota"&gt;Kota:&lt;/label&gt;
+&lt;select id="kota" name="kota"&gt;
+  &lt;option value="jakarta"&gt;Jakarta&lt;/option&gt;
+  &lt;option value="bandung"&gt;Bandung&lt;/option&gt;
+  &lt;option value="surabaya"&gt;Surabaya&lt;/option&gt;
+&lt;/select&gt;
+                    </div>
+                    
+                    <h3>Button</h3>
+                    <div class="code-block">
+&lt;button type="submit"&gt;Kirim Data&lt;/button&gt;
+&lt;button type="reset"&gt;Reset&lt;/button&gt;
+                    </div>
+                </div>
+                
+                <div class="col">
+                    <h3>Preview:</h3>
+                    <div class="form-preview">
+                        <label for="preview-kota">Kota:</label>
+                        <select id="preview-kota" name="preview-kota">
+                            <option value="jakarta">Jakarta</option>
+                            <option value="bandung">Bandung</option>
+                            <option value="surabaya">Surabaya</option>
+                        </select>
+                        
+                        <button type="submit">Kirim Data</button>
+                        <button type="reset">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 7: Atribut-atribut Penting -->
+        <div class="slide" id="slide7">
+            <h2>Atribut-atribut Penting</h2>
+            
+            <table style="width:100%; border-collapse: collapse; margin: 20px 0;">
+                <tr style="background-color: #1a2a6c; color: white;">
+                    <th style="padding: 12px; text-align: left;">Atribut</th>
+                    <th style="padding: 12px; text-align: left;">Fungsi</th>
+                </tr>
+                <tr style="background-color: #f9f9f9;">
+                    <td style="padding: 10px; border-bottom: 1px solid #ddd;"><span class="highlight">action</span></td>
+                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">Menentukan ke mana data form akan dikirim</td>
+                </tr>
+                <tr style="background-color: #fff;">
+                    <td style="padding: 10px; border-bottom: 1px solid #ddd;"><span class="highlight">method</span></td>
+                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">Menentukan metode pengiriman data (GET/POST)</td>
+                </tr>
+                <tr style="background-color: #f9f9f9;">
+                    <td style="padding: 10px; border-bottom: 1px solid #ddd;"><span class="highlight">name</span></td>
+                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">Memberikan nama untuk setiap elemen form</td>
+                </tr>
+                <tr style="background-color: #fff;">
+                    <td style="padding: 10px; border-bottom: 1px solid #ddd;"><span class="highlight">required</span></td>
+                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">Membuat field wajib diisi sebelum form dapat dikirim</td>
+                </tr>
+                <tr style="background-color: #f9f9f9;">
+                    <td style="padding: 10px; border-bottom: 1px solid #ddd;"><span class="highlight">placeholder</span></td>
+                    <td style="padding: 10px; border-bottom: 1px solid #ddd;">Memberikan petunjuk di dalam field input</td>
+                </tr>
+            </table>
+            
+            <div class="important">
+                <h3>Perbedaan GET dan POST</h3>
+                <p><strong>GET:</strong> Data dikirim melalui URL (terlihat di address bar)</p>
+                <p><strong>POST:</strong> Data dikirim secara tersembunyi (lebih aman)</p>
+            </div>
+        </div>
+        
+        <!-- Slide 8: Validasi Form -->
+        <div class="slide" id="slide8">
+            <h2>Validasi Form</h2>
+            <p>Validasi form dapat dilakukan dengan HTML5 untuk memastikan data yang dimasukkan sesuai format yang diharapkan.</p>
+            
+            <div class="code-block">
+&lt;input type="email" name="email" required placeholder="contoh@email.com"&gt;
+&lt;input type="number" name="usia" min="1" max="100"&gt;
+&lt;input type="password" name="password" minlength="8"&gt;
+            </div>
+            
+            <h3>Jenis-jenis Validasi:</h3>
+            <ul>
+                <li><span class="highlight">required</span>: Field harus diisi</li>
+                <li><span class="highlight">min/max</span>: Batas nilai untuk angka</li>
+                <li><span class="highlight">minlength/maxlength</span>: Batas panjang teks</li>
+                <li><span class="highlight">pattern</span>: Pola regex untuk validasi khusus</li>
+                <li><span class="highlight">type="email"</span>: Memastikan format email</li>
+            </ul>
+        </div>
+        
+        <!-- Slide 9: Contoh Form Lengkap -->
+        <div class="slide" id="slide9">
+            <h2>Contoh Form Lengkap</h2>
+            
+            <div class="code-block">
+&lt;form action="proses_daftar.php" method="post"&gt;
+  &lt;label for="nama"&gt;Nama Lengkap:&lt;/label&gt;
+  &lt;input type="text" id="nama" name="nama" required&gt;&lt;br&gt;&lt;br&gt;
+  
+  &lt;label for="email"&gt;Email:&lt;/label&gt;
+  &lt;input type="email" id="email" name="email" required&gt;&lt;br&gt;&lt;br&gt;
+  
+  &lt;label for="password"&gt;Password:&lt;/label&gt;
+  &lt;input type="password" id="password" name="password" minlength="8" required&gt;&lt;br&gt;&lt;br&gt;
+  
+  &lt;label&gt;Jenis Kelamin:&lt;/label&gt;
+  &lt;input type="radio" id="laki" name="jenis_kelamin" value="L" required&gt;
+  &lt;label for="laki"&gt;Laki-laki&lt;/label&gt;
+  &lt;input type="radio" id="perempuan" name="jenis_kelamin" value="P"&gt;
+  &lt;label for="perempuan"&gt;Perempuan&lt;/label&gt;&lt;br&gt;&lt;br&gt;
+  
+  &lt;button type="submit"&gt;Daftar&lt;/button&gt;
+  &lt;button type="reset"&gt;Reset&lt;/button&gt;
+&lt;/form&gt;
+            </div>
+            
+            <div class="form-preview">
+                <h3>Preview Form:</h3>
+                <form style="padding: 15px;">
+                    <label for="demo-nama">Nama Lengkap:</label>
+                    <input type="text" id="demo-nama" name="demo-nama" required placeholder="Masukkan nama lengkap">
+                    
+                    <label for="demo-email">Email:</label>
+                    <input type="email" id="demo-email" name="demo-email" required placeholder="contoh@email.com">
+                    
+                    <label for="demo-password">Password:</label>
+                    <input type="password" id="demo-password" name="demo-password" minlength="8" required placeholder="Minimal 8 karakter">
+                    
+                    <label>Jenis Kelamin:</label>
+                    <div>
+                        <input type="radio" id="demo-laki" name="demo-jk" value="L" required>
+                        <label for="demo-laki">Laki-laki</label>
+                        <input type="radio" id="demo-perempuan" name="demo-jk" value="P">
+                        <label for="demo-perempuan">Perempuan</label>
+                    </div>
+                    
+                    <button type="submit" style="margin-top: 15px;">Daftar</button>
+                    <button type="reset">Reset</button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Slide 10: Latihan Praktikum -->
+        <div class="slide" id="slide10">
+            <h2>Latihan Praktikum</h2>
+            
+            <div class="two-column">
+                <div class="col">
+                    <h3>Tugas 1: Form Kontak Sederhana</h3>
+                    <p>Buatlah form kontak dengan field:</p>
+                    <ul>
+                        <li>Nama (wajib diisi)</li>
+                        <li>Email (wajib diisi, format email)</li>
+                        <li>Subjek</li>
+                        <li>Pesan (textarea)</li>
+                    </ul>
+                </div>
+                
+                <div class="col">
+                    <h3>Tugas 2: Form Pendaftaran Event</h3>
+                    <p>Buatlah form pendaftaran event dengan field:</p>
+                    <ul>
+                        <li>Nama lengkap</li>
+                        <li>Institusi/sekolah</li>
+                        <li>Jenis kelamin (radio button)</li>
+                        <li>Kategori event (dropdown)</li>
+                        <li>Makanan vegetarian (checkbox)</li>
+                        <li>Komentar (textarea)</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="important">
+                <h3>Kriteria Penilaian:</h3>
+                <ul>
+                    <li>Struktur HTML yang benar</li>
+                    <li>Penggunaan elemen form yang tepat</li>
+                    <li>Penerapan atribut yang sesuai</li>
+                    <li>Validasi form yang efektif</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Slide 11: Evaluasi -->
+        <div class="slide" id="slide11">
+            <h2>Evaluasi</h2>
+            
+            <div class="two-column">
+                <div class="col">
+                    <h3>Soal Teori</h3>
+                    <ol>
+                        <li>Jelaskan perbedaan antara metode GET dan POST dalam pengiriman form!</li>
+                        <li>Apa fungsi atribut <span class="highlight">name</span> dalam elemen form?</li>
+                        <li>Mengapa validasi form diperlukan?</li>
+                    </ol>
+                </div>
+                
+                <div class="col">
+                    <h3>Soal Praktik</h3>
+                    <p>Buatlah form untuk sistem login yang memuat:</p>
+                    <ul>
+                        <li>Field username (wajib diisi)</li>
+                        <li>Field password (wajib diisi, minimal 6 karakter)</li>
+                        <li>Checkbox "Ingat saya"</li>
+                        <li>Tombol Login dan Reset</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 12: Penutup -->
+        <div class="slide" id="slide12">
+            <div class="center-content">
+                <h1>Terima Kasih</h1>
+                <p>Materi HTML Form - Kelas 10 RPL</p>
+                <div class="logo">{ }</div>
+                <p>Selamat belajar dan berkreasi!</p>
+            </div>
+        </div>
+        
+        <!-- Navigasi -->
+        <div class="nav-buttons">
+            <button id="prevBtn">Sebelumnya</button>
+            <div class="slide-counter">Slide <span id="currentSlide">1</span> dari <span id="totalSlides">12</span></div>
+            <button id="nextBtn">Berikutnya</button>
+        </div>
+        
+        <!-- Indikator Slide -->
+        <div class="slide-indicators" id="slideIndicators">
+            <!-- Indikator akan diisi oleh JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const totalSlides = slides.length;
+            let currentSlide = 0;
+            
+            // Update counter
+            document.getElementById('totalSlides').textContent = totalSlides;
+            
+            // Buat indikator slide
+            const indicatorsContainer = document.getElementById('slideIndicators');
+            for (let i = 0; i < totalSlides; i++) {
+                const indicator = document.createElement('div');
+                indicator.classList.add('indicator');
+                if (i === 0) indicator.classList.add('active');
+                indicator.addEventListener('click', () => goToSlide(i));
+                indicatorsContainer.appendChild(indicator);
+            }
+            
+            // Fungsi untuk pergi ke slide tertentu
+            function goToSlide(n) {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = n;
+                slides[currentSlide].classList.add('active');
+                updateCounter();
+                updateIndicators();
+            }
+            
+            // Update counter
+            function updateCounter() {
+                document.getElementById('currentSlide').textContent = currentSlide + 1;
+            }
+            
+            // Update indikator
+            function updateIndicators() {
+                const indicators = document.querySelectorAll('.indicator');
+                indicators.forEach((indicator, index) => {
+                    if (index === currentSlide) {
+                        indicator.classList.add('active');
+                    } else {
+                        indicator.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Tombol navigasi
+            document.getElementById('nextBtn').addEventListener('click', () => {
+                if (currentSlide < totalSlides - 1) {
+                    goToSlide(currentSlide + 1);
+                }
+            });
+            
+            document.getElementById('prevBtn').addEventListener('click', () => {
+                if (currentSlide > 0) {
+                    goToSlide(currentSlide - 1);
+                }
+            });
+            
+            // Navigasi dengan keyboard
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' && currentSlide < totalSlides - 1) {
+                    goToSlide(currentSlide + 1);
+                } else if (e.key === 'ArrowLeft' && currentSlide > 0) {
+                    goToSlide(currentSlide - 1);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

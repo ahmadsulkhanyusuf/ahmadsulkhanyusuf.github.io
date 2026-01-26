@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentasi Pseudocode - Kelas 10 RPL</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+        
+        .presentation-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4a6fa5 0%, #2c3e50 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header h2 {
+            font-size: 1.4em;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+        
+        .nav-slides {
+            display: flex;
+            justify-content: center;
+            background: #34495e;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        
+        .nav-btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .slide-container {
+            padding: 40px;
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        .slide-container.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h3 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h4 {
+            color: #3498db;
+            font-size: 1.4em;
+            margin: 25px 0 15px 0;
+        }
+        
+        .content-box {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 5px solid #3498db;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .pseudo-code {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            white-space: pre-wrap;
+            line-height: 1.5;
+            overflow-x: auto;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+        }
+        
+        .example {
+            background: #e8f4fc;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #1abc9c;
+        }
+        
+        .exercise {
+            background: #fff8e1;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #f39c12;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th {
+            background: #3498db;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .slide-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .btn-prev {
+            background: #7f8c8d;
+        }
+        
+        .btn-prev:hover {
+            background: #636e72;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #2c3e50;
+            color: white;
+            margin-top: 40px;
+        }
+        
+        .level-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin: 0 5px;
+        }
+        
+        .level-dasar {
+            background: #2ecc71;
+            color: white;
+        }
+        
+        .level-menengah {
+            background: #3498db;
+            color: white;
+        }
+        
+        .level-lanjut {
+            background: #9b59b6;
+            color: white;
+        }
+        
+        .slide-counter {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(44, 62, 80, 0.9);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="header">
+            <h1>PEMBELAJARAN PSEUDOCODE</h1>
+            <h2>Kelas 10 Rekayasa Perangkat Lunak (RPL)</h2>
+        </div>
+        
+        <div class="nav-slides">
+            <button class="nav-btn" onclick="showSlide(1)">Apa itu Pseudocode?</button>
+            <button class="nav-btn" onclick="showSlide(2)">Struktur Dasar</button>
+            <button class="nav-btn" onclick="showSlide(3)">Struktur Kendali</button>
+            <button class="nav-btn" onclick="showSlide(4)">Array & Contoh</button>
+            <button class="nav-btn" onclick="showSlide(5)">Latihan Soal</button>
+            <button class="nav-btn" onclick="showSlide(6)">Soal Proyek</button>
+        </div>
+        
+        <!-- SLIDE 1 -->
+        <div class="slide-container active" id="slide1">
+            <h3>📝 Apa itu Pseudocode?</h3>
+            
+            <div class="content-box">
+                <h4>Definisi</h4>
+                <p><span class="highlight">Pseudocode</span> adalah deskripsi tertulis dari algoritma pemrograman yang menggunakan struktur mirip bahasa pemrograman, tetapi lebih mudah dipahami manusia.</p>
+            </div>
+            
+            <div class="content-box">
+                <h4>Ciri-ciri Pseudocode:</h4>
+                <ul style="margin-left: 20px; margin-bottom: 15px;">
+                    <li>Tidak bergantung pada bahasa pemrograman tertentu</li>
+                    <li>Menggunakan bahasa sehari-hari yang terstruktur</li>
+                    <li>Fokus pada logika penyelesaian masalah</li>
+                    <li>Tidak bisa langsung dijalankan di komputer</li>
+                </ul>
+            </div>
+            
+            <div class="content-box">
+                <h4>Tujuan Pseudocode:</h4>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 15px;">
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 8px;">
+                        <strong>1. Perencanaan Algoritma</strong>
+                        <p>Merencanakan algoritma sebelum coding</p>
+                    </div>
+                    <div style="background: #f3e5f5; padding: 15px; border-radius: 8px;">
+                        <strong>2. Komunikasi Tim</strong>
+                        <p>Memudahkan komunikasi antar developer</p>
+                    </div>
+                    <div style="background: #e8f5e9; padding: 15px; border-radius: 8px;">
+                        <strong>3. Dokumentasi</strong>
+                        <p>Sebagai dokumentasi algoritma</p>
+                    </div>
+                    <div style="background: #fff3e0; padding: 15px; border-radius: 8px;">
+                        <strong>4. Minimalkan Error</strong>
+                        <p>Meminimalisir kesalahan logika</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slide-navigation">
+                <div></div>
+                <button class="btn" onclick="showSlide(2)">Lanjut →</button>
+            </div>
+        </div>
+        
+        <!-- SLIDE 2 -->
+        <div class="slide-container" id="slide2">
+            <h3>🏗️ Struktur Dasar Pseudocode</h3>
+            
+            <div class="content-box">
+                <h4>Komponen Utama Pseudocode:</h4>
+                <div class="pseudo-code">
+PROGRAM NamaProgram
+DEKLARASI
+    {variabel, konstanta, tipe data}
+DESKRIPSI
+    {algoritma utama}
+                </div>
+            </div>
+            
+            <div class="example">
+                <h4>Contoh Sederhana:</h4>
+                <div class="pseudo-code">
+PROGRAM Salam
+DEKLARASI
+    nama : string
+DESKRIPSI
+    TAMPILKAN "Masukkan nama: "
+    BACA nama
+    TAMPILKAN "Halo, " + nama
+                </div>
+            </div>
+            
+            <div class="content-box">
+                <h4>Operator dalam Pseudocode:</h4>
+                <table>
+                    <tr>
+                        <th>Jenis Operator</th>
+                        <th>Simbol</th>
+                        <th>Keterangan</th>
+                    </tr>
+                    <tr>
+                        <td>Aritmatika</td>
+                        <td>+, -, *, /, DIV, MOD</td>
+                        <td>Penjumlahan, pengurangan, perkalian, pembagian, pembagian bulat, modulus</td>
+                    </tr>
+                    <tr>
+                        <td>Perbandingan</td>
+                        <td>=, <>, <, >, <=, >=</td>
+                        <td>Sama dengan, tidak sama dengan, kurang dari, lebih dari, dll</td>
+                    </tr>
+                    <tr>
+                        <td>Logika</td>
+                        <td>AND, OR, NOT</td>
+                        <td>Dan, atau, tidak</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="slide-navigation">
+                <button class="btn btn-prev" onclick="showSlide(1)">← Kembali</button>
+                <button class="btn" onclick="showSlide(3)">Lanjut →</button>
+            </div>
+        </div>
+        
+        <!-- SLIDE 3 -->
+        <div class="slide-container" id="slide3">
+            <h3>🎮 Struktur Kendali (Control Structures)</h3>
+            
+            <div class="content-box">
+                <h4>1. SELEKSI (Percabangan)</h4>
+                
+                <div style="margin: 20px 0;">
+                    <strong>IF-THEN:</strong>
+                    <div class="pseudo-code">
+IF nilai >= 75 THEN
+    TAMPILKAN "Lulus"
+ENDIF
+                    </div>
+                </div>
+                
+                <div style="margin: 20px 0;">
+                    <strong>IF-THEN-ELSE:</strong>
+                    <div class="pseudo-code">
+IF suhu > 37 THEN
+    TAMPILKAN "Demam"
+ELSE
+    TAMPILKAN "Sehat"
+ENDIF
+                    </div>
+                </div>
+                
+                <div style="margin: 20px 0;">
+                    <strong>CASE-OF (Switch Case):</strong>
+                    <div class="pseudo-code">
+CASE pilihan OF
+    1 : TAMPILKAN "Anda memilih menu 1"
+    2 : TAMPILKAN "Anda memilih menu 2"
+    3 : TAMPILKAN "Anda memilih menu 3"
+    OTHERWISE: TAMPILKAN "Pilihan tidak valid"
+ENDCASE
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-box">
+                <h4>2. PERULANGAN (Looping)</h4>
+                
+                <div style="margin: 20px 0;">
+                    <strong>FOR Loop:</strong>
+                    <div class="pseudo-code">
+FOR i ← 1 TO 5 DO
+    TAMPILKAN "Iterasi ke-" + i
+ENDFOR
+                    </div>
+                </div>
+                
+                <div style="margin: 20px 0;">
+                    <strong>WHILE Loop:</strong>
+                    <div class="pseudo-code">
+i ← 1
+WHILE i <= 5 DO
+    TAMPILKAN "Nilai i: " + i
+    i ← i + 1
+ENDWHILE
+                    </div>
+                </div>
+                
+                <div style="margin: 20px 0;">
+                    <strong>REPEAT-UNTIL:</strong>
+                    <div class="pseudo-code">
+i ← 1
+REPEAT
+    TAMPILKAN "Nilai i: " + i
+    i ← i + 1
+UNTIL i > 5
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slide-navigation">
+                <button class="btn btn-prev" onclick="showSlide(2)">← Kembali</button>
+                <button class="btn" onclick="showSlide(4)">Lanjut →</button>
+            </div>
+        </div>
+        
+        <!-- SLIDE 4 -->
+        <div class="slide-container" id="slide4">
+            <h3>📊 Array & Contoh Kasus</h3>
+            
+            <div class="content-box">
+                <h4>Deklarasi Array:</h4>
+                <div class="pseudo-code">
+DEKLARASI
+    nilai : array[1..5] of integer
+    nama : array[1..3] of string
+                </div>
+            </div>
+            
+            <div class="example">
+                <h4>Contoh Penggunaan Array:</h4>
+                <div class="pseudo-code">
+PROGRAM ContohArray
+DEKLARASI
+    nilai : array[1..5] of integer
+    i : integer
+DESKRIPSI
+    // Input nilai
+    FOR i ← 1 TO 5 DO
+        TAMPILKAN "Masukkan nilai ke-" + i
+        BACA nilai[i]
+    ENDFOR
+    
+    // Tampilkan nilai
+    FOR i ← 1 TO 5 DO
+        TAMPILKAN "Nilai[" + i + "] = " + nilai[i]
+    ENDFOR
+                </div>
+            </div>
+            
+            <div class="content-box">
+                <h4>Contoh Kasus: Menghitung Luas Persegi Panjang</h4>
+                <div class="pseudo-code">
+PROGRAM LuasPersegiPanjang
+DEKLARASI
+    panjang, lebar, luas : real
+DESKRIPSI
+    TAMPILKAN "Masukkan panjang: "
+    BACA panjang
+    
+    TAMPILKAN "Masukkan lebar: "
+    BACA lebar
+    
+    luas ← panjang * lebar
+    
+    TAMPILKAN "Luas persegi panjang: " + luas
+                </div>
+            </div>
+            
+            <div class="content-box">
+                <h4>Best Practice Pseudocode:</h4>
+                <ul style="margin-left: 20px;">
+                    <li>✅ Gunakan indentasi untuk struktur bersarang</li>
+                    <li>✅ Beri komentar jika diperlukan</li>
+                    <li>✅ Gunakan nama variabel yang deskriptif</li>
+                    <li>✅ Test algoritma secara manual sebelum coding</li>
+                    <li>✅ Konsisten dalam penulisan</li>
+                </ul>
+            </div>
+            
+            <div class="slide-navigation">
+                <button class="btn btn-prev" onclick="showSlide(3)">← Kembali</button>
+                <button class="btn" onclick="showSlide(5)">Lanjut →</button>
+            </div>
+        </div>
+        
+        <!-- SLIDE 5 -->
+        <div class="slide-container" id="slide5">
+            <h3>📚 Latihan Soal Pseudocode</h3>
+            
+            <div class="exercise">
+                <h4>🎯 Tingkat Dasar</h4>
+                
+                <div style="margin: 15px 0;">
+                    <strong>Soal 1: Konversi Suhu</strong>
+                    <span class="level-badge level-dasar">DASAR</span>
+                    <p>Buat pseudocode untuk mengkonversi suhu dari Celcius ke Fahrenheit!</p>
+                    <p><strong>Rumus:</strong> F = (9/5 × C) + 32</p>
+                    
+                    <details style="margin-top: 10px;">
+                        <summary>Lihat Jawaban</summary>
+                        <div class="pseudo-code">
+PROGRAM KonversiSuhu
+DEKLARASI
+    celcius, fahrenheit : real
+DESKRIPSI
+    TAMPILKAN "Masukkan suhu dalam Celcius: "
+    BACA celcius
+    
+    fahrenheit ← (9/5 * celcius) + 32
+    
+    TAMPILKAN celcius + "°C = " + fahrenheit + "°F"
+                        </div>
+                    </details>
+                </div>
+                
+                <div style="margin: 15px 0;">
+                    <strong>Soal 2: Kalkulator Sederhana</strong>
+                    <span class="level-badge level-dasar">DASAR</span>
+                    <p>Buat pseudocode kalkulator dengan 4 operasi dasar (+, -, ×, ÷)</p>
+                    
+                    <details style="margin-top: 10px;">
+                        <summary>Lihat Jawaban</summary>
+                        <div class="pseudo-code">
+PROGRAM Kalkulator
+DEKLARASI
+    bil1, bil2, hasil : real
+    operator : char
+DESKRIPSI
+    TAMPILKAN "Masukkan bilangan pertama: "
+    BACA bil1
+    
+    TAMPILKAN "Masukkan bilangan kedua: "
+    BACA bil2
+    
+    TAMPILKAN "Pilih operasi (+, -, *, /): "
+    BACA operator
+    
+    CASE operator OF
+        '+' : hasil ← bil1 + bil2
+        '-' : hasil ← bil1 - bil2
+        '*' : hasil ← bil1 * bil2
+        '/' : hasil ← bil1 / bil2
+        OTHERWISE: TAMPILKAN "Operator tidak valid"
+    ENDCASE
+    
+    TAMPILKAN "Hasil: " + hasil
+                        </div>
+                    </details>
+                </div>
+            </div>
+            
+            <div class="exercise">
+                <h4>⚡ Tingkat Menengah</h4>
+                
+                <div style="margin: 15px 0;">
+                    <strong>Soal 3: Deret Fibonacci</strong>
+                    <span class="level-badge level-menengah">MENENGAH</span>
+                    <p>Buat pseudocode untuk menampilkan n bilangan pertama dalam deret Fibonacci.</p>
+                    <p><strong>Rumus:</strong> F(n) = F(n-1) + F(n-2), dengan F(0) = 0, F(1) = 1</p>
+                    
+                    <details style="margin-top: 10px;">
+                        <summary>Lihat Jawaban</summary>
+                        <div class="pseudo-code">
+PROGRAM DeretFibonacci
+DEKLARASI
+    n, i : integer
+    a, b, c : integer
+DESKRIPSI
+    TAMPILKAN "Masukkan jumlah bilangan Fibonacci: "
+    BACA n
+    
+    a ← 0
+    b ← 1
+    
+    TAMPILKAN a + " " + b + " "
+    
+    FOR i ← 3 TO n DO
+        c ← a + b
+        TAMPILKAN c + " "
+        a ← b
+        b ← c
+    ENDFOR
+                        </div>
+                    </details>
+                </div>
+                
+                <div style="margin: 15px 0;">
+                    <strong>Soal 4: Bilangan Prima</strong>
+                    <span class="level-badge level-menengah">MENENGAH</span>
+                    <p>Buat pseudocode untuk menentukan apakah suatu bilangan prima atau bukan.</p>
+                    
+                    <details style="margin-top: 10px;">
+                        <summary>Lihat Jawaban</summary>
+                        <div class="pseudo-code">
+PROGRAM CekBilanganPrima
+DEKLARASI
+    n, i : integer
+    isPrima : boolean
+DESKRIPSI
+    TAMPILKAN "Masukkan bilangan: "
+    BACA n
+    
+    isPrima ← TRUE
+    
+    IF n <= 1 THEN
+        isPrima ← FALSE
+    ELSE
+        FOR i ← 2 TO n DIV 2 DO
+            IF n MOD i = 0 THEN
+                isPrima ← FALSE
+            ENDIF
+        ENDFOR
+    ENDIF
+    
+    IF isPrima = TRUE THEN
+        TAMPILKAN n + " adalah bilangan PRIMA"
+    ELSE
+        TAMPILKAN n + " BUKAN bilangan prima"
+    ENDIF
+                        </div>
+                    </details>
+                </div>
+            </div>
+            
+            <div class="slide-navigation">
+                <button class="btn btn-prev" onclick="showSlide(4)">← Kembali</button>
+                <button class="btn" onclick="showSlide(6)">Lanjut →</button>
+            </div>
+        </div>
+        
+        <!-- SLIDE 6 -->
+        <div class="slide-container" id="slide6">
+            <h3>🚀 Soal Proyek & Challenge</h3>
+            
+            <div class="exercise">
+                <h4>💼 Proyek 1: Sistem Login Sederhana</h4>
+                <span class="level-badge level-lanjut">PROYEK</span>
+                <p>Buat pseudocode untuk sistem login dengan:</p>
+                <ul style="margin-left: 20px; margin: 10px 0;">
+                    <li>Username benar: "admin"</li>
+                    <li>Password benar: "12345"</li>
+                    <li>Beri maksimal 3 kali percobaan</li>
+                </ul>
+                
+                <details style="margin-top: 10px;">
+                    <summary>Lihat Jawaban</summary>
+                    <div class="pseudo-code">
+PROGRAM SistemLogin
+DEKLARASI
+    username, password : string
+    percobaan : integer
+    berhasil_login : boolean
+DESKRIPSI
+    berhasil_login ← FALSE
+    percobaan ← 0
+    
+    WHILE percobaan < 3 AND berhasil_login = FALSE DO
+        TAMPILKAN "=== LOGIN ==="
+        TAMPILKAN "Username: "
+        BACA username
+        TAMPILKAN "Password: "
+        BACA password
+        
+        IF username = "admin" AND password = "12345" THEN
+            berhasil_login ← TRUE
+            TAMPILKAN "Login BERHASIL!"
+        ELSE
+            percobaan ← percobaan + 1
+            TAMPILKAN "Login GAGAL! Percobaan ke-" + percobaan
+        ENDIF
+    ENDWHILE
+    
+    IF berhasil_login = FALSE THEN
+        TAMPILKAN "Akun terkunci! Maksimal percobaan tercapai."
+    ENDIF
+                    </div>
+                </details>
+            </div>
+            
+            <div class="exercise">
+                <h4>🔥 Challenge (Tantangan)</h4>
+                
+                <div style="margin: 15px 0; padding: 15px; background: #ffebee; border-radius: 8px;">
+                    <strong>Challenge 1: Deret Bilangan</strong>
+                    <p>Buat pseudocode untuk menampilkan deret berikut:</p>
+                    <div class="pseudo-code">
+Input: 5
+Output:
+1
+2 2
+3 3 3
+4 4 4 4
+5 5 5 5 5
+                    </div>
+                    <p><strong>Petunjuk:</strong> Gunakan nested loop (perulangan bersarang)</p>
+                </div>
+                
+                <div style="margin: 15px 0; padding: 15px; background: #e8f5e9; border-radius: 8px;">
+                    <strong>Challenge 2: Kalkulator BMI</strong>
+                    <p>Buat pseudocode untuk menghitung BMI dengan kategori:</p>
+                    <ul style="margin-left: 20px;">
+                        <li>BMI = berat(kg) / (tinggi(m) × tinggi(m))</li>
+                        <li>< 18.5: Kurus</li>
+                        <li>18.5 - 24.9: Normal</li>
+                        <li>25.0 - 29.9: Gemuk</li>
+                        <li>≥ 30.0: Obesitas</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="content-box" style="background: #e3f2fd;">
+                <h4>📋 Panduan Pengerjaan Latihan:</h4>
+                <ol style="margin-left: 20px;">
+                    <li><strong>Identifikasi masalah</strong> - Pahami apa yang diminta</li>
+                    <li><strong>Tentukan input/output</strong> - Data apa yang dibutuhkan?</li>
+                    <li><strong>Rencanakan algoritma</strong> - Buat langkah-langkah penyelesaian</li>
+                    <li><strong>Tulis pseudocode</strong> - Gunakan struktur yang tepat</li>
+                    <li><strong>Test secara manual</strong> - Jalankan algoritma dengan contoh data</li>
+                </ol>
+            </div>
+            
+            <div class="slide-navigation">
+                <button class="btn btn-prev" onclick="showSlide(5)">← Kembali</button>
+                <button class="btn" onclick="showSlide(1)">↻ Ke Awal</button>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Materi Pembelajaran Pseudocode - Kelas 10 RPL | © 2024</p>
+            <p style="margin-top: 10px; font-size: 0.9em; opacity: 0.8;">
+                "Belajar algoritma hari ini, ciptakan solusi masa depan"
+            </p>
+        </div>
+    </div>
+    
+    <div class="slide-counter" id="slideCounter">Slide 1 dari 6</div>
+    
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 6;
+        
+        function showSlide(slideNumber) {
+            // Sembunyikan semua slide
+            document.querySelectorAll('.slide-container').forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // Tampilkan slide yang dipilih
+            document.getElementById(`slide${slideNumber}`).classList.add('active');
+            
+            // Update counter
+            document.getElementById('slideCounter').textContent = `Slide ${slideNumber} dari ${totalSlides}`;
+            
+            // Update current slide
+            currentSlide = slideNumber;
+            
+            // Scroll ke atas
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Navigasi dengan keyboard
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight' || event.key === ' ') {
+                // Next slide
+                if (currentSlide < totalSlides) {
+                    showSlide(currentSlide + 1);
+                }
+            } else if (event.key === 'ArrowLeft') {
+                // Previous slide
+                if (currentSlide > 1) {
+                    showSlide(currentSlide - 1);
+                }
+            }
+        });
+        
+        // Initialize
+        showSlide(1);
+    </script>
+</body>
+</html>
