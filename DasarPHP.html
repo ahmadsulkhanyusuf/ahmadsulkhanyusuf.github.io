@@ -111,7 +111,7 @@
                 <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
                     <div class="bg-secondary text-white p-4">
                         <h2 class="text-xl font-bold"><i class="fas fa-list-ol mr-2"></i>Daftar Materi</h2>
-                        <p class="text-sm opacity-80">8 Bab Materi PHP Dasar</p>
+                        <p class="text-sm opacity-80">8 Bab + 2 Latihan Database Integration</p>
                     </div>
                     <div class="p-2 max-h-[600px] overflow-y-auto">
                         <nav id="slideMenu" class="space-y-1">
@@ -123,10 +123,10 @@
                     <div class="p-4 border-t">
                         <div class="flex justify-between mb-2">
                             <span class="font-medium text-gray-700">Progress Belajar</span>
-                            <span id="progressPercentage" class="font-bold text-primary">12%</span>
+                            <span id="progressPercentage" class="font-bold text-primary">10%</span>
                         </div>
                         <div class="w-full bg-gray-200 rounded-full h-3">
-                            <div id="progressFill" class="progress-bar h-3 rounded-full bg-gradient-to-r from-primary to-accent" style="width: 12%"></div>
+                            <div id="progressFill" class="progress-bar h-3 rounded-full bg-gradient-to-r from-primary to-accent" style="width: 10%"></div>
                         </div>
                         <p class="text-sm text-gray-500 mt-2">Selesaikan semua materi untuk menyelesaikan pembelajaran</p>
                     </div>
@@ -474,8 +474,174 @@
                                 </div>
                                 
                                 <h3 class="text-xl font-bold text-primary mb-4 flex items-center">
-                                    <i class="fas fa-tags mr-2"></i>3.3 Variabel dalam PHP
+                                    <i class="fas fa-graduation-cap mr-2"></i>9.4 Proyek Integrasi Form & Database
                                 </h3>
+                                
+                                <div class="bg-gradient-to-r from-orange-50 to-red-50 p-5 rounded-xl mb-6">
+                                    <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                                        <i class="fas fa-project-diagram text-orange-600 mr-2"></i>Mini Project: Sistem Pendaftaran Siswa
+                                    </h4>
+                                    
+                                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                        <div>
+                                            <h5 class="font-bold text-orange-800 mb-3">📁 Struktur File</h5>
+                                            <div class="bg-gray-100 p-3 rounded-lg font-mono text-sm">
+                                                <div class="text-gray-700">/latihan_siswa/</div>
+                                                <div class="ml-3 text-blue-600">📄 koneksi.php</div>
+                                                <div class="ml-3 text-green-600">📄 form_siswa.html</div>
+                                                <div class="ml-3 text-yellow-600">📄 proses_siswa.php</div>
+                                                <div class="ml-3 text-purple-600">📄 daftar_siswa.php</div>
+                                                <div class="ml-3 text-red-600">📄 edit_siswa.php</div>
+                                                <div class="ml-3 text-gray-600">📄 hapus_siswa.php</div>
+                                                <div class="ml-3 text-indigo-600">📄 style.css</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div>
+                                            <h5 class="font-bold text-orange-800 mb-3">🎯 Fitur yang Dibutuhkan</h5>
+                                            <div class="space-y-2">
+                                                <div class="bg-white p-2 rounded-lg border border-orange-200">
+                                                    <span class="inline-block bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">1</span>
+                                                    Form input dengan validasi lengkap
+                                                </div>
+                                                <div class="bg-white p-2 rounded-lg border border-orange-200">
+                                                    <span class="inline-block bg-green-100 text-green-800 px-2 py-1 rounded text-xs">2</span>
+                                                    Simpan data ke database dengan prepared statement
+                                                </div>
+                                                <div class="bg-white p-2 rounded-lg border border-orange-200">
+                                                    <span class="inline-block bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs">3</span>
+                                                    Tampilkan data dalam tabel HTML yang menarik
+                                                </div>
+                                                <div class="bg-white p-2 rounded-lg border border-orange-200">
+                                                    <span class="inline-block bg-red-100 text-red-800 px-2 py-1 rounded text-xs">4</span>
+                                                    Fitur edit dan hapus data
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-xl font-bold text-primary mb-4 flex items-center">
+                                    <i class="fas fa-tasks mr-2"></i>9.5 Tugas Praktikum Lanjutan
+                                </h3>
+                                
+                                <div class="bg-gradient-to-r from-purple-50 to-pink-50 p-5 rounded-xl mb-6">
+                                    <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                                        <i class="fas fa-graduation-cap text-purple-600 mr-2"></i>Clean Code Learning Path
+                                    </h4>
+                                    
+                                    <div class="space-y-4">
+                                        <div class="bg-white p-4 rounded-lg shadow-sm border border-purple-200">
+                                            <h5 class="font-bold text-purple-800 mb-2">📝 Step 1: Code Organization</h5>
+                                            <ol class="space-y-2 text-gray-700 text-sm ml-4">
+                                                <li>1. File header documentation</li>
+                                                <li>2. Logical code separation</li>
+                                                <li>3. Consistent indentation</li>
+                                                <li>4. Meaningful variable names</li>
+                                                <li>5. Function documentation blocks</li>
+                                            </ol>
+                                            <div class="bg-purple-100 p-2 rounded text-purple-800 text-sm mt-2">
+                                                💡 Focus: Readability & Maintainability
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="bg-white p-4 rounded-lg shadow-sm border border-blue-200">
+                                            <h5 class="font-bold text-blue-800 mb-2">🛡️ Step 2: Security & Validation</h5>
+                                            <ol class="space-y-2 text-gray-700 text-sm ml-4">
+                                                <li>1. Input sanitization functions</li>
+                                                <li>2. Prepared statements implementation</li>
+                                                <li>3. Data validation layers</li>
+                                                <li>4. Error handling mechanisms</li>
+                                                <li>5. Security best practices</li>
+                                            </ol>
+                                            <div class="bg-blue-100 p-2 rounded text-blue-800 text-sm mt-2">
+                                                🎯 Focus: Secure & Reliable Code
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="bg-white p-4 rounded-lg shadow-sm border border-green-200">
+                                            <h5 class="font-bold text-green-800 mb-2">🎨 Step 3: User Experience</h5>
+                                            <ol class="space-y-2 text-gray-700 text-sm ml-4">
+                                                <li>1. Responsive design implementation</li>
+                                                <li>2. User-friendly error messages</li>
+                                                <li>3. Loading states & feedback</li>
+                                                <li>4. Accessible HTML markup</li>
+                                                <li>5. Performance optimizations</li>
+                                            </ol>
+                                            <div class="bg-green-100 p-2 rounded text-green-800 text-sm mt-2">
+                                                🚀 Focus: Professional Applications
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gradient-to-r from-blue-50 to-cyan-50 p-5 rounded-xl mb-6">
+                                    <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                                        <i class="fas fa-code text-blue-600 mr-2"></i>Clean Code Checklist
+                                    </h4>
+                                    
+                                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                        <div class="bg-white p-3 rounded-lg shadow-sm border border-blue-200">
+                                            <h6 class="font-bold text-blue-800 mb-2">📋 Documentation</h6>
+                                            <ul class="text-xs text-gray-700 space-y-1">
+                                                <li>☑ File header comments</li>
+                                                <li>☑ Function descriptions</li>
+                                                <li>☑ Parameter documentation</li>
+                                                <li>☑ Return value docs</li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <div class="bg-white p-3 rounded-lg shadow-sm border border-green-200">
+                                            <h6 class="font-bold text-green-800 mb-2">🏗️ Structure</h6>
+                                            <ul class="text-xs text-gray-700 space-y-1">
+                                                <li>☑ Logical code grouping</li>
+                                                <li>☑ Single responsibility</li>
+                                                <li>☑ Consistent formatting</li>
+                                                <li>☑ Proper indentation</li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <div class="bg-white p-3 rounded-lg shadow-sm border border-purple-200">
+                                            <h6 class="font-bold text-purple-800 mb-2">🔧 Function Design</h6>
+                                            <ul class="text-xs text-gray-700 space-y-1">
+                                                <li>☑ Descriptive names</li>
+                                                <li>☑ Small focused functions</li>
+                                                <li>☑ Reusable components</li>
+                                                <li>☑ Clear return types</li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <div class="bg-white p-3 rounded-lg shadow-sm border border-red-200">
+                                            <h6 class="font-bold text-red-800 mb-2">🛡️ Security</h6>
+                                            <ul class="text-xs text-gray-700 space-y-1">
+                                                <li>☑ Input validation</li>
+                                                <li>☑ Output escaping</li>
+                                                <li>☑ SQL injection prevention</li>
+                                                <li>☑ XSS protection</li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <div class="bg-white p-3 rounded-lg shadow-sm border border-yellow-200">
+                                            <h6 class="font-bold text-yellow-800 mb-2">💡 Best Practices</h6>
+                                            <ul class="text-xs text-gray-700 space-y-1">
+                                                <li>☑ Error handling</li>
+                                                <li>☑ Resource cleanup</li>
+                                                <li>☑ Performance awareness</li>
+                                                <li>☑ Testing mindset</li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <div class="bg-white p-3 rounded-lg shadow-sm border border-indigo-200">
+                                            <h6 class="font-bold text-indigo-800 mb-2">🎯 User Experience</h6>
+                                            <ul class="text-xs text-gray-700 space-y-1">
+                                                <li>☑ Clear feedback</li>
+                                                <li>☑ Intuitive navigation</li>
+                                                <li>☑ Responsive design</li>
+                                                <li>☑ Accessibility</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
                                 
                                 <div class="bg-gradient-to-r from-purple-50 to-pink-50 p-5 rounded-xl mb-6">
                                     <p class="text-gray-800 mb-4">
@@ -1082,13 +1248,67 @@
 <span class="text-pink-500">?&gt;</span></code></pre>
                                     </div>
                                     
-                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                        <div class="bg-white p-4 rounded-lg shadow-sm">
-                                            <h5 class="font-bold text-gray-800 mb-2 flex items-center">
-                                                <i class="fas fa-shield-alt text-primary mr-2"></i>$_POST
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                                            <h5 class="font-bold text-blue-800 mb-3 flex items-center">
+                                                <i class="fas fa-palette text-blue-600 mr-2"></i>Syntax Color Legend
                                             </h5>
-                                            <p class="text-gray-600 text-sm">Superglobal untuk mengambil data dari method POST</p>
+                                            <div class="space-y-2 text-sm">
+                                                <div class="flex items-center">
+                                                    <span class="inline-block w-3 h-3 bg-pink-500 rounded-full mr-2"></span>
+                                                    <span class="text-gray-700"><strong class="text-pink-500">Pink</strong> - PHP Tags (&lt;?php, ?&gt;)</span>
+                                                </div>
+                                                <div class="flex items-center">
+                                                    <span class="inline-block w-3 h-3 bg-purple-600 rounded-full mr-2"></span>
+                                                    <span class="text-gray-700"><strong class="text-purple-600">Purple</strong> - Functions, Keywords</span>
+                                                </div>
+                                                <div class="flex items-center">
+                                                    <span class="inline-block w-3 h-3 bg-blue-600 rounded-full mr-2"></span>
+                                                    <span class="text-gray-700"><strong class="text-blue-600">Blue</strong> - Variables, $this</span>
+                                                </div>
+                                                <div class="flex items-center">
+                                                    <span class="inline-block w-3 h-3 bg-green-400 rounded-full mr-2"></span>
+                                                    <span class="text-gray-700"><strong class="text-green-400">Green</strong> - Strings, 'text'</span>
+                                                </div>
+                                                <div class="flex items-center">
+                                                    <span class="inline-block w-3 h-3 bg-orange-500 rounded-full mr-2"></span>
+                                                    <span class="text-gray-700"><strong class="text-orange-500">Orange</strong> - Numbers, 123</span>
+                                                </div>
+                                                <div class="flex items-center">
+                                                    <span class="inline-block w-3 h-3 bg-gray-500 rounded-full mr-2"></span>
+                                                    <span class="text-gray-700"><strong class="text-gray-500">Gray</strong> - Comments, // notes</span>
+                                                </div>
+                                                <div class="flex items-center">
+                                                    <span class="inline-block w-3 h-3 bg-cyan-600 rounded-full mr-2"></span>
+                                                    <span class="text-gray-700"><strong class="text-cyan-600">Cyan</strong> - HTML Tags</span>
+                                                </div>
+                                            </div>
                                         </div>
+                                        
+                                        <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+                                            <h5 class="font-bold text-green-800 mb-3 flex items-center">
+                                                <i class="fas fa-shield-alt text-green-600 mr-2"></i>Security Features
+                                            </h5>
+                                            <ul class="text-sm text-gray-700 space-y-2">
+                                                <li>• <code class="bg-green-100 px-1 rounded text-green-800">htmlspecialchars()</code> - XSS protection</li>
+                                                <li>• <code class="bg-green-100 px-1 rounded text-green-800">prepared statement</code> - SQL injection prevention</li>
+                                                <li>• <code class="bg-green-100 px-1 rounded text-green-800">ENT_QUOTES</code> - Full HTML escaping</li>
+                                                <li>• <code class="bg-green-100 px-1 rounded text-green-800">allowed_fields</code> - Whitelisting input</li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <div class="bg-purple-50 p-4 rounded-lg border border-purple-200">
+                                            <h5 class="font-bold text-purple-800 mb-3 flex items-center">
+                                                <i class="fas fa-code text-purple-600 mr-2"></i>Clean Code Benefits
+                                            </h5>
+                                            <ul class="text-sm text-gray-700 space-y-2">
+                                                <li>• 🎯 <strong>Readability:</strong> Color-coded syntax easy to read</li>
+                                                <li>• 🐛 <strong>Debugging:</strong> Quick identification of code elements</li>
+                                                <li>• 📚 <strong>Learning:</strong> Visual understanding of PHP structure</li>
+                                                <li>• 🔧 <strong>Maintenance:</strong> Easier code modifications</li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                         
                                         <div class="bg-white p-4 rounded-lg shadow-sm">
                                             <h5 class="font-bold text-gray-800 mb-2 flex items-center">
@@ -1307,11 +1527,878 @@
                                 <button onclick="prevSlide()" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-5 rounded-lg transition flex items-center">
                                     <i class="fas fa-arrow-left mr-2"></i>Sebelumnya
                                 </button>
+                                <button onclick="nextSlide()" class="bg-primary hover:bg-blue-700 text-white font-medium py-2 px-5 rounded-lg transition flex items-center">
+                                    Berikutnya <i class="fas fa-arrow-right ml-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 9: Form Processing dengan Database -->
+                        <div class="slide" id="slide9">
+                            <div class="flex items-center justify-between mb-6">
+                                <div>
+                                    <span class="inline-block bg-warning text-white px-4 py-1 rounded-full text-sm font-bold mb-2">LATIHAN LANJUTAN</span>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-secondary">Form Processing dengan Database</h2>
+                                </div>
+                                <div class="text-right">
+                                    <span class="bg-blue-100 text-primary px-3 py-1 rounded-lg font-medium">Slide 9/10</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-8">
+                                <h3 class="text-xl font-bold text-primary mb-4 flex items-center">
+                                    <i class="fas fa-file-code mr-2"></i>9.1 Form HTML dengan Database Integration
+                                </h3>
+                                
+                                <div class="bg-gradient-to-r from-blue-50 to-cyan-50 p-5 rounded-xl mb-6">
+                                    <p class="text-gray-800 mb-4">
+                                        Menggabungkan form HTML processing dengan database untuk menyimpan dan menampilkan data secara dinamis.
+                                    </p>
+                                    
+                                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                                        <div>
+                                            <h4 class="font-bold text-gray-800 mb-3">File: form_siswa.html</h4>
+                                            <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-4">
+                                                <pre class="text-sm overflow-x-auto"><code><span class="green-400">&lt;!DOCTYPE html&gt;</span>
+<span class="blue-400">&lt;html&gt;</span>
+<span class="blue-400">&lt;head&gt;</span>
+    <span class="blue-400">&lt;title&gt;</span>Form Siswa<span class="blue-400">&lt;/title&gt;</span>
+    <span class="blue-400">&lt;link</span> <span class="yellow-400">href=</span><span class="yellow-300">"https://cdn.jsdelivr.net/npm/
+         bootstrap@5.1.3/dist/css/bootstrap.min.css"</span> 
+         <span class="yellow-400">rel=</span><span class="yellow-300">"stylesheet"</span><span class="blue-400">&gt;</span>
+<span class="blue-400">&lt;/head&gt;</span>
+<span class="blue-400">&lt;body&gt;</span>
+    <span class="blue-400">&lt;div</span> <span class="yellow-400">class=</span><span class="yellow-300">"container mt-4"</span><span class="blue-400">&gt;</span>
+        <span class="blue-400">&lt;h2&gt;</span>Form Pendaftaran Siswa<span class="blue-400">&lt;/h2&gt;</span>
+        
+        <span class="blue-400">&lt;form</span> <span class="yellow-400">action=</span><span class="yellow-300">"proses_siswa.php"</span> 
+              <span class="yellow-400">method=</span><span class="yellow-300">"POST"</span> <span class="blue-400">&gt;</span>
+            <span class="blue-400">&lt;div</span> <span class="yellow-400">class=</span><span class="yellow-300">"mb-3"</span><span class="blue-400">&gt;</span>
+                <span class="blue-400">&lt;label&gt;</span>Nama Lengkap:<span class="blue-400">&lt;/label&gt;</span>
+                <span class="blue-400">&lt;input</span> <span class="yellow-400">type=</span><span class="yellow-300">"text"</span> 
+                       <span class="yellow-400">name=</span><span class="yellow-300">"nama"</span> <span class="yellow-400">class=</span><span class="yellow-300">"form-control"</span> 
+                       <span class="yellow-400">required</span><span class="blue-400">&gt;</span>
+            <span class="blue-400">&lt;/div&gt;</span>
+            
+            <span class="blue-400">&lt;div</span> <span class="yellow-400">class=</span><span class="yellow-300">"mb-3"</span><span class="blue-400">&gt;</span>
+                <span class="blue-400">&lt;label&gt;</span>Email:<span class="blue-400">&lt;/label&gt;</span>
+                <span class="blue-400">&lt;input</span> <span class="yellow-400">type=</span><span class="yellow-300">"email"</span> 
+                       <span class="yellow-400">name=</span><span class="yellow-300">"email"</span> <span class="yellow-400">class=</span><span class="yellow-300">"form-control"</span> 
+                       <span class="yellow-400">required</span><span class="blue-400">&gt;</span>
+            <span class="blue-400">&lt;/div&gt;</span>
+            
+            <span class="blue-400">&lt;div</span> <span class="yellow-400">class=</span><span class="yellow-300">"mb-3"</span><span class="blue-400">&gt;</span>
+                <span class="blue-400">&lt;label&gt;</span>Kelas:<span class="blue-400">&lt;/label&gt;</span>
+                <span class="blue-400">&lt;select</span> <span class="yellow-400">name=</span><span class="yellow-300">"kelas"</span> 
+                        <span class="yellow-400">class=</span><span class="yellow-300">"form-control"</span><span class="blue-400">&gt;</span>
+                    <span class="blue-400">&lt;option</span> <span class="yellow-400">value=</span><span class="yellow-300">"10 RPL 1"</span><span class="blue-400">&gt;</span>10 RPL 1<span class="blue-400">&lt;/option&gt;</span>
+                    <span class="blue-400">&lt;option</span> <span class="yellow-400">value=</span><span class="yellow-300">"10 RPL 2"</span><span class="blue-400">&gt;</span>10 RPL 2<span class="blue-400">&lt;/option&gt;</span>
+                <span class="blue-400">&lt;/select&gt;</span>
+            <span class="blue-400">&lt;/div&gt;</span>
+            
+            <span class="blue-400">&lt;button</span> <span class="yellow-400">type=</span><span class="yellow-300">"submit"</span> 
+                    <span class="yellow-400">class=</span><span class="yellow-300">"btn btn-primary"</span><span class="blue-400">&gt;</span>Daftar<span class="blue-400">&lt;/button&gt;</span>
+        <span class="blue-400">&lt;/form&gt;</span>
+    <span class="blue-400">&lt;/div&gt;</span>
+<span class="blue-400">&lt;/body&gt;</span>
+<span class="blue-400">&lt;/html&gt;</span></code></pre>
+                                            </div>
+                                        </div>
+                                        
+                                        <div>
+                                            <h4 class="font-bold text-gray-800 mb-3">Database Structure</h4>
+                                            <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-4">
+                                                <pre class="text-sm overflow-x-auto"><code><span class="green-400">-- Buat tabel siswa</span>
+<span class="blue-400">CREATE TABLE</span> siswa (
+    id <span class="blue-400">INT</span> <span class="blue-400">AUTO_INCREMENT PRIMARY KEY</span>,
+    nama <span class="blue-400">VARCHAR</span>(100) <span class="blue-400">NOT NULL</span>,
+    email <span class="blue-400">VARCHAR</span>(100) <span class="blue-400">NOT NULL UNIQUE</span>,
+    kelas <span class="blue-400">VARCHAR</span>(20) <span class="blue-400">NOT NULL</span>,
+    jurusan <span class="blue-400">VARCHAR</span>(50) <span class="blue-400">DEFAULT</span> <span class="yellow-300">'RPL'</span>,
+    tanggal_daftar <span class="blue-400">TIMESTAMP</span> 
+                  <span class="blue-400">DEFAULT CURRENT_TIMESTAMP</span>
+);</code></pre>
+                                            </div>
+                                            
+                                            <div class="bg-amber-50 p-4 rounded-lg border-l-4 border-amber-500">
+                                                <h5 class="font-bold text-gray-800 mb-2">
+                                                    <i class="fas fa-lightbulb text-amber-600 mr-2"></i>Tips
+                                                </h5>
+                                                <p class="text-gray-700 text-sm">
+                                                    Gunakan <code class="bg-gray-100 px-2 py-1 rounded">AUTO_INCREMENT</code> untuk ID otomatis 
+                                                    dan <code class="bg-gray-100 px-2 py-1 rounded">TIMESTAMP</code> untuk tracking waktu input.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-xl font-bold text-primary mb-4 flex items-center">
+                                    <i class="fas fa-server mr-2"></i>9.2 File Processing dengan Validasi
+                                </h3>
+                                
+                                <div class="bg-gradient-to-r from-green-50 to-emerald-50 p-5 rounded-xl mb-6">
+                                    <h4 class="font-bold text-gray-800 mb-3">File: proses_siswa.php (Clean Code Version)</h4>
+                                    
+                                    <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-4">
+                                        <pre class="text-sm overflow-x-auto"><code><span class="text-pink-500">&lt;?php</span>
+<span class="text-gray-500">// =============================================</span>
+<span class="text-gray-500">// FILE: proses_siswa.php</span>
+<span class="text-gray-500">// DESKRIPSI: Memproses form pendaftaran siswa</span>
+<span class="text-gray-500">// AUTHOR: Your Name</span>
+<span class="text-gray-500">// =============================================</span>
+
+<span class="text-gray-500">// Include file konfigurasi</span>
+<span class="text-purple-600">require_once</span> <span class="text-green-400">'config/database.php'</span>;
+
+<span class="text-gray-500">// Inisialisasi variabel</span>
+<span class="text-blue-600">$errors</span>     = [];
+<span class="text-blue-600">$success</span>   = <span class="text-green-400">''</span>;
+<span class="text-blue-600">$form_data</span>  = [];
+
+<span class="text-gray-500">// =============================================</span>
+<span class="text-gray-500">// CEK SUBMIT FORM</span>
+<span class="text-gray-500">// =============================================</span>
+<span class="text-purple-600">if</span> (<span class="text-purple-600">isset</span>(<span class="text-blue-600">$_POST</span>[<span class="text-green-400">'btn_submit'</span>])) {
+    
+    <span class="text-gray-500">// =============================================</span>
+    <span class="text-gray-500">// STEP 1: SANITIZE INPUT DATA</span>
+    <span class="text-gray-500">// =============================================</span>
+    <span class="text-blue-600">$form_data</span> = sanitize_input(<span class="text-blue-600">$_POST</span>);
+    
+    <span class="text-gray-500">// =============================================</span>
+    <span class="text-gray-500">// STEP 2: VALIDASI DATA</span>
+    <span class="text-gray-500">// =============================================</span>
+    <span class="text-blue-600">$errors</span> = validate_siswa_data(<span class="text-blue-600">$form_data</span>);
+    
+    <span class="text-gray-500">// =============================================</span>
+    <span class="text-gray-500">// STEP 3: PROSES DATA (JIKA VALID)</span>
+    <span class="text-gray-500">// =============================================</span>
+    <span class="text-purple-600">if</span> (<span class="text-purple-600">empty</span>(<span class="text-blue-600">$errors</span>)) {
+        <span class="text-blue-600">$success</span> = process_siswa_registration(<span class="text-blue-600">$form_data</span>);
+    }
+}
+
+<span class="text-gray-500">// =============================================</span>
+<span class="text-gray-500">// FUNGSI-FUNGSI HELPER</span>
+<span class="text-gray-500">// =============================================</span>
+
+<span class="text-gray-500">/**</span>
+<span class="text-gray-500"> * Sanitasi input data dari form</span>
+<span class="text-gray-500"> * @param array $data Input data dari $_POST</span>
+<span class="text-gray-500"> * @return array Data yang sudah dibersihkan</span>
+<span class="text-gray-500"> */</span>
+<span class="text-purple-600">function</span> sanitize_input(<span class="text-blue-600">$data</span>) {
+    <span class="text-blue-600">$clean_data</span> = [];
+    
+    <span class="text-gray-500">// Definisi field yang diperbolehkan</span>
+    <span class="text-blue-600">$allowed_fields</span> = [<span class="text-green-400">'nama'</span>, <span class="text-green-400">'email'</span>, <span class="text-green-400">'kelas'</span>];
+    
+    <span class="text-purple-600">foreach</span> (<span class="text-blue-600">$allowed_fields</span> <span class="text-purple-600">as</span> <span class="text-blue-600">$field</span>) {
+        <span class="text-purple-600">if</span> (<span class="text-purple-600">isset</span>(<span class="text-blue-600">$data</span>[<span class="text-blue-600">$field</span>])) {
+            <span class="text-gray-500">// Hapus spasi di awal/akhir dan escape HTML</span>
+            <span class="text-blue-600">$clean_data</span>[<span class="text-blue-600">$field</span>] = <span class="text-purple-600">htmlspecialchars</span>(
+                <span class="text-purple-600">trim</span>(<span class="text-blue-600">$data</span>[<span class="text-blue-600">$field</span>]), 
+                <span class="text-purple-600">ENT_QUOTES</span>, 
+                <span class="text-green-400">'UTF-8'</span>
+            );
+        }
+    }
+    
+    <span class="text-purple-600">return</span> <span class="text-blue-600">$clean_data</span>;
+}
+
+<span class="text-gray-500">/**</span>
+<span class="text-gray-500"> * Validasi data siswa</span>
+<span class="text-gray-500"> * @param array $data Data siswa yang divalidasi</span>
+<span class="text-gray-500"> * @return array List error messages</span>
+<span class="text-gray-500"> */</span>
+<span class="text-purple-600">function</span> validate_siswa_data(<span class="text-blue-600">$data</span>) {
+    <span class="text-blue-600">$errors</span> = [];
+    
+    <span class="text-gray-500">// Validasi nama: wajib diisi, minimal 3 karakter</span>
+    <span class="text-purple-600">if</span> (<span class="text-purple-600">empty</span>(<span class="text-blue-600">$data</span>[<span class="text-green-400">'nama'</span>])) {
+        <span class="text-blue-600">$errors</span>[] = <span class="text-green-400">"Nama wajib diisi"</span>;
+    } <span class="text-purple-600">elseif</span> (<span class="text-purple-600">strlen</span>(<span class="text-blue-600">$data</span>[<span class="text-green-400">'nama'</span>]) < <span class="text-orange-500">3</span>) {
+        <span class="text-blue-600">$errors</span>[] = <span class="text-green-400">"Nama minimal 3 karakter"</span>;
+    }
+    
+    <span class="text-gray-500">// Validasi email: wajib diisi, format email, unique</span>
+    <span class="text-purple-600">if</span> (<span class="text-purple-600">empty</span>(<span class="text-blue-600">$data</span>[<span class="text-green-400">'email'</span>])) {
+        <span class="text-blue-600">$errors</span>[] = <span class="text-green-400">"Email wajib diisi"</span>;
+    } <span class="text-purple-600">elseif</span> (!<span class="text-purple-600">filter_var</span>(<span class="text-blue-600">$data</span>[<span class="text-green-400">'email'</span>], <span class="text-purple-600">FILTER_VALIDATE_EMAIL</span>)) {
+        <span class="text-blue-600">$errors</span>[] = <span class="text-green-400">"Format email tidak valid"</span>;
+    } <span class="text-purple-600">elseif</span> (is_email_exists(<span class="text-blue-600">$data</span>[<span class="text-green-400">'email'</span>])) {
+        <span class="text-blue-600">$errors</span>[] = <span class="text-green-400">"Email sudah terdaftar"</span>;
+    }
+    
+    <span class="text-gray-500">// Validasi kelas: wajib dipilih</span>
+    <span class="text-purple-600">if</span> (<span class="text-purple-600">empty</span>(<span class="text-blue-600">$data</span>[<span class="text-green-400">'kelas'</span>])) {
+        <span class="text-blue-600">$errors</span>[] = <span class="text-green-400">"Kelas wajib dipilih"</span>;
+    }
+    
+    <span class="text-purple-600">return</span> <span class="text-blue-600">$errors</span>;
+}
+
+<span class="text-gray-500">/**</span>
+<span class="text-gray-500"> * Cek apakah email sudah ada di database</span>
+<span class="text-gray-500"> * @param string $email Email yang akan dicek</span>
+<span class="text-gray-500"> * @return bool True jika email sudah ada</span>
+<span class="text-gray-500"> */</span>
+<span class="text-purple-600">function</span> is_email_exists(<span class="text-blue-600">$email</span>) {
+    <span class="text-purple-600">global</span> <span class="text-blue-600">$koneksi</span>;
+    
+    <span class="text-blue-600">$sql</span> = <span class="text-green-400">"SELECT id FROM siswa WHERE email = ?"</span>;
+    <span class="text-blue-600">$stmt</span> = <span class="text-purple-600">mysqli_prepare</span>(<span class="text-blue-600">$koneksi</span>, <span class="text-blue-600">$sql</span>);
+    <span class="text-purple-600">mysqli_stmt_bind_param</span>(<span class="text-blue-600">$stmt</span>, <span class="text-green-400">"s"</span>, <span class="text-blue-600">$email</span>);
+    <span class="text-purple-600">mysqli_stmt_execute</span>(<span class="text-blue-600">$stmt</span>);
+    <span class="text-blue-600">$result</span> = <span class="text-purple-600">mysqli_stmt_get_result</span>(<span class="text-blue-600">$stmt</span>);
+    
+    <span class="text-purple-600">return</span> <span class="text-purple-600">mysqli_num_rows</span>(<span class="text-blue-600">$result</span>) > <span class="text-orange-500">0</span>;
+}
+
+<span class="text-gray-500">/**</span>
+<span class="text-gray-500"> * Proses pendaftaran siswa ke database</span>
+<span class="text-gray-500"> * @param array $data Data siswa yang akan disimpan</span>
+<span class="text-gray-500"> * @return string Success message</span>
+<span class="text-gray-500"> */</span>
+<span class="text-purple-600">function</span> process_siswa_registration(<span class="text-blue-600">$data</span>) {
+    <span class="text-purple-600">global</span> <span class="text-blue-600">$koneksi</span>;
+    
+    <span class="text-gray-500">// Insert data ke database dengan prepared statement</span>
+    <span class="text-blue-600">$sql</span> = <span class="text-green-400">"INSERT INTO siswa (nama, email, kelas, jurusan, created_at) 
+                  VALUES (?, ?, ?, 'RPL', NOW())"</span>;
+    
+    <span class="text-blue-600">$stmt</span> = <span class="text-purple-600">mysqli_prepare</span>(<span class="text-blue-600">$koneksi</span>, <span class="text-blue-600">$sql</span>);
+    <span class="text-purple-600">mysqli_stmt_bind_param</span>(<span class="text-blue-600">$stmt</span>, <span class="text-green-400">"sss"</span>, 
+                             <span class="text-blue-600">$data</span>[<span class="text-green-400">'nama'</span>], 
+                             <span class="text-blue-600">$data</span>[<span class="text-green-400">'email'</span>], 
+                             <span class="text-blue-600">$data</span>[<span class="text-green-400">'kelas'</span>]);
+    
+    <span class="text-purple-600">if</span> (<span class="text-purple-600">mysqli_stmt_execute</span>(<span class="text-blue-600">$stmt</span>)) {
+        <span class="text-purple-600">return</span> <span class="text-green-400">"✅ Data siswa berhasil disimpan!"</span>;
+    } <span class="text-purple-600">else</span> {
+        <span class="text-purple-600">return</span> <span class="text-green-400">"❌ Gagal menyimpan data: "</span> . <span class="text-purple-600">mysqli_error</span>(<span class="text-blue-600">$koneksi</span>);
+    }
+}
+
+<span class="text-gray-500">// =============================================</span>
+<span class="text-gray-500">// TAMPILKAN HASIL PROSES</span>
+<span class="text-gray-500">// =============================================</span>
+<span class="text-purple-600">if</span> (!<span class="text-purple-600">empty</span>(<span class="text-blue-600">$success</span>)) {
+    <span class="text-purple-600">echo</span> <span class="text-green-400">"&lt;div class='alert alert-success'&gt;<span class="text-blue-600">$success</span>&lt;/div&gt;"</span>;
+}
+
+<span class="text-purple-600">if</span> (!<span class="text-purple-600">empty</span>(<span class="text-blue-600">$errors</span>)) {
+    <span class="text-purple-600">echo</span> <span class="text-green-400">"&lt;div class='alert alert-danger'&gt;&lt;ul&gt;"</span>;
+    <span class="text-purple-600">foreach</span> (<span class="text-blue-600">$errors</span> <span class="text-purple-600">as</span> <span class="text-blue-600">$error</span>) {
+        <span class="text-purple-600">echo</span> <span class="text-green-400">"&lt;li&gt;<span class="text-blue-600">$error</span>&lt;/li&gt;"</span>;
+    }
+    <span class="text-purple-600">echo</span> <span class="text-green-400">"&lt;/ul&gt;&lt;/div&gt;"</span>;
+}
+
+<span class="text-pink-500">?&gt;</span></code></pre>
+                                    </div>
+                                    
+                                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                                        <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                                            <h5 class="font-bold text-blue-800 mb-3 flex items-center">
+                                                <i class="fas fa-code text-blue-600 mr-2"></i>Clean Code Principles
+                                            </h5>
+                                            <ul class="text-sm text-gray-700 space-y-2">
+                                                <li>• <strong>Comment Header:</strong> File documentation</li>
+                                                <li>• <strong>Function Separation:</strong> Single responsibility</li>
+                                                <li>• <strong>Naming Convention:</strong> Descriptive names</li>
+                                                <li>• <strong>Consistent Formatting:</strong> Indentation & spacing</li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+                                            <h5 class="font-bold text-green-800 mb-3 flex items-center">
+                                                <i class="fas fa-shield-alt text-green-600 mr-2"></i>Security Features
+                                            </h5>
+                                            <ul class="text-sm text-gray-700 space-y-2">
+                                                <li>• <code class="bg-green-100 px-1 rounded">htmlspecialchars()</code> - XSS protection</li>
+                                                <li>• <code class="bg-green-100 px-1 rounded">prepared statement</code> - SQL injection prevention</li>
+                                                <li>• <code class="bg-green-100 px-1 rounded">ENT_QUOTES</code> - Full HTML escaping</li>
+                                                <li>• <code class="bg-green-100 px-1 rounded">allowed_fields</code> - Whitelisting input</li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <div class="bg-purple-50 p-4 rounded-lg border border-purple-200">
+                                            <h5 class="font-bold text-purple-800 mb-3 flex items-center">
+                                                <i class="fas fa-tasks text-purple-600 mr-2"></i>Best Practices
+                                            </h5>
+                                            <ul class="text-sm text-gray-700 space-y-2">
+                                                <li>• <strong>Input Validation:</strong> Multiple validation layers</li>
+                                                <li>• <strong>Error Handling:</strong> Clear error messages</li>
+                                                <li>• <strong>Database Security:</strong> Prepared statements</li>
+                                                <li>• <strong>Code Organization:</strong> Logical function grouping</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                                    <div>
+                                        <h3 class="text-xl font-bold text-primary mb-4 flex items-center">
+                                            <i class="fas fa-edit mr-2"></i>9.4 UPDATE (Update Data)
+                                        </h3>
+                                        
+                                        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-4">
+                                            <pre class="text-sm overflow-x-auto"><code><span class="text-pink-500">&lt;?php</span>
+    <span class="text-green-400">// Update data siswa</span>
+    <span class="text-blue-400">$sql</span> = <span class="text-yellow-300">"UPDATE siswa 
+                   SET kelas='10 RPL 2' 
+                   WHERE id=1"</span>;
+    
+    <span class="text-blue-400">if</span> (<span class="text-blue-400">mysqli_query</span>(<span class="text-blue-400">$koneksi</span>, <span class="text-blue-400">$sql</span>)) {
+        <span class="text-blue-400">echo</span> <span class="text-yellow-300">"Data berhasil diupdate!"</span>;
+    } <span class="text-blue-400">else</span> {
+        <span class="text-blue-400">echo</span> <span class="text-yellow-300">"Error updating record: "</span> . 
+             <span class="text-blue-400">mysqli_error</span>(<span class="text-blue-400">$koneksi</span>);
+    }
+<span class="text-pink-500">?&gt;</span></code></pre>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <h3 class="text-xl font-bold text-primary mb-4 flex items-center">
+                                            <i class="fas fa-trash mr-2"></i>9.5 DELETE (Delete Data)
+                                        </h3>
+                                        
+                                        <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-4">
+                                            <pre class="text-sm overflow-x-auto"><code><span class="text-pink-500">&lt;?php</span>
+    <span class="text-green-400">// Delete data dari tabel siswa</span>
+    <span class="text-blue-400">$sql</span> = <span class="text-yellow-300">"DELETE FROM siswa WHERE id=1"</span>;
+    
+    <span class="text-blue-400">if</span> (<span class="text-blue-400">mysqli_query</span>(<span class="text-blue-400">$koneksi</span>, <span class="text-blue-400">$sql</span>)) {
+        <span class="text-blue-400">echo</span> <span class="text-yellow-300">"Data berhasil dihapus!"</span>;
+    } <span class="text-blue-400">else</span> {
+        <span class="text-blue-400">echo</span> <span class="text-yellow-300">"Error deleting record: "</span> . 
+             <span class="text-blue-400">mysqli_error</span>(<span class="text-blue-400">$koneksi</span>);
+    }
+    
+    <span class="text-green-400">// Tutup koneksi</span>
+    <span class="text-blue-400">mysqli_close</span>(<span class="text-blue-400">$koneksi</span>);
+<span class="text-pink-500">?&gt;</span></code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-xl font-bold text-primary mb-4 flex items-center">
+                                    <i class="fas fa-table mr-2"></i>9.3 Display Data ke Tabel HTML
+                                </h3>
+                                
+                                <div class="bg-gradient-to-r from-purple-50 to-pink-50 p-5 rounded-xl mb-6">
+                                    <h4 class="font-bold text-gray-800 mb-3">File: daftar_siswa.php (Clean Code Version)</h4>
+                                    
+                                    <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-4">
+                                        <pre class="text-sm overflow-x-auto"><code><span class="text-pink-500">&lt;?php</span>
+<span class="text-gray-500">// =============================================</span>
+<span class="text-gray-500">// FILE: daftar_siswa.php</span>
+<span class="text-gray-500">// DESKRIPSI: Menampilkan daftar semua siswa</span>
+<span class="text-gray-500">// AUTHOR: Your Name</span>
+<span class="text-gray-500">// =============================================</span>
+
+<span class="text-gray-500">// Include dependencies</span>
+<span class="text-purple-600">require_once</span> <span class="text-green-400">'config/database.php'</span>;
+
+<span class="text-gray-500">// Inisialisasi variabel</span>
+<span class="text-blue-600">$siswa_list</span> = [];
+<span class="text-blue-600">$total_siswa</span> = <span class="text-orange-500">0</span>;
+<span class="text-blue-600">$page_title</span> = <span class="text-green-400">"Daftar Siswa Terdaftar"</span>;
+
+<span class="text-gray-500">// =============================================</span>
+<span class="text-gray-500">// AMBIL DATA SISWA DARI DATABASE</span>
+<span class="text-gray-500">// =============================================</span>
+<span class="text-blue-600">$siswa_data</span> = get_all_siswa();
+
+<span class="text-gray-500">// =============================================</span>
+<span class="text-gray-500">// FUNGSI-FUNGSI HELPER</span>
+<span class="text-gray-500">// =============================================</span>
+
+<span class="text-gray-500">/**</span>
+<span class="text-gray-500"> * Mengambil semua data siswa dari database</span>
+<span class="text-gray-500"> * @return array Data siswa yang sudah diurutkan</span>
+<span class="text-gray-500"> */</span>
+<span class="text-purple-600">function</span> get_all_siswa() {
+    <span class="text-purple-600">global</span> <span class="text-blue-600">$koneksi</span>;
+    
+    <span class="text-gray-500">// Query dengan JOIN untuk menampilkan jurusan lengkap</span>
+    <span class="text-blue-600">$sql</span> = <span class="text-green-400">"SELECT 
+                s.id, 
+                s.nama, 
+                s.email, 
+                s.kelas, 
+                s.jurusan,
+                s.created_at,
+                DATE_FORMAT(s.created_at, '%d %M %Y %H:%i') as tanggal_daftar_formatted
+                FROM siswa s 
+                ORDER BY s.created_at DESC"</span>;
+    
+    <span class="text-blue-600">$result</span> = <span class="text-purple-600">mysqli_query</span>(<span class="text-blue-600">$koneksi</span>, <span class="text-blue-600">$sql</span>);
+    <span class="text-blue-600">$siswa_list</span> = [];
+    
+    <span class="text-purple-600">if</span> (<span class="text-purple-600">mysqli_num_rows</span>(<span class="text-blue-600">$result</span>) > <span class="text-orange-500">0</span>) {
+        <span class="text-purple-600">while</span> (<span class="text-blue-600">$row</span> = <span class="text-purple-600">mysqli_fetch_assoc</span>(<span class="text-blue-600">$result</span>)) {
+            <span class="text-blue-600">$siswa_list</span>[] = <span class="text-blue-600">$row</span>;
+        }
+    }
+    
+    <span class="text-purple-600">return</span> <span class="text-blue-600">$siswa_list</span>;
+}
+
+<span class="text-gray-500">/**</span>
+<span class="text-gray-500"> * Format status jurusan dengan badge</span>
+<span class="text-gray-500"> * @param string $jurusan Nama jurusan</span>
+<span class="text-gray-500"> * @return string HTML badge</span>
+<span class="text-gray-500"> */</span>
+<span class="text-purple-600">function</span> format_jurusan_badge(<span class="text-blue-600">$jurusan</span>) {
+    <span class="text-blue-600">$badge_colors</span> = [
+        <span class="text-green-400">'RPL'</span>   => <span class="text-green-400">'primary'</span>,
+        <span class="text-green-400">'TKJ'</span>   => <span class="text-green-400">'success'</span>,
+        <span class="text-green-400">'MM'</span>    => <span class="text-green-400">'info'</span>,
+        <span class="text-green-400">'AK'</span>    => <span class="text-green-400">'warning'</span>
+    ];
+    
+    <span class="text-blue-600">$color</span> = <span class="text-purple-600">isset</span>(<span class="text-blue-600">$badge_colors</span>[<span class="text-blue-600">$jurusan</span>]) 
+               ? <span class="text-blue-600">$badge_colors</span>[<span class="text-blue-600">$jurusan</span>] 
+               : <span class="text-green-400">'secondary'</span>;
+    
+    <span class="text-purple-600">return</span> <span class="text-green-400">"&lt;span class='badge bg-<span class="text-blue-600">$color</span>'&gt;<span class="text-blue-600">$jurusan</span>&lt;/span&gt;"</span>;
+}
+
+<span class="text-gray-500">/**</span>
+<span class="text-gray-500"> * Generate tombol aksi untuk setiap siswa</span>
+<span class="text-gray-500"> * @param int $siswa_id ID siswa</span>
+<span class="text-gray-500"> * @return string HTML tombol aksi</span>
+<span class="text-gray-500"> */</span>
+<span class="text-purple-600">function</span> generate_action_buttons(<span class="text-blue-600">$siswa_id</span>) {
+    <span class="text-blue-600">$edit_url</span>   = <span class="text-green-400">"edit_siswa.php?id=<span class="text-blue-600">$siswa_id</span>"</span>;
+    <span class="text-blue-600">$delete_url</span> = <span class="text-green-400">"hapus_siswa.php?id=<span class="text-blue-600">$siswa_id</span>"</span>;
+    
+    <span class="text-blue-600">$buttons</span> = <span class="text-green-400">""</span>;
+    
+    <span class="text-gray-500">// Tombol Edit</span>
+    <span class="text-blue-600">$buttons</span> .= <span class="text-green-400">"&lt;a href='<span class="text-blue-600">$edit_url</span>' 
+                     class='btn btn-sm btn-warning me-1' 
+                     title='Edit data siswa'&gt;
+                     &lt;i class='fas fa-edit'&gt;&lt;/i&gt; Edit
+                     &lt;/a&gt;"</span>;
+    
+    <span class="text-gray-500">// Tombol Hapus dengan konfirmasi</span>
+    <span class="text-blue-600">$buttons</span> .= <span class="text-green-400">"&lt;a href='<span class="text-blue-600">$delete_url</span>' 
+                     class='btn btn-sm btn-danger' 
+                     title='Hapus data siswa'
+                     onclick=\"return confirm('⚠️ Yakin ingin menghapus data siswa ini?')\"&gt;
+                     &lt;i class='fas fa-trash'&gt;&lt;/i&gt; Hapus
+                     &lt;/a&gt;"</span>;
+    
+    <span class="text-purple-600">return</span> <span class="text-blue-600">$buttons</span>;
+}
+
+<span class="text-gray-500">// Assign data ke variabel untuk digunakan di HTML</span>
+<span class="text-blue-600">$siswa_list</span> = <span class="text-blue-600">$siswa_data</span>;
+<span class="text-blue-600">$total_siswa</span> = <span class="text-purple-600">count</span>(<span class="text-blue-600">$siswa_list</span>);
+
+<span class="text-pink-500">?&gt;</span>
+
+<span class="text-gray-500">&lt;!DOCTYPE html&gt;</span>
+<span class="text-cyan-600">&lt;html lang="id"&gt;</span>
+<span class="text-cyan-600">&lt;head&gt;</span>
+    <span class="text-cyan-600">&lt;meta charset="UTF-8"&gt;</span>
+    <span class="text-cyan-600">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span>
+    <span class="text-cyan-600">&lt;title&gt;&lt;?php echo $page_title; ?&gt;&lt;/title&gt;</span>
+    
+    <span class="text-gray-500">/* Bootstrap CSS */</span>
+    <span class="text-cyan-600">&lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" 
+          rel="stylesheet"&gt;</span>
+    
+    <span class="text-gray-500">/* Font Awesome untuk icons */</span>
+    <span class="text-cyan-600">&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"&gt;</span>
+    
+    <span class="text-gray-500">/* Custom CSS */</span>
+    <span class="text-cyan-600">&lt;style&gt;</span>
+        <span class="text-yellow-600">.table-hover tbody tr:hover</span> {
+            <span class="text-yellow-600">background-color: #f8f9fa</span>;
+            <span class="text-yellow-600">cursor: pointer</span>;
+        }
+        <span class="text-yellow-600">.action-buttons</span> {
+            <span class="text-yellow-600">white-space: nowrap</span>;
+        }
+    <span class="text-cyan-600">&lt;/style&gt;</span>
+<span class="text-cyan-600">&lt;/head&gt;</span>
+<span class="text-cyan-600">&lt;body&gt;</span>
+    <span class="text-cyan-600">&lt;div class="container mt-4"&gt;</span>
+        
+        <span class="text-gray-500">/* Header dengan statistik */</span>
+        <span class="text-cyan-600">&lt;div class="row mb-4"&gt;</span>
+            <span class="text-cyan-600">&lt;div class="col-md-8"&gt;</span>
+                <span class="text-cyan-600">&lt;h2&gt;&lt;i class="fas fa-users me-2"&gt;&lt;/i&gt;&lt;?php echo $page_title; ?&gt;&lt;/h2&gt;</span>
+            <span class="text-cyan-600">&lt;/div&gt;</span>
+            <span class="text-cyan-600">&lt;div class="col-md-4 text-end"&gt;</span>
+                <span class="text-cyan-600">&lt;div class="alert alert-info d-inline-block"&gt;</span>
+                    <span class="text-cyan-600">&lt;i class="fas fa-chart-bar me-1"&gt;&lt;/i&gt;</span>
+                    <span class="text-cyan-600">Total Siswa: &lt;strong&gt;&lt;?php echo $total_siswa; ?&gt;&lt;/strong&gt;</span>
+                <span class="text-cyan-600">&lt;/div&gt;</span>
+            <span class="text-cyan-600">&lt;/div&gt;</span>
+        <span class="text-cyan-600">&lt;/div&gt;</span>
+        
+        <span class="text-gray-500">/* Tombol tambah siswa */</span>
+        <span class="text-cyan-600">&lt;div class="mb-3"&gt;</span>
+            <span class="text-cyan-600">&lt;a href="form_siswa.html" class="btn btn-primary"&gt;</span>
+                <span class="text-cyan-600">&lt;i class="fas fa-plus me-2"&gt;&lt;/i&gt;+ Tambah Siswa Baru</span>
+            <span class="text-cyan-600">&lt;/a&gt;</span>
+        <span class="text-cyan-600">&lt;/div&gt;</span>
+        
+        <span class="text-gray-500">/* Tabel data siswa */</span>
+        <span class="text-cyan-600">&lt;div class="table-responsive"&gt;</span>
+            <span class="text-cyan-600">&lt;table class="table table-striped table-hover"&gt;</span>
+                <span class="text-cyan-600">&lt;thead class="table-dark"&gt;</span>
+                    <span class="text-cyan-600">&lt;tr&gt;</span>
+                        <span class="text-cyan-600">&lt;th class="text-center" width="50"&gt;No&lt;/th&gt;</span>
+                        <span class="text-cyan-600">&lt;th&gt;Nama Lengkap&lt;/th&gt;</span>
+                        <span class="text-cyan-600">&lt;th&gt;Email&lt;/th&gt;</span>
+                        <span class="text-cyan-600">&lt;th&gt;Kelas&lt;/th&gt;</span>
+                        <span class="text-cyan-600">&lt;th&gt;Jurusan&lt;/th&gt;</span>
+                        <span class="text-cyan-600">&lt;th&gt;Tanggal Daftar&lt;/th&gt;</span>
+                        <span class="text-cyan-600">&lt;th class="text-center"&gt;Aksi&lt;/th&gt;</span>
+                    <span class="text-cyan-600">&lt;/tr&gt;</span>
+                <span class="text-cyan-600">&lt;/thead&gt;</span>
+                <span class="text-cyan-600">&lt;tbody&gt;</span>
+                    <span class="text-pink-500">&lt;?php</span>
+                    <span class="text-purple-600">if</span> (<span class="text-blue-600">$total_siswa</span> > <span class="text-orange-500">0</span>) {
+                        <span class="text-blue-600">$no</span> = <span class="text-orange-500">1</span>;
+                        <span class="text-purple-600">foreach</span> (<span class="text-blue-600">$siswa_list</span> <span class="text-purple-600">as</span> <span class="text-blue-600">$siswa</span>) {
+                    <span class="text-pink-500">?&gt;</span>
+                        <span class="text-cyan-600">&lt;tr&gt;</span>
+                            <span class="text-cyan-600">&lt;td class="text-center"&gt;&lt;?php echo $no++; ?&gt;&lt;/td&gt;</span>
+                            <span class="text-cyan-600">&lt;td&gt;</span>
+                                <span class="text-cyan-600">&lt;strong&gt;&lt;?php echo htmlspecialchars($siswa['nama']); ?&gt;&lt;/strong&gt;</span>
+                            <span class="text-cyan-600">&lt;/td&gt;</span>
+                            <span class="text-cyan-600">&lt;td&gt;</span>
+                                <span class="text-cyan-600">&lt;a href="mailto:&lt;?php echo $siswa['email']; ?&gt;" 
+                                   class="text-decoration-none"&gt;
+                                   &lt;i class="fas fa-envelope me-1"&gt;&lt;/i&gt;
+                                   &lt;?php echo htmlspecialchars($siswa['email']); ?&gt;
+                                &lt;/a&gt;</span>
+                            <span class="text-cyan-600">&lt;/td&gt;</span>
+                            <span class="text-cyan-600">&lt;td&gt;&lt;?php echo htmlspecialchars($siswa['kelas']); ?&gt;&lt;/td&gt;</span>
+                            <span class="text-cyan-600">&lt;td&gt;&lt;?php echo format_jurusan_badge($siswa['jurusan']); ?&gt;&lt;/td&gt;</span>
+                            <span class="text-cyan-600">&lt;td&gt;</span>
+                                <span class="text-cyan-600">&lt;i class="fas fa-clock text-muted me-1"&gt;&lt;/i&gt;</span>
+                                <span class="text-cyan-600">&lt;?php echo htmlspecialchars($siswa['tanggal_daftar_formatted']); ?&gt;</span>
+                            <span class="text-cyan-600">&lt;/td&gt;</span>
+                            <span class="text-cyan-600">&lt;td class="text-center action-buttons"&gt;</span>
+                                <span class="text-pink-500">&lt;?php echo generate_action_buttons($siswa['id']); ?&gt;</span>
+                            <span class="text-cyan-600">&lt;/td&gt;</span>
+                        <span class="text-cyan-600">&lt;/tr&gt;</span>
+                    <span class="text-pink-500">&lt;?php</span>
+                        }
+                    } <span class="text-purple-600">else</span> {
+                    <span class="text-pink-500">?&gt;</span>
+                        <span class="text-cyan-600">&lt;tr&gt;</span>
+                            <span class="text-cyan-600">&lt;td colspan="7" class="text-center py-5"&gt;</span>
+                                <span class="text-cyan-600">&lt;i class="fas fa-inbox fa-3x text-muted mb-3 d-block"&gt;&lt;/i&gt;</span>
+                                <span class="text-cyan-600">&lt;h5 class="text-muted"&gt;Belum ada data siswa&lt;/h5&gt;</span>
+                                <span class="text-cyan-600">&lt;p class="text-muted"&gt;Silakan tambah siswa baru untuk memulai&lt;/p&gt;</span>
+                                <span class="text-cyan-600">&lt;a href="form_siswa.html" class="btn btn-primary"&gt;</span>
+                                    <span class="text-cyan-600">&lt;i class="fas fa-plus me-2"&gt;&lt;/i&gt;Tambah Siswa Pertama</span>
+                                <span class="text-cyan-600">&lt;/a&gt;</span>
+                            <span class="text-cyan-600">&lt;/td&gt;</span>
+                        <span class="text-cyan-600">&lt;/tr&gt;</span>
+                    <span class="text-pink-500">&lt;?php</span>
+                    }
+                    <span class="text-pink-500">?&gt;</span>
+                <span class="text-cyan-600">&lt;/tbody&gt;</span>
+            <span class="text-cyan-600">&lt;/table&gt;</span>
+        <span class="text-cyan-600">&lt;/div&gt;</span>
+        
+    <span class="text-cyan-600">&lt;/div&gt;</span>
+    
+    <span class="text-gray-500">/* Bootstrap JS */</span>
+    <span class="text-cyan-600">&lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;</span>
+<span class="text-cyan-600">&lt;/body&gt;</span>
+<span class="text-cyan-600">&lt;/html&gt;</span></code></pre>
+                                    </div>
+                                    
+                                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                                        <div class="bg-white p-4 rounded-lg shadow-sm border border-blue-200">
+                                            <h5 class="font-bold text-blue-800 mb-3 flex items-center">
+                                                <i class="fas fa-code-branch text-blue-600 mr-2"></i>Clean Code Features
+                                            </h5>
+                                            <ul class="text-sm text-gray-700 space-y-2">
+                                                <li>• <strong>Function Documentation:</strong> PHPDoc comments</li>
+                                                <li>• <strong>Separation of Concerns:</strong> Logic & view separated</li>
+                                                <li>• <strong>Helper Functions:</strong> Reusable code components</li>
+                                                <li>• <strong>Consistent Naming:</strong> Clear variable/function names</li>
+                                                <li>• <strong>Data Formatting:</strong> Centralized in functions</li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <div class="bg-white p-4 rounded-lg shadow-sm border border-green-200">
+                                            <h5 class="font-bold text-green-800 mb-3 flex items-center">
+                                                <i class="fas fa-paint-brush text-green-600 mr-2"></i>UI/UX Improvements
+                                            </h5>
+                                            <ul class="text-sm text-gray-700 space-y-2">
+                                                <li>• <strong>Responsive Table:</strong> Mobile-friendly</li>
+                                                <li>• <strong>Status Badges:</strong> Visual indicators</li>
+                                                <li>• <strong>Hover Effects:</strong> Interactive elements</li>
+                                                <li>• <strong>Icons:</strong> Font Awesome integration</li>
+                                                <li>• <strong>Empty State:</strong> User-friendly no data message</li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <div class="bg-white p-4 rounded-lg shadow-sm border border-purple-200">
+                                            <h5 class="font-bold text-purple-800 mb-3 flex items-center">
+                                                <i class="fas fa-tachometer-alt text-purple-600 mr-2"></i>Performance Optimizations
+                                            </h5>
+                                            <ul class="text-sm text-gray-700 space-y-2">
+                                                <li>• <strong>SQL Optimization:</strong> Efficient queries</li>
+                                                <li>• <strong>Data Formatting:</strong> Database-level formatting</li>
+                                                <li>• <strong>Asset Loading:</strong> CDN resources</li>
+                                                <li>• <strong>Memory Management:</strong> Proper variable cleanup</li>
+                                                <li>• <strong>Caching Ready:</strong> Structured for easy caching</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gradient-to-r from-red-50 to-orange-50 p-5 rounded-xl border-l-4 border-warning">
+                                    <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                                        <i class="fas fa-exclamation-triangle text-warning mr-2"></i>Penting!
+                                    </h4>
+                                    <div class="space-y-2 text-gray-700">
+                                        <p>• <strong>Security:</strong> Gunakan prepared statements untuk mencegah SQL injection</p>
+                                        <p>• <strong>Validasi:</strong> Selalu validasi input dari user</p>
+                                        <p>• <strong>Error Handling:</strong> Gunakan try-catch untuk error handling</p>
+                                        <p>• <strong>Backup:</strong> Selalu backup database sebelum melakukan perubahan</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between mt-8 pt-6 border-t">
+                                <button onclick="prevSlide()" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-5 rounded-lg transition flex items-center">
+                                    <i class="fas fa-arrow-left mr-2"></i>Sebelumnya
+                                </button>
+                                <button onclick="nextSlide()" class="bg-primary hover:bg-blue-700 text-white font-medium py-2 px-5 rounded-lg transition flex items-center">
+                                    Berikutnya <i class="fas fa-arrow-right ml-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Slide 10: PHP Database Connection -->
+                        <div class="slide" id="slide10">
+                            <div class="flex items-center justify-between mb-6">
+                                <div>
+                                    <span class="inline-block bg-warning text-white px-4 py-1 rounded-full text-sm font-bold mb-2">LATIHAN LANJUTAN</span>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-secondary">PHP Database Connection</h2>
+                                </div>
+                                <div class="text-right">
+                                    <span class="bg-blue-100 text-primary px-3 py-1 rounded-lg font-medium">Slide 10/10</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-8">
+                                <h3 class="text-xl font-bold text-primary mb-4 flex items-center">
+                                    <i class="fas fa-database mr-2"></i>10.1 CRUD Operations Complete
+                                </h3>
+                                
+                                <div class="bg-gradient-to-r from-blue-50 to-cyan-50 p-5 rounded-xl mb-6">
+                                    <h4 class="font-bold text-gray-800 mb-3">Complete CRUD Implementation</h4>
+                                    
+                                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                        <div>
+                                            <h5 class="font-bold text-blue-800 mb-3">File: edit_siswa.php</h5>
+                                            <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-4">
+                                                <pre class="text-sm overflow-x-auto"><code><span class="pink-500">&lt;?php</span>
+<span class="blue-400">require_once</span> <span class="yellow-300">'koneksi.php'</span>;
+
+<span class="green-400">// Ambil ID dari URL</span>
+<span class="blue-400">$id</span> = <span class="blue-400">$_GET</span>[<span class="yellow-300">'id'</span>];
+
+<span class="green-400">// Query untuk mengambil data siswa</span>
+<span class="blue-400">$sql</span> = <span class="yellow-300">"SELECT * FROM siswa WHERE id = ?"</span>;
+<span class="blue-400">$stmt</span> = <span class="blue-400">mysqli_prepare</span>(<span class="blue-400">$koneksi</span>, <span class="blue-400">$sql</span>);
+<span class="blue-400">mysqli_stmt_bind_param</span>(<span class="blue-400">$stmt</span>, <span class="yellow-300">"i"</span>, <span class="blue-400">$id</span>);
+<span class="blue-400">mysqli_stmt_execute</span>(<span class="blue-400">$stmt</span>);
+<span class="blue-400">$result</span> = <span class="blue-400">mysqli_stmt_get_result</span>(<span class="blue-400">$stmt</span>);
+<span class="blue-400">$siswa</span> = <span class="blue-400">mysqli_fetch_assoc</span>(<span class="blue-400">$result</span>);
+
+<span class="green-400">// Proses update jika form disubmit</span>
+<span class="blue-400">if</span>(<span class="blue-400">isset</span>(<span class="blue-400">$_POST</span>[<span class="yellow-300">'update'</span>])) {
+    <span class="blue-400">$nama</span> = <span class="blue-400">htmlspecialchars</span>(<span class="blue-400">$_POST</span>[<span class="yellow-300">'nama'</span>]);
+    <span class="blue-400">$email</span> = <span class="blue-400">htmlspecialchars</span>(<span class="blue-400">$_POST</span>[<span class="yellow-300">'email'</span>]);
+    <span class="blue-400">$kelas</span> = <span class="blue-400">htmlspecialchars</span>(<span class="blue-400">$_POST</span>[<span class="yellow-300">'kelas'</span>]);
+    
+    <span class="blue-400">$update_sql</span> = <span class="yellow-300">"UPDATE siswa SET nama=?, email=?, 
+                         kelas=? WHERE id=?"</span>;
+    <span class="blue-400">$stmt</span> = <span class="blue-400">mysqli_prepare</span>(<span class="blue-400">$koneksi</span>, <span class="blue-400">$update_sql</span>);
+    <span class="blue-400">mysqli_stmt_bind_param</span>(<span class="blue-400">$stmt</span>, <span class="yellow-300">"sssi"</span>, 
+                             <span class="blue-400">$nama</span>, <span class="blue-400">$email</span>, 
+                             <span class="blue-400">$kelas</span>, <span class="blue-400">$id</span>);
+    <span class="blue-400">mysqli_stmt_execute</span>(<span class="blue-400">$stmt</span>);
+    
+    <span class="blue-400">header</span>(<span class="yellow-300">"Location: daftar_siswa.php"</span>);
+}
+<span class="pink-500">?&gt;</span>
+
+<span class="green-400">&lt;!-- Form Edit --&gt;</span>
+<span class="blue-400">&lt;form</span> <span class="yellow-400">method=</span><span class="yellow-300">"POST"</span><span class="blue-400">&gt;</span>
+    <span class="blue-400">&lt;input</span> <span class="yellow-400">type=</span><span class="yellow-300">"text"</span> <span class="yellow-400">name=</span><span class="yellow-300">"nama"</span> 
+           <span class="yellow-400">value=</span><span class="yellow-300">"&lt;?php echo $siswa['nama']; ?&gt;"</span><span class="blue-400">&gt;</span>
+    <span class="blue-400">&lt;input</span> <span class="yellow-400">type=</span><span class="yellow-300">"email"</span> <span class="yellow-400">name=</span><span class="yellow-300">"email"</span> 
+           <span class="yellow-400">value=</span><span class="yellow-300">"&lt;?php echo $siswa['email']; ?&gt;"</span><span class="blue-400">&gt;</span>
+    <span class="blue-400">&lt;button</span> <span class="yellow-400">type=</span><span class="yellow-300">"submit"</span> <span class="yellow-400">name=</span><span class="yellow-300">"update"</span><span class="blue-400">&gt;</span>Update<span class="blue-400">&lt;/button&gt;</span>
+<span class="blue-400">&lt;/form&gt;</span></code></pre>
+                                            </div>
+                                        </div>
+                                        
+                                        <div>
+                                            <h5 class="font-bold text-green-800 mb-3">File: hapus_siswa.php</h5>
+                                            <div class="bg-gray-900 text-gray-100 p-4 rounded-lg mb-4">
+                                                <pre class="text-sm overflow-x-auto"><code><span class="pink-500">&lt;?php</span>
+<span class="blue-400">require_once</span> <span class="yellow-300">'koneksi.php'</span>;
+
+<span class="green-400">// Ambil ID dari URL</span>
+<span class="blue-400">$id</span> = <span class="blue-400">$_GET</span>[<span class="yellow-300">'id'</span>];
+
+<span class="green-400">// Hapus data dari database</span>
+<span class="blue-400">$sql</span> = <span class="yellow-300">"DELETE FROM siswa WHERE id = ?"</span>;
+<span class="blue-400">$stmt</span> = <span class="blue-400">mysqli_prepare</span>(<span class="blue-400">$koneksi</span>, <span class="blue-400">$sql</span>);
+<span class="blue-400">mysqli_stmt_bind_param</span>(<span class="blue-400">$stmt</span>, <span class="yellow-300">"i"</span>, <span class="blue-400">$id</span>);
+
+<span class="blue-400">if</span>(<span class="blue-400">mysqli_stmt_execute</span>(<span class="blue-400">$stmt</span>)) {
+    <span class="green-400">// Redirect kembali ke daftar siswa</span>
+    <span class="blue-400">header</span>(<span class="yellow-300">"Location: daftar_siswa.php"</span>);
+    <span class="blue-400">exit</span>();
+} <span class="blue-400">else</span> {
+    <span class="blue-400">echo</span> <span class="yellow-300">"Gagal menghapus data"</span>;
+}
+<span class="pink-500">?&gt;</span></code></pre>
+                                            </div>
+                                            
+                                            <div class="bg-amber-50 p-3 rounded-lg border-l-4 border-amber-500">
+                                                <h5 class="font-bold text-amber-800 mb-2">
+                                                    <i class="fas fa-shield-alt text-amber-600 mr-2"></i>Security Notes
+                                                </h5>
+                                                <ul class="text-sm text-gray-700 space-y-1">
+                                                    <li>• Gunakan prepared statement untuk semua query</li>
+                                                    <li>• Validasi ID untuk prevent SQL injection</li>
+                                                    <li>• Gunakan <code class="bg-amber-100 px-1 rounded">header()</code> untuk redirect setelah operasi</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-xl font-bold text-primary mb-4 flex items-center">
+                                    <i class="fas fa-chart-line mr-2"></i>10.2 Advanced Features
+                                </h3>
+                                
+                                <div class="bg-gradient-to-r from-purple-50 to-pink-50 p-5 rounded-xl mb-6">
+                                    <h4 class="font-bold text-gray-800 mb-3">Fitur Tambahan untuk Production</h4>
+                                    
+                                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                        <div class="bg-white p-4 rounded-lg shadow-sm border border-purple-200">
+                                            <h5 class="font-bold text-purple-800 mb-2 flex items-center">
+                                                <i class="fas fa-search text-purple-600 mr-2"></i>Search & Filter
+                                            </h5>
+                                            <div class="text-sm text-gray-700">
+                                                <p class="mb-2">Pencarian data siswa:</p>
+                                                <code class="bg-purple-100 px-2 py-1 rounded text-xs">
+                                                    SELECT * FROM siswa WHERE nama LIKE ?
+                                                </code>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="bg-white p-4 rounded-lg shadow-sm border border-blue-200">
+                                            <h5 class="font-bold text-blue-800 mb-2 flex items-center">
+                                                <i class="fas fa-file-export text-blue-600 mr-2"></i>Export Data
+                                            </h5>
+                                            <div class="text-sm text-gray-700">
+                                                <p class="mb-2">Export ke Excel/CSV:</p>
+                                                <code class="bg-blue-100 px-2 py-1 rounded text-xs">
+                                                    header('Content-Type: text/csv')
+                                                </code>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="bg-white p-4 rounded-lg shadow-sm border border-green-200">
+                                            <h5 class="font-bold text-green-800 mb-2 flex items-center">
+                                                <i class="fas fa-images text-green-600 mr-2"></i>Upload Photo
+                                            </h5>
+                                            <div class="text-sm text-gray-700">
+                                                <p class="mb-2">Upload foto siswa:</p>
+                                                <code class="bg-green-100 px-2 py-1 rounded text-xs">
+                                                    move_uploaded_file()
+                                                </code>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="bg-white p-4 rounded-lg shadow-sm border border-red-200">
+                                            <h5 class="font-bold text-red-800 mb-2 flex items-center">
+                                                <i class="fas fa-lock text-red-600 mr-2"></i>Authentication
+                                            </h5>
+                                            <div class="text-sm text-gray-700">
+                                                <p class="mb-2">Login system:</p>
+                                                <code class="bg-red-100 px-2 py-1 rounded text-xs">
+                                                    $_SESSION['user_id']
+                                                </code>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="bg-white p-4 rounded-lg shadow-sm border border-yellow-200">
+                                            <h5 class="font-bold text-yellow-800 mb-2 flex items-center">
+                                                <i class="fas fa-chart-bar text-yellow-600 mr-2"></i>Dashboard
+                                            </h5>
+                                            <div class="text-sm text-gray-700">
+                                                <p class="mb-2">Statistik data:</p>
+                                                <code class="bg-yellow-100 px-2 py-1 rounded text-xs">
+                                                    COUNT(*) GROUP BY
+                                                </code>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="bg-white p-4 rounded-lg shadow-sm border border-indigo-200">
+                                            <h5 class="font-bold text-indigo-800 mb-2 flex items-center">
+                                                <i class="fas fa-mobile-alt text-indigo-600 mr-2"></i>API REST
+                                            </h5>
+                                            <div class="text-sm text-gray-700">
+                                                <p class="mb-2">JSON API endpoint:</p>
+                                                <code class="bg-indigo-100 px-2 py-1 rounded text-xs">
+                                                    header('Content-Type: application/json')
+                                                </code>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gradient-to-r from-red-50 to-orange-50 p-5 rounded-xl border-l-4 border-warning">
+                                    <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                                        <i class="fas fa-rocket text-warning mr-2"></i>Next Steps
+                                    </h4>
+                                    <div class="space-y-2 text-gray-700">
+                                        <p>🎯 <strong>Practice:</strong> Implementasikan semua contoh kode di XAMPP</p>
+                                        <p>🔧 <strong>Debug:</strong> Pelajari error handling dan debugging</p>
+                                        <p>📚 <strong>Learn:</strong> Framework PHP (Laravel, CodeIgniter)</p>
+                                        <p>🚀 <strong>Deploy:</strong> Upload project ke hosting</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between mt-8 pt-6 border-t">
+                                <button onclick="prevSlide()" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-5 rounded-lg transition flex items-center">
+                                    <i class="fas fa-arrow-left mr-2"></i>Sebelumnya
+                                </button>
                                 <button onclick="finishPresentation()" class="bg-accent hover:bg-green-600 text-white font-medium py-2 px-5 rounded-lg transition flex items-center">
                                     Selesai <i class="fas fa-check ml-2"></i>
                                 </button>
                             </div>
                         </div>
+                    </div>
+                </div>
                     </div>
                 </div>
                 
@@ -1353,7 +2440,9 @@
             { id: "slide5", title: "Struktur Kendali", number: "BAB V" },
             { id: "slide6", title: "Array dan Fungsi", number: "BAB VI" },
             { id: "slide7", title: "Form Processing", number: "BAB VII" },
-            { id: "slide8", title: "Proyek Akhir", number: "PROYEK" }
+            { id: "slide8", title: "Proyek Akhir", number: "PROYEK" },
+            { id: "slide9", title: "Form Processing + Database", number: "LATIHAN 1" },
+            { id: "slide10", title: "PHP Database Connection", number: "LATIHAN 2" }
         ];
         
         let currentSlide = 0;
