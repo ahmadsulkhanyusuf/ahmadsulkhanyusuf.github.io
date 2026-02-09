@@ -1,0 +1,12 @@
+﻿305:                                <button onclick="nextSlide()"
+463:                                <button onclick="nextSlide()"
+783:                                <button onclick="nextSlide()"
+926:                                <button onclick="nextSlide()"
+1073:                                <button onclick="nextSlide()"
+1257:                                <button onclick="nextSlide()"
+1506:                            <button onclick="nextSlide()"
+1695:                            <button onclick="nextSlide()"
+2369:                            <button onclick="nextSlide()"
+2613:                <button onclick="nextSlide()"
+2707:        function nextSlide() {
+2739:                nextSlide();
