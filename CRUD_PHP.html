@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial CRUD PHP & MySQL - Materi RPL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3498db',
+                        secondary: '#2c3e50',
+                        accent: '#2ecc71',
+                        warning: '#f39c12',
+                        danger: '#e74c3c',
+                        dark: '#1a1a2e',
+                        light: '#f8f9fa'
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #3498db;
+            border-radius: 4px;
+        }
+
+.slide {
+            display: none;
+        }
+
+        .slide.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .hide-footer {
+            display: none !important;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .code-block {
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        }
+
+        .crud-card {
+            transition: all 0.3s ease;
+        }
+
+        .crud-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+
+<body class="font-poppins bg-gradient-to-br from-slate-50 to-blue-100 min-h-screen p-4 md:p-8">
+
+    <!-- Header -->
+    <div class="max-w-6xl mx-auto mb-8">
+        <div
+            class="bg-gradient-to-r from-dark to-primary rounded-3xl shadow-2xl p-8 md:p-12 text-white relative overflow-hidden">
+            <div class="relative z-10">
+                <div class="flex items-center justify-center md:justify-start mb-4">
+                    <span
+                        class="bg-accent text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest mr-3">Web
+                        Development</span>
+                    <span
+                        class="bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Kelas
+                        10 RPL</span>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-4 text-center md:text-left">
+                    Membangun System <span class="text-accent italic">CRUD</span>
+                </h1>
+                <p class="text-lg md:text-2xl opacity-80 font-light text-center md:text-left">Create, Read, Update, &
+                    Delete dengan PHP dan MySQL</p>
+            </div>
+            <!-- Decorative circle -->
+            <div class="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 bg-accent/20 rounded-full blur-3xl"></div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-6xl mx-auto">
+        <div class="bg-white rounded-[2.5rem] shadow-2xl min-h-[650px] flex flex-col overflow-hidden">
+
+            <!-- Progress Stepper -->
+            <div class="bg-gray-50 border-b px-8 py-6 hidden md:block">
+                <div class="flex justify-between relative">
+                    <div class="absolute top-1/2 left-0 w-full h-0.5 bg-gray-200 -translate-y-1/2 z-0"></div>
+                    <div id="stepLine"
+                        class="absolute top-1/2 left-0 h-0.5 bg-primary -translate-y-1/2 z-0 transition-all duration-500"
+                        style="width: 0%"></div>
+
+                    <div class="relative z-10 flex flex-col items-center">
+                        <div
+                            class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold mb-2 shadow-lg">
+                            1</div>
+                        <span class="text-xs font-bold text-primary">Intro</span>
+                    </div>
+                    <div class="relative z-10 flex flex-col items-center">
+                        <div
+                            class="w-10 h-10 rounded-full bg-gray-200 text-gray-400 flex items-center justify-center font-bold mb-2 step-node">
+                            2</div>
+                        <span class="text-xs font-bold text-gray-400 step-label">Schema</span>
+                    </div>
+                    <div class="relative z-10 flex flex-col items-center">
+                        <div
+                            class="w-10 h-10 rounded-full bg-gray-200 text-gray-400 flex items-center justify-center font-bold mb-2 step-node">
+                            3</div>
+                        <span class="text-xs font-bold text-gray-400 step-label">Read</span>
+                    </div>
+                    <div class="relative z-10 flex flex-col items-center">
+                        <div
+                            class="w-10 h-10 rounded-full bg-gray-200 text-gray-400 flex items-center justify-center font-bold mb-2 step-node">
+                            4</div>
+                        <span class="text-xs font-bold text-gray-400 step-label">Create</span>
+                    </div>
+                    <div class="relative z-10 flex flex-col items-center">
+                        <div
+                            class="w-10 h-10 rounded-full bg-gray-200 text-gray-400 flex items-center justify-center font-bold mb-2 step-node">
+                            5</div>
+                        <span class="text-xs font-bold text-gray-400 step-label">Update</span>
+                    </div>
+                    <div class="relative z-10 flex flex-col items-center">
+                        <div
+                            class="w-10 h-10 rounded-full bg-gray-200 text-gray-400 flex items-center justify-center font-bold mb-2 step-node">
+                            6</div>
+                        <span class="text-xs font-bold text-gray-400 step-label">Delete</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-area p-8 md:p-14 flex-grow">
+
+                <!-- Slide 1: Pengenalan -->
+                <div class="slide active" id="slide1">
+                    <div class="flex flex-col md:flex-row items-center gap-12">
+                        <div class="flex-1 text-center md:text-left">
+                            <h2
+                                class="text-3xl font-bold text-secondary mb-6 flex items-center justify-center md:justify-start">
+                                <i class="fas fa-layer-group text-primary mr-4"></i>Apa itu CRUD?
+                            </h2>
+<p class="text-gray-600 text-lg leading-relaxed mb-8">
+                                CRUD adalah singkatan dari operasi dasar yang dilakukan pada data di database. Hampir
+                                semua aplikasi web di dunia menggunakan konsep ini.
+                            </p>
+                            
+                            <!-- Analogi CRUD untuk siswa -->
+                            <div class="bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-2xl mb-8 border-2 border-purple-200">
+                                <h4 class="font-bold text-purple-800 mb-3 flex items-center text-lg">
+                                    <i class="fas fa-magic mr-2"></i>CRUD dalam Kehidupan Sehari-hari
+                                </h4>
+                                <p class="text-purple-900 text-sm leading-relaxed mb-4">
+                                    Bayangkan kamu punya <span class="font-bold">buku telepon</span> untuk menyimpan nomor teman-teman:
+                                </p>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-purple-900">
+                                    <div>
+                                        <span class="font-bold text-danger">C - CREATE:</span> Menulis nomor teman baru
+                                    </div>
+                                    <div>
+                                        <span class="font-bold text-accent">R - READ:</span> Mencari nomor teman yang sudah ada
+                                    </div>
+                                    <div>
+                                        <span class="font-bold text-warning">U - UPDATE:</span> Mengubah nomor teman yang pindah
+                                    </div>
+                                    <div>
+                                        <span class="font-bold text-primary">D - DELETE:</span> Menghapus nomor teman yang tidak lagi dihubungi
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-blue-50 p-4 rounded-2xl border border-blue-100 flex items-start gap-3">
+                                    <span class="text-2xl font-black text-primary">C</span>
+                                    <div>
+                                        <h4 class="font-bold text-secondary text-sm">CREATE</h4>
+                                        <p class="text-xs text-gray-500 italic">Menambah data baru</p>
+                                    </div>
+                                </div>
+                                <div class="bg-green-50 p-4 rounded-2xl border border-green-100 flex items-start gap-3">
+                                    <span class="text-2xl font-black text-accent">R</span>
+                                    <div>
+                                        <h4 class="font-bold text-secondary text-sm">READ</h4>
+                                        <p class="text-xs text-gray-500 italic">Membaca/Menampilkan data</p>
+                                    </div>
+                                </div>
+                                <div
+                                    class="bg-yellow-50 p-4 rounded-2xl border border-yellow-100 flex items-start gap-3">
+                                    <span class="text-2xl font-black text-warning">U</span>
+                                    <div>
+                                        <h4 class="font-bold text-secondary text-sm">UPDATE</h4>
+                                        <p class="text-xs text-gray-500 italic">Mengubah data lama</p>
+                                    </div>
+                                </div>
+                                <div class="bg-red-50 p-4 rounded-2xl border border-red-100 flex items-start gap-3">
+                                    <span class="text-2xl font-black text-danger">D</span>
+                                    <div>
+                                        <h4 class="font-bold text-secondary text-sm">DELETE</h4>
+                                        <p class="text-xs text-gray-500 italic">Menghapus data</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-1 flex justify-center">
+                            <div class="relative">
+                                <div class="absolute inset-0 bg-primary blur-3xl opacity-20 -z-10 animate-pulse"></div>
+                                <i class="fas fa-cubes text-[120px] md:text-[200px] text-primary"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2: Schema Database -->
+                <div class="slide" id="slide2">
+                    <h2 class="text-2xl font-bold text-secondary mb-6 flex items-center">
+                        <i class="fas fa-table text-primary mr-3"></i>Langkah 1: Siapkan Tabel Database
+                    </h2>
+                    <p class="text-gray-600 mb-6 font-medium">Buatlah tabel bernama <span
+                            class="bg-gray-100 px-2 rounded text-danger">siswa</span> di database kamu:</p>
+                    <div class="code-block bg-gray-900 text-gray-100 p-6 rounded-3xl shadow-xl text-sm overflow-x-auto">
+                        <pre><code><span class="text-blue-400">CREATE TABLE</span> siswa (
+    id <span class="text-yellow-300">INT</span> <span class="text-pink-500">PRIMARY KEY</span> <span class="text-pink-500">AUTO_INCREMENT</span>,
+    nama <span class="text-yellow-300">VARCHAR</span>(<span class="text-accent">100</span>),
+    kelas <span class="text-yellow-300">VARCHAR</span>(<span class="text-accent">20</span>),
+    alamat <span class="text-yellow-300">TEXT</span>
+);</code></pre>
+                    </div>
+<div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="p-5 bg-blue-50 rounded-2xl border-2 border-dashed border-blue-200 hover:shadow-lg transition">
+                            <h4 class="font-bold text-blue-800 text-sm mb-2">ID (PK)</h4>
+                            <p class="text-xs text-blue-600">Sebagai pengenal unik dan dibuat otomatis.</p>
+                            <p class="text-xs text-blue-500 mt-2"><i class="fas fa-fingerprint mr-1"></i>Mirip NIS/nomor absen yang unik</p>
+                        </div>
+                        <div class="p-5 bg-green-50 rounded-2xl border-2 border-dashed border-green-200 hover:shadow-lg transition">
+                            <h4 class="font-bold text-green-800 text-sm mb-2">VARCHAR</h4>
+                            <p class="text-xs text-green-600">Untuk menyimpan teks pendek (Nama/Kelas).</p>
+                            <p class="text-xs text-green-500 mt-2"><i class="fas fa-id-card mr-1"></i>Seperti kolom di buku absen</p>
+                        </div>
+                        <div class="p-5 bg-orange-50 rounded-2xl border-2 border-dashed border-orange-200 hover:shadow-lg transition">
+                            <h4 class="font-bold text-orange-800 text-sm mb-2">TEXT</h4>
+                            <p class="text-xs text-orange-600">Untuk menyimpan teks yang panjang (Alamat).</p>
+                            <p class="text-xs text-orange-500 mt-2"><i class="fas fa-file-alt mr-1"></i>Seperti catatan panjang di jurnal</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3: Read - Menampilkan Data -->
+                <div class="slide" id="slide3">
+                    <h2 class="text-2xl font-bold text-secondary mb-6 flex items-center">
+                        <i class="fas fa-eye text-primary mr-3"></i>Langkah 2: Menampilkan Data (READ)
+                    </h2>
+                    <div class="flex flex-col lg:flex-row gap-8">
+                        <div class="flex-1">
+                            <p class="text-gray-700 mb-4 text-sm font-medium">Buat file <span
+                                    class="text-primary">index.php</span> untuk menampilkan data dalam tabel HTML:</p>
+                            <div
+                                class="code-block bg-gray-900 text-gray-100 p-5 rounded-3xl text-xs overflow-x-auto max-h-[350px] overflow-y-auto">
+                                <pre><code><span class="text-pink-500">&lt;?php</span>
+<span class="text-blue-400">include</span> <span class="text-yellow-300">'koneksi.php'</span>;
+<span class="text-blue-400">$query</span> = <span class="text-yellow-400">mysqli_query</span>(<span class="text-blue-400">$conn</span>, <span class="text-yellow-300">"SELECT * FROM siswa"</span>);
+<span class="text-pink-500">?&gt;</span>
+
+<span class="text-blue-400">&lt;table&gt;</span>
+    <span class="text-blue-400">&lt;tr&gt;</span>
+        <span class="text-blue-400">&lt;th&gt;</span>Nama<span class="text-blue-400">&lt;/th&gt;</span>
+        <span class="text-blue-400">&lt;th&gt;</span>Kelas<span class="text-blue-400">&lt;/th&gt;</span>
+        <span class="text-blue-400">&lt;th&gt;</span>Aksi<span class="text-blue-400">&lt;/th&gt;</span>
+    <span class="text-blue-400">&lt;/tr&gt;</span>
+    <span class="text-pink-500">&lt;?php</span> <span class="text-blue-400">while</span>(<span class="text-blue-400">$data</span> = <span class="text-yellow-400">mysqli_fetch_array</span>(<span class="text-blue-400">$query</span>)): <span class="text-pink-500">?&gt;</span>
+    <span class="text-blue-400">&lt;tr&gt;</span>
+        <span class="text-blue-400">&lt;td&gt;</span><span class="text-pink-500">&lt;?=</span> <span class="text-blue-400">$data</span>[<span class="text-yellow-300">'nama'</span>] <span class="text-pink-500">?&gt;</span><span class="text-blue-400">&lt;/td&gt;</span>
+        <span class="text-blue-400">&lt;td&gt;</span><span class="text-pink-500">&lt;?=</span> <span class="text-blue-400">$data</span>[<span class="text-yellow-300">'kelas'</span>] <span class="text-pink-500">?&gt;</span><span class="text-blue-400">&lt;/td&gt;</span>
+        <span class="text-blue-400">&lt;td&gt;</span>
+            <span class="text-blue-400">&lt;a</span> <span class="text-yellow-400">href=</span><span class="text-yellow-300">"edit.php?id=&lt;?= $data['id'] ?&gt;"</span><span class="text-blue-400">&gt;</span>Edit<span class="text-blue-400">&lt;/a&gt;</span>
+            <span class="text-blue-400">&lt;a</span> <span class="text-yellow-400">href=</span><span class="text-yellow-300">"hapus.php?id=&lt;?= $data['id'] ?&gt;"</span><span class="text-blue-400">&gt;</span>Hapus<span class="text-blue-400">&lt;/a&gt;</span>
+        <span class="text-blue-400">&lt;/td&gt;</span>
+    <span class="text-blue-400">&lt;/tr&gt;</span>
+    <span class="text-pink-500">&lt;?php</span> <span class="text-blue-400">endwhile</span>; <span class="text-pink-500">?&gt;</span>
+<span class="text-blue-400">&lt;/table&gt;</span></code></pre>
+                            </div>
+                        </div>
+                        <div class="lg:w-1/3">
+<div class="bg-indigo-50 p-6 rounded-[2rem] border border-indigo-100 flex flex-col h-full">
+                                <h4 class="font-bold text-indigo-800 mb-4 flex items-center">
+                                    <i class="fas fa-lightbulb mr-2"></i>Penjelasan Kode (Bahasa Gampang)
+                                </h4>
+                                <ul class="space-y-4 text-xs text-indigo-900 leading-relaxed">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-accent mr-2 mt-0.5"></i>
+                                        <div>
+                                            <strong>mysqli_query</strong> menjalankan perintah SELECT untuk mengambil
+                                            semua data siswa.
+                                            <p class="text-indigo-600 mt-1"><i class="fas fa-info-circle mr-1"></i>Mirip meminta tolong ke penjaga perpustakaan: "Cariin semua buku siswa ya!"</p>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-accent mr-2 mt-0.5"></i>
+                                        <div>
+                                            <strong>while loop</strong> digunakan untuk mengulang baris tabel selama
+                                            data masih ada.
+                                            <p class="text-indigo-600 mt-1"><i class="fas fa-info-circle mr-1"></i>Seperti membuka satu per satu halaman buku sampai habis</p>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-accent mr-2 mt-0.5"></i>
+                                        <div>
+                                            <strong>mysqli_fetch_array</strong> memecah hasil query menjadi array yang
+                                            mudah dibaca.
+                                            <p class="text-indigo-600 mt-1"><i class="fas fa-info-circle mr-1"></i>Mengubah data mentah menjadi informasi terstruktur seperti daftar isi</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 4: Create - Input Data -->
+                <div class="slide" id="slide4">
+                    <h2 class="text-2xl font-bold text-secondary mb-6 flex items-center">
+                        <i class="fas fa-plus-circle text-primary mr-3"></i>Langkah 3: Input Data (CREATE)
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="bg-white border rounded-3xl p-6 shadow-sm">
+                            <h4 class="font-bold text-secondary mb-4 text-sm border-b pb-2">Part A: Form (tambah.php)
+                            </h4>
+                            <div class="code-block bg-gray-100 text-gray-800 p-4 rounded-xl text-xs overflow-x-auto">
+                                <pre><code><span class="text-blue-600">&lt;form</span> <span class="text-red-600">action=</span><span class="text-blue-800">"proses_tambah.php"</span> <span class="text-red-600">method=</span><span class="text-blue-800">"POST"</span><span class="text-blue-600">&gt;</span>
+    Nama: <span class="text-blue-600">&lt;input</span> <span class="text-red-600">type=</span><span class="text-blue-800">"text"</span> <span class="text-red-600">name=</span><span class="text-blue-800">"nama"</span><span class="text-blue-600">&gt;</span>
+    Kelas: <span class="text-blue-600">&lt;input</span> <span class="text-red-600">type=</span><span class="text-blue-800">"text"</span> <span class="text-red-600">name=</span><span class="text-blue-800">"kelas"</span><span class="text-blue-600">&gt;</span>
+    Alamat: <span class="text-blue-600">&lt;textarea</span> <span class="text-red-600">name=</span><span class="text-blue-800">"alamat"</span><span class="text-blue-600">&gt;&lt;/textarea&gt;</span>
+    <span class="text-blue-600">&lt;button</span> <span class="text-red-600">type=</span><span class="text-blue-800">"submit"</span><span class="text-blue-600">&gt;</span>Simpan<span class="text-blue-600">&lt;/button&gt;</span>
+<span class="text-blue-600">&lt;/form&gt;</span></code></pre>
+                            </div>
+                        </div>
+                        <div class="bg-dark rounded-3xl p-6 shadow-xl">
+                            <h4 class="font-bold text-white mb-4 text-sm border-b border-white/10 pb-2">Part B: Proses
+                                (proses_tambah.php)</h4>
+                            <div class="code-block text-gray-300 text-xs overflow-x-auto">
+                                <pre><code><span class="text-pink-500">&lt;?php</span>
+<span class="text-blue-400">include</span> <span class="text-yellow-300">'koneksi.php'</span>;
+
+<span class="text-blue-400">$nama</span>   = <span class="text-blue-400">$_POST</span>[<span class="text-yellow-300">'nama'</span>];
+<span class="text-blue-400">$kelas</span>  = <span class="text-blue-400">$_POST</span>[<span class="text-yellow-300">'kelas'</span>];
+<span class="text-blue-400">$alamat</span> = <span class="text-blue-400">$_POST</span>[<span class="text-yellow-300">'alamat'</span>];
+
+<span class="text-blue-400">$sql</span> = <span class="text-yellow-300">"INSERT INTO siswa (nama, kelas, alamat) 
+        VALUES ('$nama', '$kelas', '$alamat')"</span>;
+
+<span class="text-blue-400">if</span> (<span class="text-yellow-400">mysqli_query</span>(<span class="text-blue-400">$conn</span>, <span class="text-blue-400">$sql</span>)) {
+    <span class="text-yellow-400">header</span>(<span class="text-yellow-300">"location:index.php"</span>);
+}
+<span class="text-pink-500">?&gt;</span></code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 5: Update - Mengubah Data -->
+                <div class="slide" id="slide5">
+                    <h2 class="text-2xl font-bold text-secondary mb-6 flex items-center">
+                        <i class="fas fa-edit text-primary mr-3"></i>Langkah 4: Mengubah Data (UPDATE)
+                    </h2>
+<div class="bg-amber-50 border-l-4 border-warning p-6 rounded-r-3xl mb-8">
+                        <p class="text-sm text-yellow-900 leading-relaxed font-medium">Operasi ini memiliki 2 tahap:
+                            <span class="text-danger">A. Mengambil data lama</span> untuk mengisi form, dan <span
+                                class="text-danger">B. Menyimpan perubahan</span> ke database.</p>
+                        
+                        <div class="mt-4 bg-yellow-100 p-4 rounded-xl">
+                            <p class="text-xs text-yellow-800"><i class="fas fa-exclamation-circle mr-1"></i>
+                            <strong>Analogi:</strong> Mirip mau edit nama di KTP. Pertama, fotokopi KTP dulu (ambil data lama), 
+                            baru setelah itu isi nama baru dan perbarui!</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-4">
+                            <h4 class="font-bold text-secondary text-sm flex items-center"><span
+                                    class="bg-secondary text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] mr-2">A</span>
+                                Ambil ID dari URL</h4>
+                            <div class="code-block bg-gray-900 text-gray-200 p-4 rounded-xl text-xs">
+                                <code class="text-blue-400">$id</code> = <span class="text-blue-400">$_GET</span>[<span
+                                    class="text-yellow-300">'id'</span>];<br>
+                                <code class="text-blue-400">$q</code> = <span
+                                    class="text-yellow-400">mysqli_query</span>(<span
+                                    class="text-blue-400">$conn</span>, <span class="text-yellow-300">"SELECT * FROM
+                                    siswa WHERE id='$id'"</span>);<br>
+                                <code class="text-blue-400">$data</code> = <span
+                                    class="text-yellow-400">mysqli_fetch_array</span>(<span
+                                    class="text-blue-400">$q</span>);
+                            </div>
+                            <p class="text-xs text-gray-500 italic">Data ini kemudian diletakkan di atribut <code
+                                    class="bg-gray-100 px-1 rounded">value=""</code> pada input form.</p>
+                        </div>
+                        <div class="space-y-4">
+                            <h4 class="font-bold text-secondary text-sm flex items-center"><span
+                                    class="bg-secondary text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] mr-2">B</span>
+                                SQL Update</h4>
+                            <div class="code-block bg-gray-900 text-gray-200 p-4 rounded-xl text-xs">
+                                <pre><code><span class="text-blue-400">$sql</span> = <span class="text-yellow-300">"UPDATE siswa SET 
+        nama='$nama', 
+        kelas='$kelas' 
+        WHERE id='$id'"</span>;</code></pre>
+                            </div>
+<p class="text-xs text-red-500 font-bold">PENTING: Jangan lupakan perintah WHERE, atau semua
+                                data akan berubah!</p>
+                            <p class="text-xs text-gray-500 mt-2"><i class="fas fa-info-circle mr-1"></i>WHERE itu seperti menunjuk: "Ganti data ini ya, yang lain jangan!"</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 6: Delete - Menghapus Data -->
+                <div class="slide" id="slide6">
+                    <div class="text-center py-6">
+                        <div class="inline-block bg-red-100 text-danger p-6 rounded-full mb-8">
+                            <i class="fas fa-trash-alt text-6xl"></i>
+                        </div>
+                        <h2 class="text-3xl font-bold text-secondary mb-4">Langkah 5: Menghapus Data (DELETE)</h2>
+<p class="text-gray-600 max-w-2xl mx-auto mb-10 italic">"Ini adalah operasi termudah namun
+                            paling berbahaya."</p>
+                        <p class="text-sm text-gray-500 mb-8">Kenapa berbahaya? Karena data yang dihapus tidak bisa dikembalikan lagi!</p>
+
+                        <div
+                            class="max-w-2xl mx-auto bg-gray-900 text-gray-200 p-8 rounded-[3rem] shadow-2xl text-left relative overflow-hidden">
+                            <div
+                                class="absolute top-0 right-10 bg-danger text-white text-[10px] px-3 py-1 font-bold rounded-b-lg">
+                                hapus.php</div>
+                            <pre class="text-sm"><code><span class="text-pink-500">&lt;?php</span>
+<span class="text-blue-400">include</span> <span class="text-yellow-300">'koneksi.php'</span>;
+
+<span class="text-blue-400">$id</span> = <span class="text-blue-400">$_GET</span>[<span class="text-yellow-300">'id'</span>];
+
+<span class="text-yellow-400">mysqli_query</span>(<span class="text-blue-400">$conn</span>, <span class="text-yellow-300">"DELETE FROM siswa WHERE id='$id'"</span>);
+
+<span class="text-yellow-400">header</span>(<span class="text-yellow-300">"location:index.php"</span>);
+<span class="text-pink-500">?&gt;</span></code></pre>
+</div>
+
+                        <div class="mt-10 flex justify-center gap-6">
+                            <div class="flex items-center text-xs font-bold text-danger">
+                                <i class="fas fa-exclamation-triangle mr-2"></i>RESIKO TINGGI
+                            </div>
+                            <div class="flex items-center text-xs font-bold text-primary">
+                                <i class="fas fa-lock mr-2"></i>BUTUH VALIDASI
+                            </div>
+                        </div>
+                        
+                        <!-- Tambahan tips keamanan untuk delete -->
+                        <div class="mt-8 bg-red-50 p-6 rounded-2xl border-2 border-red-200 max-w-2xl mx-auto">
+                            <h4 class="font-bold text-red-800 mb-3 flex items-center">
+                                <i class="fas fa-shield-alt mr-2"></i>Tips Keamanan Delete
+                            </h4>
+                            <div class="text-xs text-red-900 space-y-2">
+                                <p><i class="fas fa-warning mr-1"></i><strong>SELANJUTNYA:</strong> Selalu tambahkan konfirmasi sebelum hapus data!</p>
+                                <p><i class="fas fa-code mr-1"></i><strong>CONTOH:</strong> Gunakan JavaScript confirm() atau form konfirmasi</p>
+                                <p><i class="fas fa-database mr-1"></i><strong>PRO TIP:</strong> Di dunia nyata, data tidak dihapus permanen tapi di-"soft delete"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 10: Selesai -->
+                <div class="slide" id="slide7">
+                    <div class="text-center py-10">
+                        <div
+                            class="w-24 h-24 bg-accent/20 text-accent rounded-full flex items-center justify-center mx-auto mb-8 animate-bounce">
+                            <i class="fas fa-check text-4xl"></i>
+                        </div>
+                        <h2 class="text-4xl font-extrabold text-secondary mb-4">Mission Accomplished!</h2>
+                        <p class="text-gray-500 text-lg mb-12 max-w-2xl mx-auto leading-relaxed">
+                            Kamu telah mempelajari seluruh siklus <span class="font-bold text-primary">CRUD</span>. Ini
+                            adalah modal utama kamu sebagai seorang web developer.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <a href="DasarPHP.html"
+                                class="px-10 py-4 bg-secondary text-white rounded-2xl font-bold hover:bg-dark transition shadow-lg">
+                                <i class="fas fa-home mr-2"></i>Kembali ke Materi Dasar
+</a>
+                            <button onclick="currentSlide = 0; updateUI(); window.scrollTo({ top: 100, behavior: 'smooth' });"
+                                class="px-10 py-4 border-2 border-primary text-primary rounded-2xl font-bold hover:bg-primary hover:text-white transition">
+                                <i class="fas fa-redo mr-2"></i>Ulangi Tutorial
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+<!-- Footer Controls -->
+            <div id="footerControls"
+                class="bg-gray-50 border-t p-8 px-10 md:px-14 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-4 order-2 md:order-1">
+                    <button id="prevBtn" onclick="prevSlide()"
+                        class="group flex items-center bg-white border px-6 py-3 rounded-2xl hover:bg-gray-100 transition disabled:opacity-30 disabled:pointer-events-none">
+                        <i class="fas fa-arrow-left text-gray-400 group-hover:text-primary transition mr-3"></i>
+                        <span class="text-sm font-bold text-gray-600">PREV</span>
+                    </button>
+                    <button id="nextBtn" onclick="nextSlide()"
+                        class="group flex items-center bg-primary px-10 py-3 rounded-2xl hover:bg-blue-700 transition shadow-lg shadow-primary/20">
+                        <span id="nextText" class="text-sm font-bold text-white">NEXT</span>
+                        <i class="fas fa-arrow-right text-white/70 group-hover:text-white transition ml-3"></i>
+                    </button>
+                </div>
+
+                <div class="flex flex-col items-center md:items-end order-1 md:order-2">
+                    <span id="pageCounter" class="text-2xl font-black text-gray-200 tracking-tighter">01 / 07</span>
+                    <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Mastering CRUD
+                        Operations</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const stepLine = document.getElementById('stepLine');
+        const stepNodes = document.querySelectorAll('.step-node');
+        const stepLabels = document.querySelectorAll('.step-label');
+        const pageCounter = document.getElementById('pageCounter');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const nextText = document.getElementById('nextText');
+
+        function updateUI() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active');
+                if (index === currentSlide) slide.classList.add('active');
+            });
+
+            // Update Progress Bar (for 6 steps on top)
+            const nodeProgress = Math.min(currentSlide, 5);
+            stepLine.style.width = `${(nodeProgress / 5) * 100}%`;
+
+            stepNodes.forEach((node, index) => {
+                if (index <= nodeProgress) {
+                    node.classList.add('bg-primary', 'text-white');
+                    node.classList.remove('bg-gray-200', 'text-gray-400');
+                    stepLabels[index].classList.add('text-primary');
+                    stepLabels[index].classList.remove('text-gray-400');
+                } else {
+                    node.classList.remove('bg-primary', 'text-white');
+                    node.classList.add('bg-gray-200', 'text-gray-400');
+                    stepLabels[index].classList.remove('text-primary');
+                    stepLabels[index].classList.add('text-gray-400');
+                }
+            });
+
+            // Update Page Counter
+            pageCounter.textContent = `${String(currentSlide + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+
+            // Update Buttons
+            prevBtn.disabled = currentSlide === 0;
+            if (currentSlide === slides.length - 1) {
+                nextText.textContent = "FINISH";
+            } else {
+                nextText.textContent = "NEXT";
+            }
+            
+            // Sembunyikan footer controls di slide terakhir
+            const footerControls = document.getElementById('footerControls');
+            if (footerControls) {
+                const shouldHide = currentSlide === slides.length - 1;
+                if (shouldHide) {
+                    footerControls.classList.add('hide-footer');
+                } else {
+                    footerControls.classList.remove('hide-footer');
+                }
+                console.log('Slide:', currentSlide, 'Hide footer:', shouldHide);
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                updateUI();
+                window.scrollTo({ top: 100, behavior: 'smooth' });
+            } else {
+                window.location.href = '#'; // Redirect or complete
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateUI();
+                window.scrollTo({ top: 100, behavior: 'smooth' });
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        // Initialize
+        updateUI();
+    </script>
+</body>
+
+</html>

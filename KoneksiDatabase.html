@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koneksi PHP ke MySQL - Materi RPL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3498db',
+                        secondary: '#2c3e50',
+                        accent: '#2ecc71',
+                        warning: '#e74c3c',
+                        dark: '#1a1a2e',
+                        light: '#f8f9fa'
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #3498db;
+            border-radius: 4px;
+        }
+
+.slide {
+            display: none;
+        }
+
+        .slide.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .hide-footer {
+            display: none !important;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .code-block {
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+        }
+    </style>
+</head>
+
+<body class="font-poppins bg-gradient-to-br from-blue-50 to-indigo-50 min-h-screen p-4 md:p-8">
+
+    <!-- Header -->
+    <div class="max-w-5xl mx-auto mb-8">
+        <div
+            class="bg-gradient-to-r from-secondary to-primary rounded-2xl shadow-2xl p-6 md:p-10 text-white relative overflow-hidden">
+            <div class="relative z-10 text-center">
+                <h1 class="text-3xl md:text-5xl font-bold mb-3 flex items-center justify-center">
+                    <i class="fas fa-plug mr-4"></i>Koneksi PHP ke MySQL
+                </h1>
+                <p class="text-lg md:text-xl opacity-90 font-light">Langkah demi langkah menyambungkan PHP dengan
+                    Database secara runut</p>
+            </div>
+            <!-- Decorative Elements -->
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-5xl mx-auto">
+        <div class="bg-white rounded-3xl shadow-xl min-h-[500px] flex flex-col">
+
+            <!-- Navigation Progress -->
+            <div class="px-8 pt-8 flex items-center justify-between space-x-2">
+                <div class="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
+                    <div id="progressBar" class="h-full bg-primary transition-all duration-500" style="width: 10%">
+                    </div>
+                </div>
+                <span id="pageCounter" class="text-sm font-bold text-gray-400 min-w-[60px] text-right">01 / 10</span>
+            </div>
+
+            <div class="content-area p-8 md:p-12 flex-grow">
+
+                <!-- Slide 1 -->
+                <div class="slide active" id="slide1">
+                    <div class="text-center py-10">
+                        <div class="inline-block bg-blue-100 text-primary p-4 rounded-3xl mb-6">
+                            <i class="fas fa-database text-6xl"></i>
+</div>
+                        <h2 class="text-3xl font-bold text-secondary mb-4">Kenapa Harus Connect?</h2>
+                        <p class="text-gray-600 max-w-2xl mx-auto leading-relaxed text-lg mb-6">
+                            Agar aplikasi web kita bisa menyimpan data secara permanen, kita harus menghubungkan skrip
+                            PHP dengan sistem database seperti <span class="text-primary font-bold">MySQL</span>.
+                        </p>
+                        
+                        <!-- Analogi untuk siswa -->
+                        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-2xl mb-8 border-2 border-blue-200">
+                            <h4 class="font-bold text-blue-800 mb-3 flex items-center text-lg">
+                                <i class="fas fa-lightbulb mr-2"></i>Analogi Mudahnya
+                            </h4>
+                            <p class="text-blue-900 text-sm leading-relaxed mb-4">
+                                Bayangkan <span class="font-bold">PHP itu seperti otak</span> yang bisa berpikir dan membuat keputusan,
+                                sedangkan <span class="font-bold">MySQL itu seperti lemari arsip</span> yang menyimpan semua data penting.
+                            </p>
+                            <p class="text-blue-900 text-sm leading-relaxed">
+                                <span class="font-bold text-danger">Koneksi = Jembatan</span> antara otak dan lemari arsip. 
+                                Tanpa jembatan ini, otak tidak bisa menyimpan atau mengambil data dari lemari!
+                            </p>
+                        </div>
+<div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="bg-light p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition">
+                                <i class="fas fa-save text-primary text-2xl mb-3"></i>
+                                <h3 class="font-bold text-secondary">Simpan Data</h3>
+                                <p class="text-sm text-gray-500">Registrasi, transaksi, postingan.</p>
+                                <p class="text-xs text-gray-400 mt-2"><i class="fas fa-book mr-1"></i>Mirip mencatat di buku agenda</p>
+                            </div>
+                            <div class="bg-light p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition">
+                                <i class="fas fa-search text-primary text-2xl mb-3"></i>
+                                <h3 class="font-bold text-secondary">Ambil Data</h3>
+                                <p class="text-sm text-gray-500">Mencari dan menampilkan informasi.</p>
+                                <p class="text-xs text-gray-400 mt-2"><i class="fas fa-book mr-1"></i>Seperti membuka halaman tertentu</p>
+                            </div>
+                            <div class="bg-light p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition">
+                                <i class="fas fa-edit text-primary text-2xl mb-3"></i>
+                                <h3 class="font-bold text-secondary">Update Data</h3>
+                                <p class="text-sm text-gray-500">Mengubah profil atau stok barang.</p>
+                                <p class="text-xs text-gray-400 mt-2"><i class="fas fa-book mr-1"></i>Lupa mencoret-coret di buku</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="slide" id="slide2">
+                    <div class="flex items-center mb-6">
+                        <span
+                            class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center font-bold mr-4">1</span>
+                        <h2 class="text-2xl font-bold text-secondary text-primary">Persiapan Lingkungan</h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <p class="text-gray-700 mb-6">Pastikan <span class="font-bold">XAMPP</span> (atau paket
+                                serupa) sudah terinstall dan berjalan di komputer kamu.</p>
+                            <div class="bg-amber-50 border-l-4 border-amber-400 p-5 rounded-r-xl">
+                                <h4 class="font-bold text-amber-800 mb-2 flex items-center">
+                                    <i class="fas fa-exclamation-triangle mr-2"></i>Aktifkan Service
+                                </h4>
+                                <ul class="space-y-2 text-amber-900 text-sm">
+                                    <li><i class="fas fa-check-circle mr-2"></i> Klik tombol <span
+                                            class="font-bold">Start</span> pada Apache.</li>
+                                    <li><i class="fas fa-check-circle mr-2"></i> Klik tombol <span
+                                            class="font-bold">Start</span> pada MySQL.</li>
+                                </ul>
+                            </div>
+                        </div>
+<div class="bg-gray-100 rounded-2xl p-4 flex flex-col items-center justify-center">
+                            <img src="https://www.apachefriends.org/images/xampp-logo.svg" alt="XAMPP Logo"
+                                class="h-24 opacity-80 mb-3">
+                            <p class="text-xs text-gray-500 text-center">XAMPP = Apache + MySQL + PHP + Perl<br>(Semudah instal game PC!)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="slide" id="slide3">
+                    <div class="flex items-center mb-6">
+                        <span
+                            class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center font-bold mr-4">2</span>
+                        <h2 class="text-2xl font-bold text-secondary text-primary">Buat Database di phpMyAdmin</h2>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100">
+                            <ol class="space-y-4 text-gray-700">
+                                <li class="flex items-start">
+                                    <div class="bg-white p-2 rounded-lg shadow-sm mr-3">a</div>
+                                    <p>Buka browser dan ketik <code
+                                            class="bg-gray-200 px-2 py-1 rounded">http://localhost/phpmyadmin</code></p>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="bg-white p-2 rounded-lg shadow-sm mr-3">b</div>
+                                    <p>Pilih menu <span class="font-bold text-primary">"New"</span> atau <span
+                                            class="font-bold text-primary">"Baru"</span> di sisi kiri.</p>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="bg-white p-2 rounded-lg shadow-sm mr-3">c</div>
+                                    <p>Masukkan nama database, contoh: <code
+                                            class="bg-gray-200 px-2 py-1 rounded">db_belajar</code></p>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="bg-white p-2 rounded-lg shadow-sm mr-3">d</div>
+                                    <p>Klik tombol <span class="font-bold">Create</span> atau <span
+                                            class="font-bold">Buat</span>.</p>
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-xl text-green-700 text-sm flex items-center">
+                            <i class="fas fa-info-circle mr-3 text-lg"></i>
+                            <p>Ingat nama database ini, karena kita akan menggunakannya di kode PHP nanti.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 4 -->
+                <div class="slide" id="slide4">
+                    <div class="flex items-center mb-6">
+                        <span
+                            class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center font-bold mr-4">3</span>
+                        <h2 class="text-2xl font-bold text-secondary text-primary">Menyiapkan Variabel Koneksi</h2>
+                    </div>
+                    <p class="text-gray-700 mb-6 font-medium">Buat file baru bernama <span
+                            class="text-primary">koneksi.php</span> dan definisikan parameter berikut:</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-light p-4 rounded-xl border border-gray-200">
+                            <code class="text-secondary font-bold">$servername = "localhost";</code>
+                            <p class="text-xs text-gray-500 mt-1">Alamat server (biasanya localhost)</p>
+                        </div>
+                        <div class="bg-light p-4 rounded-xl border border-gray-200">
+                            <code class="text-secondary font-bold">$username = "root";</code>
+                            <p class="text-xs text-gray-500 mt-1">Default user XAMPP adalah root</p>
+                        </div>
+                        <div class="bg-light p-4 rounded-xl border border-gray-200">
+                            <code class="text-secondary font-bold">$password = "";</code>
+                            <p class="text-xs text-gray-500 mt-1">Default password XAMPP adalah kosong</p>
+                        </div>
+                        <div class="bg-light p-4 rounded-xl border border-gray-200">
+                            <code class="text-secondary font-bold">$dbname = "db_belajar";</code>
+                            <p class="text-xs text-gray-500 mt-1">Nama database yang dibuat tadi</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 5 -->
+                <div class="slide" id="slide5">
+                    <div class="flex items-center mb-6">
+                        <span
+                            class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center font-bold mr-4">4</span>
+                        <h2 class="text-2xl font-bold text-secondary text-primary">Gunakan mysqli_connect()</h2>
+                    </div>
+                    <p class="text-gray-700 mb-4">Inilah fungsi utama untuk "berjabat tangan" dengan MySQL.</p>
+                    <div
+                        class="code-block bg-gray-900 text-gray-200 p-6 rounded-2xl shadow-inner text-sm overflow-x-auto">
+                        <pre><code><span class="text-pink-500">&lt;?php</span>
+<span class="text-green-500">// Membuat koneksi</span>
+<span class="text-blue-400">$conn</span> = <span class="text-yellow-400">mysqli_connect</span>(<span class="text-blue-400">$servername</span>, <span class="text-blue-400">$username</span>, <span class="text-blue-400">$password</span>, <span class="text-blue-400">$dbname</span>);
+<span class="text-pink-500">?&gt;</span></code></pre>
+                    </div>
+                    <div class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-400 text-blue-800 text-sm">
+                        Hasil dari fungsi ini akan disimpan dalam variabel <code
+                            class="bg-white px-1 rounded">$conn</code>. Variabel inilah yang akan kita panggil setiap
+                        kali ingin berinteraksi dengan database.
+                    </div>
+                </div>
+
+                <!-- Slide 6 -->
+                <div class="slide" id="slide6">
+                    <div class="flex items-center mb-6">
+                        <span
+                            class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center font-bold mr-4">5</span>
+                        <h2 class="text-2xl font-bold text-secondary text-primary">Cek Status Koneksi</h2>
+                    </div>
+                    <p class="text-gray-700 mb-4">Kita harus memastikan koneksi berhasil sebelum lanjut eksekusi
+                        perintah lain.</p>
+                    <div
+                        class="code-block bg-gray-900 text-gray-200 p-6 rounded-2xl shadow-inner text-sm overflow-x-auto">
+                        <pre><code><span class="text-pink-500">&lt;?php</span>
+<span class="text-green-500">// Mengecek koneksi</span>
+<span class="text-blue-400">if</span> (!<span class="text-blue-400">$conn</span>) {
+    <span class="text-blue-400">die</span>(<span class="text-yellow-300">"Koneksi Gagal: "</span> . <span class="text-yellow-400">mysqli_connect_error</span>());
+}
+<span class="text-blue-400">echo</span> <span class="text-yellow-300">"Koneksi Berhasil!"</span>;
+<span class="text-pink-500">?&gt;</span></code></pre>
+                    </div>
+<div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-red-50 p-4 rounded-xl border border-red-100 flex items-start">
+                            <i class="fas fa-times-circle text-red-500 mr-3 mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-red-800 text-sm">Fungsi die()</h4>
+                                <p class="text-xs text-red-600">Menghentikan program seketika dan menampilkan pesan
+                                    error.</p>
+                                <p class="text-xs text-red-500 mt-2"><i class="fas fa-info-circle mr-1"></i>Ini seperti memutuskan untuk tidak lanjut jika gagal!</p>
+                            </div>
+                        </div>
+                        <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-100 flex items-start">
+                            <i class="fas fa-bug text-indigo-500 mr-3 mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-indigo-800 text-sm">mysqli_connect_error()</h4>
+                                <p class="text-xs text-indigo-600">Menyediakan alasan detail kenapa koneksi gagal.</p>
+                                <p class="text-xs text-indigo-500 mt-2"><i class="fas fa-info-circle mr-1"></i> seperti GPS error yang menunjukkan lokasi masalah!</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tambahan penjelasan untuk pemahaman -->
+                    <div class="mt-8 bg-green-50 p-6 rounded-2xl border border-green-200">
+                        <h4 class="font-bold text-green-800 mb-4 flex items-center text-lg">
+                            <i class="fas fa-graduation-cap mr-2"></i>Penting untuk Dipahami!
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-green-900">
+                            <div>
+                                <p class="mb-3"><span class="font-bold text-danger">Kenapa harus cek koneksi?</span></p>
+                                <p class="text-xs leading-relaxed">Sama seperti mengecek apakah kabel printer tercolok sebelum mencetak. 
+                                   Jika tidak tercolok, pasti gagal!</p>
+                            </div>
+                            <div>
+                                <p class="mb-3"><span class="font-bold text-primary">Variabel $conn itu apa?</span></p>
+                                <p class="text-xs leading-relaxed">Ini seperti remote control TV. Setelah konek, 
+                                   remote ($conn) inilah yang kita gunakan untuk mengontrol database.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 7 -->
+                <div class="slide" id="slide7">
+                    <div class="flex items-center mb-6">
+                        <span
+                            class="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center font-bold mr-4">6</span>
+                        <h2 class="text-2xl font-bold text-secondary text-primary">Menutup Koneksi</h2>
+                    </div>
+                    <div class="flex flex-col md:flex-row gap-8">
+                        <div class="flex-1">
+<p class="text-gray-700 mb-6 italic">"Jangan biarkan pintu terbuka jika sudah tidak
+                                digunakan."</p>
+                            <p class="text-sm text-gray-500">Maksudnya: Setelah selesai ngobrol dengan database, tutup baik-baik koneksinya.</p>
+                            <div class="code-block bg-gray-900 text-gray-200 p-6 rounded-2xl mb-4 text-sm">
+                                <code class="text-yellow-400">mysqli_close</code>(<span
+                                    class="text-blue-400">$conn</span>);
+                            </div>
+                            <p class="text-gray-500 text-sm">Menutup koneksi akan mengosongkan sumber daya server yang
+                                digunakan.</p>
+                        </div>
+                        <div class="flex-1 bg-yellow-50 p-6 rounded-2xl border-2 border-dashed border-yellow-200">
+                            <h4 class="font-bold text-yellow-800 mb-3 flex items-center">
+                                <i class="fas fa-lightbulb mr-2"></i>Wawasan Penting
+                            </h4>
+                            <p class="text-sm text-yellow-900 leading-relaxed">
+                                Secara teknis, PHP akan menutup koneksi secara otomatis saat script selesai dijalankan.
+                                Namun, menutupnya secara manual adalah praktik coding yang <span
+                                    class="font-bold italic">bersih (clean code)</span> dan sangat direkomendasikan
+                                untuk aplikasi besar.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 8 -->
+                <div class="slide" id="slide8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold text-secondary">Contoh Kode Utuh</h2>
+                        <span
+                            class="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold font-mono">koneksi.php</span>
+                    </div>
+                    <div
+                        class="code-block bg-gray-900 text-gray-200 p-6 rounded-2xl shadow-xl text-xs md:text-sm overflow-x-auto max-h-[400px] overflow-y-auto">
+                        <pre><code><span class="text-pink-500">&lt;?php</span>
+<span class="text-blue-400">$host</span>     = <span class="text-yellow-300">"localhost"</span>;
+<span class="text-blue-400">$user</span>     = <span class="text-yellow-300">"root"</span>;
+<span class="text-blue-400">$password</span> = <span class="text-yellow-300">""</span>;
+<span class="text-blue-400">$db</span>       = <span class="text-yellow-300">"db_belajar"</span>;
+
+<span class="text-green-500">// Membuat koneksi</span>
+<span class="text-blue-400">$conn</span> = <span class="text-yellow-400">mysqli_connect</span>(<span class="text-blue-400">$host</span>, <span class="text-blue-400">$user</span>, <span class="text-blue-400">$password</span>, <span class="text-blue-400">$db</span>);
+
+<span class="text-green-500">// Cek Koneksi</span>
+<span class="text-blue-400">if</span> (!<span class="text-blue-400">$conn</span>) {
+    <span class="text-blue-400">die</span>(<span class="text-yellow-300">"Koneksi Gagal: "</span> . <span class="text-yellow-400">mysqli_connect_error</span>());
+}
+
+<span class="text-blue-400">echo</span> <span class="text-yellow-300">"Koneksi Berhasil!"</span>;
+<span class="text-pink-500">?&gt;</span></code></pre>
+                    </div>
+                </div>
+
+<!-- Slide 9 -->
+                <div class="slide" id="slide9">
+                    <h2 class="text-2xl font-bold text-secondary mb-6">Error yang Sering Muncul</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div
+                            class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 group hover:border-red-200 transition">
+                            <h3 class="font-bold text-red-600 mb-2">"Access denied for user..."</h3>
+                            <p class="text-gray-600 text-sm">Biasanya karena username salah (default: root) atau
+                                password yang tidak sesuai.</p>
+                            <p class="text-xs text-gray-500 mt-2"><i class="fas fa-key mr-1"></i>Mirip pakai kunci yang salah</p>
+                        </div>
+                        <div
+                            class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 group hover:border-amber-200 transition">
+                            <h3 class="font-bold text-amber-600 mb-2">"Unknown database..."</h3>
+                            <p class="text-gray-600 text-sm">Nama database di PHP tidak sama dengan yang ada di
+                                phpMyAdmin. Typo!</p>
+                            <p class="text-xs text-gray-500 mt-2"><i class="fas fa-spell-check mr-1"></i>Periksa huruf besar/kecil</p>
+                        </div>
+                        <div
+                            class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 group hover:border-blue-200 transition">
+                            <h3 class="font-bold text-blue-600 mb-2">"Could not connect to server"</h3>
+                            <p class="text-gray-600 text-sm">MySQL di XAMPP belum di-Start. Cek Control Panel XAMPP.</p>
+                            <p class="text-xs text-gray-500 mt-2"><i class="fas fa-power-off mr-1"></i Lampu belum dinyalakan</p>
+                        </div>
+                        <div
+                            class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 group hover:border-purple-200 transition">
+                            <h3 class="font-bold text-purple-600 mb-2">"Fatal error: Uncaught Error..."</h3>
+                            <p class="text-gray-600 text-sm">Ada kesalahan penulisan (syntax) di file PHP kamu. Cek
+                                titik koma.</p>
+                            <p class="text-xs text-gray-500 mt-2"><i class="fas fa-code mr-1"></i>Kode tidak sesuai aturan</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Tips tambahan -->
+                    <div class="mt-8 bg-gradient-to-r from-green-50 to-emerald-50 p-6 rounded-2xl border border-green-200">
+                        <h4 class="font-bold text-green-800 mb-4 flex items-center">
+                            <i class="fas fa-tools mr-2"></i>Tips Debugging untuk Pemula
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-green-900">
+                            <div>
+                                <p class="font-bold mb-2"><i class="fas fa-search mr-1"></i>Cek Langkah demi Langkah:</p>
+                                <ol class="space-y-1 ml-4">
+                                    <li>1. Apache & MySQL sudah Start?</li>
+                                    <li>2. Database sudah dibuat?</li>
+                                    <li>3. Nama database sama persis?</li>
+                                    <li>4. Username & password benar?</li>
+                                </ol>
+                            </div>
+                            <div>
+                                <p class="font-bold mb-2"><i class="fas fa-magic mr-1"></i>Trik Cepat:</p>
+                                <ul class="space-y-1 ml-4">
+                                    <li>• Copy-paste nama database dari phpMyAdmin</li>
+                                    <li>• Gunakan default: root & password kosong</li>
+                                    <li>• Cek baris yang error di kode</li>
+                                    <li>• Restart XAMPP jika masih error</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 10 -->
+                <div class="slide" id="slide10">
+                    <div class="text-center py-10">
+                        <div class="inline-block bg-accent/20 text-accent p-4 rounded-full mb-6">
+                            <i class="fas fa-rocket text-5xl"></i>
+                        </div>
+                        <h2 class="text-3xl font-bold text-secondary mb-4">Ayo Mulai Ngoding!</h2>
+                        <p class="text-gray-600 max-w-xl mx-auto leading-relaxed mb-10">
+                            Selamat! Kamu sudah menguasai fondasi utama dalam membangun web dinamis. Tahap selanjutnya
+                            adalah memasukkan data (INSERT) ke database.
+                        </p>
+                        <div class="flex flex-col md:flex-row justify-center items-center gap-4">
+                            <a href="DasarPHP.html"
+                                class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-8 rounded-2xl transition">
+                                <i class="fas fa-arrow-left mr-2"></i>Materi Dasar
+                            </a>
+                            <a href="CRUD_PHP.html"
+                                class="bg-accent hover:bg-green-600 text-white font-bold py-3 px-8 rounded-2xl shadow-lg transition">
+                                <i class="fas fa-layer-group mr-2"></i>Lanjut ke CRUD
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+<!-- Footer Controls -->
+            <div id="footerControls" class="bg-gray-50 border-t p-6 rounded-b-3xl flex justify-between items-center px-8 md:px-12">
+                <button id="prevBtn" onclick="prevSlide()"
+                    class="flex items-center text-gray-400 hover:text-secondary font-bold transition disabled:opacity-30">
+                    <i class="fas fa-chevron-left mr-3"></i>SEBELUMNYA
+                </button>
+                <div class="hidden md:flex space-x-2">
+                    <!-- Dots will be added here -->
+                </div>
+                <button id="nextBtn" onclick="nextSlide()"
+                    class="flex items-center text-primary hover:text-blue-700 font-bold transition">
+                    BERIKUTNYA<i class="fas fa-chevron-right ml-3"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Background Decoration -->
+    <div class="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none opacity-40">
+        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+            <pattern id="pattern" width="80" height="80" patternUnits="userSpaceOnUse">
+                <circle cx="2" cy="2" r="1.5" fill="#3498db" />
+            </pattern>
+            <rect width="100%" height="100%" fill="url(#pattern)" />
+        </svg>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const progressBar = document.getElementById('progressBar');
+        const pageCounter = document.getElementById('pageCounter');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        function updateUI() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active');
+                if (index === currentSlide) slide.classList.add('active');
+            });
+
+            const progress = ((currentSlide + 1) / slides.length) * 100;
+            progressBar.style.width = `${progress}%`;
+            pageCounter.textContent = `${String(currentSlide + 1).padStart(2, '0')} / ${slides.length}`;
+
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.innerHTML = currentSlide === slides.length - 1 ? 'SELESAI<i class="fas fa-check ml-3"></i>' : 'BERIKUTNYA<i class="fas fa-chevron-right ml-3"></i>';
+            
+            // Sembunyikan footer controls di slide terakhir
+            const footerControls = document.getElementById('footerControls');
+            if (footerControls) {
+                const shouldHide = currentSlide === slides.length - 1;
+                if (shouldHide) {
+                    footerControls.classList.add('hide-footer');
+                } else {
+                    footerControls.classList.remove('hide-footer');
+                }
+                console.log('Slide:', currentSlide, 'Hide footer:', shouldHide);
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                updateUI();
+            } else {
+                alert('Materi selesai! Semangat belajar ngoding!');
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateUI();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        // Initial setup
+        updateUI();
+    </script>
+</body>
+
+</html>
