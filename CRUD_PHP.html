@@ -44,7 +44,7 @@
             border-radius: 4px;
         }
 
-.slide {
+        .slide {
             display: none;
         }
 
@@ -170,31 +170,36 @@
                                 class="text-3xl font-bold text-secondary mb-6 flex items-center justify-center md:justify-start">
                                 <i class="fas fa-layer-group text-primary mr-4"></i>Apa itu CRUD?
                             </h2>
-<p class="text-gray-600 text-lg leading-relaxed mb-8">
+                            <p class="text-gray-600 text-lg leading-relaxed mb-8">
                                 CRUD adalah singkatan dari operasi dasar yang dilakukan pada data di database. Hampir
                                 semua aplikasi web di dunia menggunakan konsep ini.
                             </p>
-                            
+
                             <!-- Analogi CRUD untuk siswa -->
-                            <div class="bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-2xl mb-8 border-2 border-purple-200">
+                            <div
+                                class="bg-gradient-to-r from-purple-50 to-pink-50 p-6 rounded-2xl mb-8 border-2 border-purple-200">
                                 <h4 class="font-bold text-purple-800 mb-3 flex items-center text-lg">
                                     <i class="fas fa-magic mr-2"></i>CRUD dalam Kehidupan Sehari-hari
                                 </h4>
                                 <p class="text-purple-900 text-sm leading-relaxed mb-4">
-                                    Bayangkan kamu punya <span class="font-bold">buku telepon</span> untuk menyimpan nomor teman-teman:
+                                    Bayangkan kamu punya <span class="font-bold">buku telepon</span> untuk menyimpan
+                                    nomor teman-teman:
                                 </p>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-purple-900">
                                     <div>
                                         <span class="font-bold text-danger">C - CREATE:</span> Menulis nomor teman baru
                                     </div>
                                     <div>
-                                        <span class="font-bold text-accent">R - READ:</span> Mencari nomor teman yang sudah ada
+                                        <span class="font-bold text-accent">R - READ:</span> Mencari nomor teman yang
+                                        sudah ada
                                     </div>
                                     <div>
-                                        <span class="font-bold text-warning">U - UPDATE:</span> Mengubah nomor teman yang pindah
+                                        <span class="font-bold text-warning">U - UPDATE:</span> Mengubah nomor teman
+                                        yang pindah
                                     </div>
                                     <div>
-                                        <span class="font-bold text-primary">D - DELETE:</span> Menghapus nomor teman yang tidak lagi dihubungi
+                                        <span class="font-bold text-primary">D - DELETE:</span> Menghapus nomor teman
+                                        yang tidak lagi dihubungi
                                     </div>
                                 </div>
                             </div>
@@ -254,21 +259,27 @@
     alamat <span class="text-yellow-300">TEXT</span>
 );</code></pre>
                     </div>
-<div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="p-5 bg-blue-50 rounded-2xl border-2 border-dashed border-blue-200 hover:shadow-lg transition">
+                    <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div
+                            class="p-5 bg-blue-50 rounded-2xl border-2 border-dashed border-blue-200 hover:shadow-lg transition">
                             <h4 class="font-bold text-blue-800 text-sm mb-2">ID (PK)</h4>
                             <p class="text-xs text-blue-600">Sebagai pengenal unik dan dibuat otomatis.</p>
-                            <p class="text-xs text-blue-500 mt-2"><i class="fas fa-fingerprint mr-1"></i>Mirip NIS/nomor absen yang unik</p>
+                            <p class="text-xs text-blue-500 mt-2"><i class="fas fa-fingerprint mr-1"></i>Mirip NIS/nomor
+                                absen yang unik</p>
                         </div>
-                        <div class="p-5 bg-green-50 rounded-2xl border-2 border-dashed border-green-200 hover:shadow-lg transition">
+                        <div
+                            class="p-5 bg-green-50 rounded-2xl border-2 border-dashed border-green-200 hover:shadow-lg transition">
                             <h4 class="font-bold text-green-800 text-sm mb-2">VARCHAR</h4>
                             <p class="text-xs text-green-600">Untuk menyimpan teks pendek (Nama/Kelas).</p>
-                            <p class="text-xs text-green-500 mt-2"><i class="fas fa-id-card mr-1"></i>Seperti kolom di buku absen</p>
+                            <p class="text-xs text-green-500 mt-2"><i class="fas fa-id-card mr-1"></i>Seperti kolom di
+                                buku absen</p>
                         </div>
-                        <div class="p-5 bg-orange-50 rounded-2xl border-2 border-dashed border-orange-200 hover:shadow-lg transition">
+                        <div
+                            class="p-5 bg-orange-50 rounded-2xl border-2 border-dashed border-orange-200 hover:shadow-lg transition">
                             <h4 class="font-bold text-orange-800 text-sm mb-2">TEXT</h4>
                             <p class="text-xs text-orange-600">Untuk menyimpan teks yang panjang (Alamat).</p>
-                            <p class="text-xs text-orange-500 mt-2"><i class="fas fa-file-alt mr-1"></i>Seperti catatan panjang di jurnal</p>
+                            <p class="text-xs text-orange-500 mt-2"><i class="fas fa-file-alt mr-1"></i>Seperti catatan
+                                panjang di jurnal</p>
                         </div>
                     </div>
                 </div>
@@ -289,6 +300,12 @@
 <span class="text-blue-400">$query</span> = <span class="text-yellow-400">mysqli_query</span>(<span class="text-blue-400">$conn</span>, <span class="text-yellow-300">"SELECT * FROM siswa"</span>);
 <span class="text-pink-500">?&gt;</span>
 
+<span class="text-gray-500">&lt;!-- Tombol Tambah Data --&gt;</span>
+<span class="text-blue-400">&lt;a</span> <span class="text-yellow-400">href=</span><span class="text-yellow-300">"tambah.php"</span> 
+   <span class="text-yellow-400">class=</span><span class="text-yellow-300">"btn-tambah"</span><span class="text-blue-400">&gt;</span>
+    <span class="text-blue-400">&lt;i</span> <span class="text-yellow-400">class=</span><span class="text-yellow-300">"fas fa-plus"</span><span class="text-blue-400">&gt;&lt;/i&gt;</span> Tambah Data
+<span class="text-blue-400">&lt;/a&gt;</span>
+
 <span class="text-blue-400">&lt;table&gt;</span>
     <span class="text-blue-400">&lt;tr&gt;</span>
         <span class="text-blue-400">&lt;th&gt;</span>Nama<span class="text-blue-400">&lt;/th&gt;</span>
@@ -307,9 +324,20 @@
     <span class="text-pink-500">&lt;?php</span> <span class="text-blue-400">endwhile</span>; <span class="text-pink-500">?&gt;</span>
 <span class="text-blue-400">&lt;/table&gt;</span></code></pre>
                             </div>
+                            <div class="mt-4 bg-green-50 p-4 rounded-xl border-2 border-green-200">
+                                <h5 class="font-bold text-green-800 mb-2 text-xs flex items-center">
+                                    <i class="fas fa-plus-circle mr-2"></i>Tombol Tambah Data
+                                </h5>
+                                <p class="text-xs text-green-700">
+                                    <i class="fas fa-info-circle mr-1"></i>
+                                    Tombol ini mengarah ke halaman <code
+                                        class="bg-green-100 px-1 rounded">tambah.php</code> untuk menambahkan data baru.
+                                    Letakkan tombol ini di atas tabel agar mudah ditemukan user.
+                                </p>
+                            </div>
                         </div>
                         <div class="lg:w-1/3">
-<div class="bg-indigo-50 p-6 rounded-[2rem] border border-indigo-100 flex flex-col h-full">
+                            <div class="bg-indigo-50 p-6 rounded-[2rem] border border-indigo-100 flex flex-col h-full">
                                 <h4 class="font-bold text-indigo-800 mb-4 flex items-center">
                                     <i class="fas fa-lightbulb mr-2"></i>Penjelasan Kode (Bahasa Gampang)
                                 </h4>
@@ -319,7 +347,9 @@
                                         <div>
                                             <strong>mysqli_query</strong> menjalankan perintah SELECT untuk mengambil
                                             semua data siswa.
-                                            <p class="text-indigo-600 mt-1"><i class="fas fa-info-circle mr-1"></i>Mirip meminta tolong ke penjaga perpustakaan: "Cariin semua buku siswa ya!"</p>
+                                            <p class="text-indigo-600 mt-1"><i class="fas fa-info-circle mr-1"></i>Mirip
+                                                meminta tolong ke penjaga perpustakaan: "Cariin semua buku siswa ya!"
+                                            </p>
                                         </div>
                                     </li>
                                     <li class="flex items-start">
@@ -327,7 +357,9 @@
                                         <div>
                                             <strong>while loop</strong> digunakan untuk mengulang baris tabel selama
                                             data masih ada.
-                                            <p class="text-indigo-600 mt-1"><i class="fas fa-info-circle mr-1"></i>Seperti membuka satu per satu halaman buku sampai habis</p>
+                                            <p class="text-indigo-600 mt-1"><i
+                                                    class="fas fa-info-circle mr-1"></i>Seperti membuka satu per satu
+                                                halaman buku sampai habis</p>
                                         </div>
                                     </li>
                                     <li class="flex items-start">
@@ -335,7 +367,9 @@
                                         <div>
                                             <strong>mysqli_fetch_array</strong> memecah hasil query menjadi array yang
                                             mudah dibaca.
-                                            <p class="text-indigo-600 mt-1"><i class="fas fa-info-circle mr-1"></i>Mengubah data mentah menjadi informasi terstruktur seperti daftar isi</p>
+                                            <p class="text-indigo-600 mt-1"><i
+                                                    class="fas fa-info-circle mr-1"></i>Mengubah data mentah menjadi
+                                                informasi terstruktur seperti daftar isi</p>
                                         </div>
                                     </li>
                                 </ul>
@@ -347,39 +381,160 @@
                 <!-- Slide 4: Create - Input Data -->
                 <div class="slide" id="slide4">
                     <h2 class="text-2xl font-bold text-secondary mb-6 flex items-center">
-                        <i class="fas fa-plus-circle text-primary mr-3"></i>Langkah 3: Input Data (CREATE)
+                        <i class="fas fa-plus-circle text-primary mr-3"></i>Langkah 3: Menambah Data (CREATE)
                     </h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div class="bg-white border rounded-3xl p-6 shadow-sm">
-                            <h4 class="font-bold text-secondary mb-4 text-sm border-b pb-2">Part A: Form (tambah.php)
-                            </h4>
+
+                    <!-- Penjelasan Analogi -->
+                    <div class="bg-gradient-to-r from-blue-50 to-cyan-50 p-6 rounded-2xl mb-8 border-2 border-blue-200">
+                        <p class="text-sm text-blue-900 leading-relaxed font-medium">
+                            <i class="fas fa-magic mr-2"></i>
+                            <strong>Analogi:</strong> Seperti <span class="font-bold">mengisi formulir pendaftaran
+                                sekolah</span> dan menyerahkannya ke TU untuk disimpan dalam arsip.
+                        </p>
+                    </div>
+
+                    <!-- Langkah-langkah Detail -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-white border-2 border-blue-200 rounded-2xl p-5">
+                            <div class="flex items-center mb-3">
+                                <span
+                                    class="bg-blue-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold mr-3">1</span>
+                                <h4 class="font-bold text-blue-800 text-sm">Buat Form HTML</h4>
+                            </div>
+                            <p class="text-xs text-gray-600">Siapkan halaman <code
+                                    class="bg-gray-100 px-1 rounded">tambah.php</code> dengan form input</p>
+                        </div>
+                        <div class="bg-white border-2 border-green-200 rounded-2xl p-5">
+                            <div class="flex items-center mb-3">
+                                <span
+                                    class="bg-green-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold mr-3">2</span>
+                                <h4 class="font-bold text-green-800 text-sm">Tangkap Data POST</h4>
+                            </div>
+                            <p class="text-xs text-gray-600">Ambil data dari form menggunakan <code
+                                    class="bg-gray-100 px-1 rounded">$_POST</code></p>
+                        </div>
+                        <div class="bg-white border-2 border-purple-200 rounded-2xl p-5">
+                            <div class="flex items-center mb-3">
+                                <span
+                                    class="bg-purple-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold mr-3">3</span>
+                                <h4 class="font-bold text-purple-800 text-sm">Simpan ke Database</h4>
+                            </div>
+                            <p class="text-xs text-gray-600">Gunakan query <code
+                                    class="bg-gray-100 px-1 rounded">INSERT INTO</code> untuk menyimpan</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- Bagian STEP 1: Form HTML -->
+                        <div class="bg-white border rounded-3xl p-6 shadow-lg">
+                            <div class="flex items-center mb-4">
+                                <span class="bg-blue-500 text-white px-3 py-1 rounded-lg text-xs font-bold mr-2">STEP
+                                    1</span>
+                                <h4 class="font-bold text-secondary text-sm">Form Input (tambah.php)</h4>
+                            </div>
                             <div class="code-block bg-gray-100 text-gray-800 p-4 rounded-xl text-xs overflow-x-auto">
-                                <pre><code><span class="text-blue-600">&lt;form</span> <span class="text-red-600">action=</span><span class="text-blue-800">"proses_tambah.php"</span> <span class="text-red-600">method=</span><span class="text-blue-800">"POST"</span><span class="text-blue-600">&gt;</span>
-    Nama: <span class="text-blue-600">&lt;input</span> <span class="text-red-600">type=</span><span class="text-blue-800">"text"</span> <span class="text-red-600">name=</span><span class="text-blue-800">"nama"</span><span class="text-blue-600">&gt;</span>
-    Kelas: <span class="text-blue-600">&lt;input</span> <span class="text-red-600">type=</span><span class="text-blue-800">"text"</span> <span class="text-red-600">name=</span><span class="text-blue-800">"kelas"</span><span class="text-blue-600">&gt;</span>
-    Alamat: <span class="text-blue-600">&lt;textarea</span> <span class="text-red-600">name=</span><span class="text-blue-800">"alamat"</span><span class="text-blue-600">&gt;&lt;/textarea&gt;</span>
-    <span class="text-blue-600">&lt;button</span> <span class="text-red-600">type=</span><span class="text-blue-800">"submit"</span><span class="text-blue-600">&gt;</span>Simpan<span class="text-blue-600">&lt;/button&gt;</span>
-<span class="text-blue-600">&lt;/form&gt;</span></code></pre>
+                                <pre><code><span class="text-pink-500">&lt;!DOCTYPE html&gt;</span>
+<span class="text-blue-600">&lt;html&gt;</span>
+<span class="text-blue-600">&lt;head&gt;</span>
+    <span class="text-blue-600">&lt;title&gt;</span>Tambah Data Siswa<span class="text-blue-600">&lt;/title&gt;</span>
+<span class="text-blue-600">&lt;/head&gt;</span>
+<span class="text-blue-600">&lt;body&gt;</span>
+    <span class="text-blue-600">&lt;h2&gt;</span>Form Tambah Siswa<span class="text-blue-600">&lt;/h2&gt;</span>
+    
+    <span class="text-blue-600">&lt;form</span> <span class="text-red-600">action=</span><span class="text-blue-800">"proses_tambah.php"</span> 
+          <span class="text-red-600">method=</span><span class="text-blue-800">"POST"</span><span class="text-blue-600">&gt;</span>
+        
+        <span class="text-blue-600">&lt;label&gt;</span>Nama Siswa:<span class="text-blue-600">&lt;/label&gt;</span>
+        <span class="text-blue-600">&lt;input</span> <span class="text-red-600">type=</span><span class="text-blue-800">"text"</span> 
+               <span class="text-red-600">name=</span><span class="text-blue-800">"nama"</span> 
+               <span class="text-red-600">required</span><span class="text-blue-600">&gt;</span>
+        <span class="text-blue-600">&lt;br&gt;&lt;br&gt;</span>
+        
+        <span class="text-blue-600">&lt;label&gt;</span>Kelas:<span class="text-blue-600">&lt;/label&gt;</span>
+        <span class="text-blue-600">&lt;input</span> <span class="text-red-600">type=</span><span class="text-blue-800">"text"</span> 
+               <span class="text-red-600">name=</span><span class="text-blue-800">"kelas"</span> 
+               <span class="text-red-600">required</span><span class="text-blue-600">&gt;</span>
+        <span class="text-blue-600">&lt;br&gt;&lt;br&gt;</span>
+        
+        <span class="text-blue-600">&lt;label&gt;</span>Alamat:<span class="text-blue-600">&lt;/label&gt;</span>
+        <span class="text-blue-600">&lt;textarea</span> <span class="text-red-600">name=</span><span class="text-blue-800">"alamat"</span> 
+                  <span class="text-red-600">required</span><span class="text-blue-600">&gt;&lt;/textarea&gt;</span>
+        <span class="text-blue-600">&lt;br&gt;&lt;br&gt;</span>
+        
+        <span class="text-blue-600">&lt;button</span> <span class="text-red-600">type=</span><span class="text-blue-800">"submit"</span><span class="text-blue-600">&gt;</span>Simpan<span class="text-blue-600">&lt;/button&gt;</span>
+    <span class="text-blue-600">&lt;/form&gt;</span>
+<span class="text-blue-600">&lt;/body&gt;</span>
+<span class="text-blue-600">&lt;/html&gt;</span></code></pre>
+                            </div>
+                            <div class="mt-4 bg-blue-50 p-3 rounded-xl">
+                                <p class="text-xs text-blue-800">
+                                    <i class="fas fa-info-circle mr-1"></i>
+                                    <strong>Penting:</strong> Atribut <code class="bg-white px-1 rounded">name</code>
+                                    harus sama dengan nama kolom di database!
+                                </p>
                             </div>
                         </div>
-                        <div class="bg-dark rounded-3xl p-6 shadow-xl">
-                            <h4 class="font-bold text-white mb-4 text-sm border-b border-white/10 pb-2">Part B: Proses
-                                (proses_tambah.php)</h4>
-                            <div class="code-block text-gray-300 text-xs overflow-x-auto">
-                                <pre><code><span class="text-pink-500">&lt;?php</span>
+
+                        <!-- Bagian STEP 2 & 3: Proses PHP -->
+                        <div class="space-y-6">
+                            <div class="bg-dark rounded-3xl p-6 shadow-xl">
+                                <div class="flex items-center mb-4">
+                                    <span
+                                        class="bg-green-500 text-white px-3 py-1 rounded-lg text-xs font-bold mr-2">STEP
+                                        2 & 3</span>
+                                    <h4 class="font-bold text-white text-sm">Proses Simpan (proses_tambah.php)</h4>
+                                </div>
+                                <div
+                                    class="code-block text-gray-300 text-xs overflow-x-auto max-h-[320px] overflow-y-auto">
+                                    <pre><code><span class="text-pink-500">&lt;?php</span>
+<span class="text-gray-500">// STEP 2: Hubungkan ke database</span>
 <span class="text-blue-400">include</span> <span class="text-yellow-300">'koneksi.php'</span>;
 
+<span class="text-gray-500">// STEP 2: Tangkap data dari form</span>
 <span class="text-blue-400">$nama</span>   = <span class="text-blue-400">$_POST</span>[<span class="text-yellow-300">'nama'</span>];
 <span class="text-blue-400">$kelas</span>  = <span class="text-blue-400">$_POST</span>[<span class="text-yellow-300">'kelas'</span>];
 <span class="text-blue-400">$alamat</span> = <span class="text-blue-400">$_POST</span>[<span class="text-yellow-300">'alamat'</span>];
 
-<span class="text-blue-400">$sql</span> = <span class="text-yellow-300">"INSERT INTO siswa (nama, kelas, alamat) 
-        VALUES ('$nama', '$kelas', '$alamat')"</span>;
+<span class="text-gray-500">// STEP 3: Buat query INSERT</span>
+<span class="text-blue-400">$sql</span> = <span class="text-yellow-300">"INSERT INTO siswa 
+        (nama, kelas, alamat) 
+        VALUES 
+        ('$nama', '$kelas', '$alamat')"</span>;
 
+<span class="text-gray-500">// Jalankan query dan cek keberhasilan</span>
 <span class="text-blue-400">if</span> (<span class="text-yellow-400">mysqli_query</span>(<span class="text-blue-400">$conn</span>, <span class="text-blue-400">$sql</span>)) {
+    <span class="text-gray-500">// Berhasil, kembali ke halaman index</span>
     <span class="text-yellow-400">header</span>(<span class="text-yellow-300">"location:index.php"</span>);
+} <span class="text-blue-400">else</span> {
+    <span class="text-gray-500">// Gagal, tampilkan error</span>
+    <span class="text-blue-400">echo</span> <span class="text-yellow-300">"Error: "</span> . <span class="text-yellow-400">mysqli_error</span>(<span class="text-blue-400">$conn</span>);
 }
 <span class="text-pink-500">?&gt;</span></code></pre>
+                                </div>
+                            </div>
+
+                            <!-- Tips Keamanan -->
+                            <div
+                                class="bg-gradient-to-br from-red-50 to-orange-50 p-5 rounded-2xl border-2 border-red-200">
+                                <h4 class="font-bold text-red-800 mb-3 flex items-center text-sm">
+                                    <i class="fas fa-shield-alt mr-2"></i>Tips Keamanan
+                                </h4>
+                                <ul class="text-xs text-red-900 space-y-2">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-red-600 mr-2 mt-0.5"></i>
+                                        <div>Selalu validasi input sebelum simpan ke database</div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-red-600 mr-2 mt-0.5"></i>
+                                        <div>Gunakan <code
+                                                class="bg-red-100 px-1 rounded">mysqli_real_escape_string()</code> untuk
+                                            mencegah SQL Injection</div>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check text-red-600 mr-2 mt-0.5"></i>
+                                        <div>Atau lebih baik gunakan <strong>Prepared Statement</strong></div>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -390,98 +545,385 @@
                     <h2 class="text-2xl font-bold text-secondary mb-6 flex items-center">
                         <i class="fas fa-edit text-primary mr-3"></i>Langkah 4: Mengubah Data (UPDATE)
                     </h2>
-<div class="bg-amber-50 border-l-4 border-warning p-6 rounded-r-3xl mb-8">
-                        <p class="text-sm text-yellow-900 leading-relaxed font-medium">Operasi ini memiliki 2 tahap:
-                            <span class="text-danger">A. Mengambil data lama</span> untuk mengisi form, dan <span
-                                class="text-danger">B. Menyimpan perubahan</span> ke database.</p>
-                        
+
+                    <!-- Analogi dan Penjelasan -->
+                    <div class="bg-amber-50 border-l-4 border-warning p-6 rounded-r-3xl mb-8">
+                        <p class="text-sm text-yellow-900 leading-relaxed font-medium">
+                            <i class="fas fa-magic mr-2"></i>
+                            <strong>Konsep UPDATE:</strong> Operasi ini memiliki <span class="font-bold text-danger">2
+                                TAHAP</span>
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                            <div class="bg-yellow-100 p-4 rounded-xl">
+                                <p class="text-xs text-yellow-800 font-bold mb-2">
+                                    <span class="bg-yellow-500 text-white px-2 py-1 rounded-full text-[10px] mr-1">TAHAP
+                                        1</span>
+                                    Ambil Data Lama
+                                </p>
+                                <p class="text-xs text-yellow-700">Mengisi form dengan data yang sudah ada</p>
+                            </div>
+                            <div class="bg-orange-100 p-4 rounded-xl">
+                                <p class="text-xs text-orange-800 font-bold mb-2">
+                                    <span class="bg-orange-500 text-white px-2 py-1 rounded-full text-[10px] mr-1">TAHAP
+                                        2</span>
+                                    Simpan Perubahan
+                                </p>
+                                <p class="text-xs text-orange-700">Update data baru ke database</p>
+                            </div>
+                        </div>
                         <div class="mt-4 bg-yellow-100 p-4 rounded-xl">
-                            <p class="text-xs text-yellow-800"><i class="fas fa-exclamation-circle mr-1"></i>
-                            <strong>Analogi:</strong> Mirip mau edit nama di KTP. Pertama, fotokopi KTP dulu (ambil data lama), 
-                            baru setelah itu isi nama baru dan perbarui!</p>
+                            <p class="text-xs text-yellow-800">
+                                <i class="fas fa-exclamation-circle mr-1"></i>
+                                <strong>Analogi:</strong> Seperti mengedit profil di Instagram. Pertama kamu lihat
+                                profil lama, baru edit dan klik "Simpan Perubahan"
+                            </p>
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div class="space-y-4">
-                            <h4 class="font-bold text-secondary text-sm flex items-center"><span
-                                    class="bg-secondary text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] mr-2">A</span>
-                                Ambil ID dari URL</h4>
-                            <div class="code-block bg-gray-900 text-gray-200 p-4 rounded-xl text-xs">
-                                <code class="text-blue-400">$id</code> = <span class="text-blue-400">$_GET</span>[<span
-                                    class="text-yellow-300">'id'</span>];<br>
-                                <code class="text-blue-400">$q</code> = <span
-                                    class="text-yellow-400">mysqli_query</span>(<span
-                                    class="text-blue-400">$conn</span>, <span class="text-yellow-300">"SELECT * FROM
-                                    siswa WHERE id='$id'"</span>);<br>
-                                <code class="text-blue-400">$data</code> = <span
-                                    class="text-yellow-400">mysqli_fetch_array</span>(<span
-                                    class="text-blue-400">$q</span>);
+
+                    <!-- Langkah-langkah ringkas -->
+                    <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 mb-8">
+                        <div class="bg-white border-2 border-blue-200 rounded-2xl p-4">
+                            <div class="flex items-center mb-2">
+                                <span
+                                    class="bg-blue-500 text-white w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold mr-2">1</span>
+                                <h5 class="font-bold text-blue-800 text-xs">Tangkap ID</h5>
                             </div>
-                            <p class="text-xs text-gray-500 italic">Data ini kemudian diletakkan di atribut <code
-                                    class="bg-gray-100 px-1 rounded">value=""</code> pada input form.</p>
+                            <p class="text-[10px] text-gray-600">Ambil ID dari URL menggunakan <code
+                                    class="bg-gray-100 px-1 rounded">$_GET</code></p>
                         </div>
-                        <div class="space-y-4">
-                            <h4 class="font-bold text-secondary text-sm flex items-center"><span
-                                    class="bg-secondary text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] mr-2">B</span>
-                                SQL Update</h4>
-                            <div class="code-block bg-gray-900 text-gray-200 p-4 rounded-xl text-xs">
-                                <pre><code><span class="text-blue-400">$sql</span> = <span class="text-yellow-300">"UPDATE siswa SET 
-        nama='$nama', 
-        kelas='$kelas' 
-        WHERE id='$id'"</span>;</code></pre>
+                        <div class="bg-white border-2 border-green-200 rounded-2xl p-4">
+                            <div class="flex items-center mb-2">
+                                <span
+                                    class="bg-green-500 text-white w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold mr-2">2</span>
+                                <h5 class="font-bold text-green-800 text-xs">Query SELECT</h5>
                             </div>
-<p class="text-xs text-red-500 font-bold">PENTING: Jangan lupakan perintah WHERE, atau semua
-                                data akan berubah!</p>
-                            <p class="text-xs text-gray-500 mt-2"><i class="fas fa-info-circle mr-1"></i>WHERE itu seperti menunjuk: "Ganti data ini ya, yang lain jangan!"</p>
+                            <p class="text-[10px] text-gray-600">Ambil data berdasarkan ID tersebut</p>
+                        </div>
+                        <div class="bg-white border-2 border-purple-200 rounded-2xl p-4">
+                            <div class="flex items-center mb-2">
+                                <span
+                                    class="bg-purple-500 text-white w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold mr-2">3</span>
+                                <h5 class="font-bold text-purple-800 text-xs">Tampilkan Form</h5>
+                            </div>
+                            <p class="text-[10px] text-gray-600">Isi form dengan data lama di atribut <code
+                                    class="bg-gray-100 px-1 rounded">value</code></p>
+                        </div>
+                        <div class="bg-white border-2 border-orange-200 rounded-2xl p-4">
+                            <div class="flex items-center mb-2">
+                                <span
+                                    class="bg-orange-500 text-white w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold mr-2">4</span>
+                                <h5 class="font-bold text-orange-800 text-xs">Update Data</h5>
+                            </div>
+                            <p class="text-[10px] text-gray-600">Simpan perubahan dengan query UPDATE</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- File 1: edit.php (Menampilkan Form) -->
+                        <div class="bg-white border rounded-3xl p-6 shadow-lg">
+                            <div class="flex items-center mb-4">
+                                <span class="bg-blue-500 text-white px-3 py-1 rounded-lg text-xs font-bold mr-2">FILE
+                                    1</span>
+                                <h4 class="font-bold text-secondary text-sm">Form Edit (edit.php)</h4>
+                            </div>
+                            <div
+                                class="code-block bg-gray-900 text-gray-200 p-4 rounded-xl text-xs overflow-x-auto max-h-[350px] overflow-y-auto">
+                                <pre><code><span class="text-pink-500">&lt;?php</span>
+<span class="text-gray-500">// STEP 1: Tangkap ID dari URL</span>
+<span class="text-blue-400">include</span> <span class="text-yellow-300">'koneksi.php'</span>;
+<span class="text-blue-400">$id</span> = <span class="text-blue-400">$_GET</span>[<span class="text-yellow-300">'id'</span>];
+
+<span class="text-gray-500">// STEP 2: Ambil data siswa berdasarkan ID</span>
+<span class="text-blue-400">$query</span> = <span class="text-yellow-400">mysqli_query</span>(<span class="text-blue-400">$conn</span>, 
+    <span class="text-yellow-300">"SELECT * FROM siswa WHERE id='$id'"</span>);
+<span class="text-blue-400">$data</span> = <span class="text-yellow-400">mysqli_fetch_array</span>(<span class="text-blue-400">$query</span>);
+<span class="text-pink-500">?&gt;</span>
+
+<span class="text-gray-500">&lt;!-- STEP 3: Tampilkan form dengan data lama --&gt;</span>
+<span class="text-blue-600">&lt;form</span> <span class="text-red-600">action=</span><span class="text-blue-800">"proses_edit.php"</span> 
+      <span class="text-red-600">method=</span><span class="text-blue-800">"POST"</span><span class="text-blue-600">&gt;</span>
+    
+    <span class="text-gray-500">&lt;!-- Kirim ID lewat hidden input --&gt;</span>
+    <span class="text-blue-600">&lt;input</span> <span class="text-red-600">type=</span><span class="text-blue-800">"hidden"</span> 
+           <span class="text-red-600">name=</span><span class="text-blue-800">"id"</span> 
+           <span class="text-red-600">value=</span><span class="text-blue-800">"<span class="text-pink-500">&lt;?= $data['id'] ?&gt;</span>"</span><span class="text-blue-600">&gt;</span>
+    
+    <span class="text-blue-600">&lt;label&gt;</span>Nama:<span class="text-blue-600">&lt;/label&gt;</span>
+    <span class="text-blue-600">&lt;input</span> <span class="text-red-600">type=</span><span class="text-blue-800">"text"</span> 
+           <span class="text-red-600">name=</span><span class="text-blue-800">"nama"</span> 
+           <span class="text-red-600">value=</span><span class="text-blue-800">"<span class="text-pink-500">&lt;?= $data['nama'] ?&gt;</span>"</span><span class="text-blue-600">&gt;</span>
+    <span class="text-blue-600">&lt;br&gt;&lt;br&gt;</span>
+    
+    <span class="text-blue-600">&lt;label&gt;</span>Kelas:<span class="text-blue-600">&lt;/label&gt;</span>
+    <span class="text-blue-600">&lt;input</span> <span class="text-red-600">type=</span><span class="text-blue-800">"text"</span> 
+           <span class="text-red-600">name=</span><span class="text-blue-800">"kelas"</span> 
+           <span class="text-red-600">value=</span><span class="text-blue-800">"<span class="text-pink-500">&lt;?= $data['kelas'] ?&gt;</span>"</span><span class="text-blue-600">&gt;</span>
+    <span class="text-blue-600">&lt;br&gt;&lt;br&gt;</span>
+    
+    <span class="text-blue-600">&lt;label&gt;</span>Alamat:<span class="text-blue-600">&lt;/label&gt;</span>
+    <span class="text-blue-600">&lt;textarea</span> <span class="text-red-600">name=</span><span class="text-blue-800">"alamat"</span><span class="text-blue-600">&gt;</span><span class="text-pink-500">&lt;?= $data['alamat'] ?&gt;</span><span class="text-blue-600">&lt;/textarea&gt;</span>
+    <span class="text-blue-600">&lt;br&gt;&lt;br&gt;</span>
+    
+    <span class="text-blue-600">&lt;button</span> <span class="text-red-600">type=</span><span class="text-blue-800">"submit"</span><span class="text-blue-600">&gt;</span>Update<span class="text-blue-600">&lt;/button&gt;</span>
+<span class="text-blue-600">&lt;/form&gt;</span></code></pre>
+                            </div>
+                            <div class="mt-4 bg-blue-50 p-3 rounded-xl">
+                                <p class="text-xs text-blue-800">
+                                    <i class="fas fa-info-circle mr-1"></i>
+                                    <strong>Penting:</strong> Gunakan <code
+                                        class="bg-white px-1 rounded">hidden input</code> untuk mengirim ID ke
+                                    proses_edit.php
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- File 2: proses_edit.php (Proses Update) -->
+                        <div class="space-y-6">
+                            <div class="bg-dark rounded-3xl p-6 shadow-xl">
+                                <div class="flex items-center mb-4">
+                                    <span
+                                        class="bg-orange-500 text-white px-3 py-1 rounded-lg text-xs font-bold mr-2">FILE
+                                        2</span>
+                                    <h4 class="font-bold text-white text-sm">Proses Update (proses_edit.php)</h4>
+                                </div>
+                                <div class="code-block text-gray-300 text-xs overflow-x-auto">
+                                    <pre><code><span class="text-pink-500">&lt;?php</span>
+<span class="text-blue-400">include</span> <span class="text-yellow-300">'koneksi.php'</span>;
+
+<span class="text-gray-500">// Tangkap semua data dari form</span>
+<span class="text-blue-400">$id</span>     = <span class="text-blue-400">$_POST</span>[<span class="text-yellow-300">'id'</span>];
+<span class="text-blue-400">$nama</span>   = <span class="text-blue-400">$_POST</span>[<span class="text-yellow-300">'nama'</span>];
+<span class="text-blue-400">$kelas</span>  = <span class="text-blue-400">$_POST</span>[<span class="text-yellow-300">'kelas'</span>];
+<span class="text-blue-400">$alamat</span> = <span class="text-blue-400">$_POST</span>[<span class="text-yellow-300">'alamat'</span>];
+
+<span class="text-gray-500">// Query UPDATE dengan WHERE</span>
+<span class="text-blue-400">$sql</span> = <span class="text-yellow-300">"UPDATE siswa SET 
+        nama   = '$nama', 
+        kelas  = '$kelas', 
+        alamat = '$alamat' 
+        WHERE id = '$id'"</span>;
+
+<span class="text-gray-500">// Jalankan query</span>
+<span class="text-blue-400">if</span> (<span class="text-yellow-400">mysqli_query</span>(<span class="text-blue-400">$conn</span>, <span class="text-blue-400">$sql</span>)) {
+    <span class="text-yellow-400">header</span>(<span class="text-yellow-300">"location:index.php"</span>);
+} <span class="text-blue-400">else</span> {
+    <span class="text-blue-400">echo</span> <span class="text-yellow-300">"Error: "</span> . <span class="text-yellow-400">mysqli_error</span>(<span class="text-blue-400">$conn</span>);
+}
+<span class="text-pink-500">?&gt;</span></code></pre>
+                                </div>
+                            </div>
+
+                            <!-- Peringatan WHERE Clause -->
+                            <div
+                                class="bg-gradient-to-br from-red-50 to-pink-50 p-5 rounded-2xl border-2 border-red-300">
+                                <h4 class="font-bold text-red-800 mb-3 flex items-center text-sm">
+                                    <i class="fas fa-exclamation-triangle mr-2 animate-pulse"></i>PERINGATAN PENTING!
+                                </h4>
+                                <div class="bg-red-100 p-4 rounded-xl mb-3">
+                                    <p class="text-xs text-red-900 font-bold mb-2">
+                                        ❌ JANGAN LUPA <code class="bg-red-200 px-2 py-1 rounded">WHERE id='$id'</code>
+                                    </p>
+                                    <p class="text-xs text-red-800">
+                                        Tanpa WHERE, <span class="font-bold underline">SEMUA DATA</span> di tabel akan
+                                        berubah menjadi nilai yang sama!
+                                    </p>
+                                </div>
+                                <div class="text-xs text-red-900 space-y-2">
+                                    <p class="flex items-start">
+                                        <i class="fas fa-shield-alt text-red-600 mr-2 mt-0.5"></i>
+                                        <span>WHERE berfungsi seperti "alamat rumah" yang spesifik menunjuk data mana
+                                            yang akan diubah</span>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Slide 6: Delete - Menghapus Data -->
                 <div class="slide" id="slide6">
-                    <div class="text-center py-6">
-                        <div class="inline-block bg-red-100 text-danger p-6 rounded-full mb-8">
-                            <i class="fas fa-trash-alt text-6xl"></i>
-                        </div>
-                        <h2 class="text-3xl font-bold text-secondary mb-4">Langkah 5: Menghapus Data (DELETE)</h2>
-<p class="text-gray-600 max-w-2xl mx-auto mb-10 italic">"Ini adalah operasi termudah namun
-                            paling berbahaya."</p>
-                        <p class="text-sm text-gray-500 mb-8">Kenapa berbahaya? Karena data yang dihapus tidak bisa dikembalikan lagi!</p>
+                    <h2 class="text-2xl font-bold text-secondary mb-6 flex items-center justify-center">
+                        <i class="fas fa-trash-alt text-danger mr-3"></i>Langkah 5: Menghapus Data (DELETE)
+                    </h2>
 
-                        <div
-                            class="max-w-2xl mx-auto bg-gray-900 text-gray-200 p-8 rounded-[3rem] shadow-2xl text-left relative overflow-hidden">
-                            <div
-                                class="absolute top-0 right-10 bg-danger text-white text-[10px] px-3 py-1 font-bold rounded-b-lg">
-                                hapus.php</div>
-                            <pre class="text-sm"><code><span class="text-pink-500">&lt;?php</span>
+                    <!-- Peringatan Utama -->
+                    <div
+                        class="bg-gradient-to-r from-red-50 to-pink-50 border-l-4 border-danger p-6 rounded-r-3xl mb-8">
+                        <p class="text-sm text-red-900 leading-relaxed font-medium flex items-center">
+                            <i class="fas fa-exclamation-triangle mr-2 text-danger animate-pulse"></i>
+                            <strong>PERHATIAN:</strong> Ini adalah operasi <span
+                                class="font-bold text-danger mx-1">TERMUDAH</span> namun <span
+                                class="font-bold text-danger mx-1">PALING BERBAHAYA!</span>
+                        </p>
+                        <div class="mt-4 bg-red-100 p-4 rounded-xl">
+                            <p class="text-xs text-red-800">
+                                <i class="fas fa-info-circle mr-1"></i>
+                                <strong>Analogi:</strong> Seperti menekan tombol <span class="font-bold">DELETE
+                                    FILE</span> di komputer. Sekali terhapus, data hilang selamanya (kecuali ada
+                                backup)!
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Langkah-langkah -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-white border-2 border-blue-200 rounded-2xl p-5">
+                            <div class="flex items-center mb-3">
+                                <span
+                                    class="bg-blue-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold mr-3">1</span>
+                                <h4 class="font-bold text-blue-800 text-sm">Tangkap ID</h4>
+                            </div>
+                            <p class="text-xs text-gray-600">Ambil ID data yang akan dihapus dari URL</p>
+                        </div>
+                        <div class="bg-white border-2 border-orange-200 rounded-2xl p-5">
+                            <div class="flex items-center mb-3">
+                                <span
+                                    class="bg-orange-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold mr-3">2</span>
+                                <h4 class="font-bold text-orange-800 text-sm">Eksekusi DELETE</h4>
+                            </div>
+                            <p class="text-xs text-gray-600">Jalankan query DELETE dengan WHERE clause</p>
+                        </div>
+                        <div class="bg-white border-2 border-green-200 rounded-2xl p-5">
+                            <div class="flex items-center mb-3">
+                                <span
+                                    class="bg-green-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold mr-3">3</span>
+                                <h4 class="font-bold text-green-800 text-sm">Redirect</h4>
+                            </div>
+                            <p class="text-xs text-gray-600">Kembali ke halaman utama setelah berhasil</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- Kode PHP Delete -->
+                        <div>
+                            <div class="bg-dark rounded-3xl p-6 shadow-2xl">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h4 class="font-bold text-white text-sm">File: hapus.php</h4>
+                                    <span class="bg-danger text-white text-[10px] px-3 py-1 font-bold rounded-full">
+                                        <i class="fas fa-exclamation-triangle mr-1"></i>DANGER ZONE
+                                    </span>
+                                </div>
+                                <div class="code-block text-gray-300 text-xs overflow-x-auto">
+                                    <pre><code><span class="text-pink-500">&lt;?php</span>
+<span class="text-gray-500">// STEP 1: Hubungkan ke database</span>
 <span class="text-blue-400">include</span> <span class="text-yellow-300">'koneksi.php'</span>;
 
+<span class="text-gray-500">// STEP 2: Tangkap ID dari URL</span>
 <span class="text-blue-400">$id</span> = <span class="text-blue-400">$_GET</span>[<span class="text-yellow-300">'id'</span>];
 
-<span class="text-yellow-400">mysqli_query</span>(<span class="text-blue-400">$conn</span>, <span class="text-yellow-300">"DELETE FROM siswa WHERE id='$id'"</span>);
+<span class="text-gray-500">// STEP 3: Buat query DELETE</span>
+<span class="text-blue-400">$sql</span> = <span class="text-yellow-300">"DELETE FROM siswa 
+        WHERE id='$id'"</span>;
 
-<span class="text-yellow-400">header</span>(<span class="text-yellow-300">"location:index.php"</span>);
+<span class="text-gray-500">// STEP 4: Eksekusi query</span>
+<span class="text-blue-400">if</span> (<span class="text-yellow-400">mysqli_query</span>(<span class="text-blue-400">$conn</span>, <span class="text-blue-400">$sql</span>)) {
+    <span class="text-gray-500">// Berhasil, redirect ke index</span>
+    <span class="text-yellow-400">header</span>(<span class="text-yellow-300">"location:index.php"</span>);
+} <span class="text-blue-400">else</span> {
+    <span class="text-gray-500">// Gagal</span>
+    <span class="text-blue-400">echo</span> <span class="text-yellow-300">"Error: "</span> . <span class="text-yellow-400">mysqli_error</span>(<span class="text-blue-400">$conn</span>);
+}
 <span class="text-pink-500">?&gt;</span></code></pre>
-</div>
-
-                        <div class="mt-10 flex justify-center gap-6">
-                            <div class="flex items-center text-xs font-bold text-danger">
-                                <i class="fas fa-exclamation-triangle mr-2"></i>RESIKO TINGGI
+                                </div>
                             </div>
-                            <div class="flex items-center text-xs font-bold text-primary">
-                                <i class="fas fa-lock mr-2"></i>BUTUH VALIDASI
+
+                            <!-- Tips Coding -->
+                            <div class="mt-6 bg-blue-50 p-5 rounded-2xl border-2 border-blue-200">
+                                <h5 class="font-bold text-blue-800 mb-3 text-xs flex items-center">
+                                    <i class="fas fa-code mr-2"></i>Struktur Query DELETE
+                                </h5>
+                                <div class="bg-white p-3 rounded-lg">
+                                    <code class="text-xs text-gray-800">
+                                        <span class="text-danger font-bold">DELETE FROM</span> 
+                                        <span class="text-blue-600">nama_tabel</span>
+                                        <span class="text-warning font-bold">WHERE</span> 
+                                        <span class="text-purple-600">kondisi</span>
+                                    </code>
+                                </div>
+                                <p class="text-xs text-blue-700 mt-2">
+                                    <i class="fas fa-info-circle mr-1"></i>
+                                    WHERE sangat penting! Tanpa WHERE, semua data akan terhapus
+                                </p>
                             </div>
                         </div>
-                        
-                        <!-- Tambahan tips keamanan untuk delete -->
-                        <div class="mt-8 bg-red-50 p-6 rounded-2xl border-2 border-red-200 max-w-2xl mx-auto">
-                            <h4 class="font-bold text-red-800 mb-3 flex items-center">
-                                <i class="fas fa-shield-alt mr-2"></i>Tips Keamanan Delete
-                            </h4>
-                            <div class="text-xs text-red-900 space-y-2">
-                                <p><i class="fas fa-warning mr-1"></i><strong>SELANJUTNYA:</strong> Selalu tambahkan konfirmasi sebelum hapus data!</p>
-                                <p><i class="fas fa-code mr-1"></i><strong>CONTOH:</strong> Gunakan JavaScript confirm() atau form konfirmasi</p>
-                                <p><i class="fas fa-database mr-1"></i><strong>PRO TIP:</strong> Di dunia nyata, data tidak dihapus permanen tapi di-"soft delete"</p>
+
+                        <!-- Tips dan Keamanan -->
+                        <div class="space-y-6">
+                            <!-- Konfirmasi JavaScript -->
+                            <div class="bg-white border rounded-3xl p-6 shadow-lg">
+                                <h4 class="font-bold text-secondary mb-4 text-sm flex items-center">
+                                    <i class="fas fa-check-double text-primary mr-2"></i>
+                                    Tambahkan Konfirmasi di index.php
+                                </h4>
+                                <div
+                                    class="code-block bg-gray-100 text-gray-800 p-4 rounded-xl text-xs overflow-x-auto">
+                                    <pre><code><span class="text-gray-500">&lt;!-- Di bagian tombol hapus --&gt;</span>
+<span class="text-blue-600">&lt;a</span> <span class="text-red-600">href=</span><span class="text-blue-800">"hapus.php?id=<span class="text-pink-500">&lt;?= $data['id'] ?&gt;</span>"</span>
+   <span class="text-red-600">onclick=</span><span class="text-blue-800">"return confirm('Yakin hapus data ini?')"</span><span class="text-blue-600">&gt;</span>
+    Hapus
+<span class="text-blue-600">&lt;/a&gt;</span></code></pre>
+                                </div>
+                                <div class="mt-3 bg-green-50 p-3 rounded-lg">
+                                    <p class="text-xs text-green-800">
+                                        <i class="fas fa-lightbulb mr-1"></i>
+                                        Fungsi <code class="bg-green-100 px-1 rounded">confirm()</code> akan menampilkan
+                                        popup konfirmasi. Jika user klik "Cancel", data tidak akan dihapus.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Tips Keamanan -->
+                            <div
+                                class="bg-gradient-to-br from-red-50 to-orange-50 p-5 rounded-2xl border-2 border-red-200">
+                                <h4 class="font-bold text-red-800 mb-4 flex items-center text-sm">
+                                    <i class="fas fa-shield-alt mr-2"></i>Tips Keamanan DELETE
+                                </h4>
+                                <div class="space-y-3 text-xs text-red-900">
+                                    <div class="bg-white p-3 rounded-lg">
+                                        <p class="font-bold mb-1 flex items-center">
+                                            <span
+                                                class="bg-red-500 text-white px-2 py-1 rounded text-[10px] mr-2">WAJIB</span>
+                                            Selalu gunakan WHERE clause
+                                        </p>
+                                        <p class="text-red-700 text-[10px]">Tanpa WHERE, semua record di tabel akan
+                                            terhapus!</p>
+                                    </div>
+                                    <div class="bg-white p-3 rounded-lg">
+                                        <p class="font-bold mb-1 flex items-center">
+                                            <span
+                                                class="bg-orange-500 text-white px-2 py-1 rounded text-[10px] mr-2">RECOMMENDED</span>
+                                            Tambahkan konfirmasi
+                                        </p>
+                                        <p class="text-red-700 text-[10px]">Gunakan JavaScript confirm() atau modal
+                                            konfirmasi</p>
+                                    </div>
+                                    <div class="bg-white p-3 rounded-lg">
+                                        <p class="font-bold mb-1 flex items-center">
+                                            <span
+                                                class="bg-purple-500 text-white px-2 py-1 rounded text-[10px] mr-2">PRO
+                                                TIP</span>
+                                            Soft Delete
+                                        </p>
+                                        <p class="text-red-700 text-[10px]">Di aplikasi profesional, data tidak dihapus
+                                            permanen. Tambahkan kolom <code
+                                                class="bg-red-100 px-1 rounded">is_deleted</code> atau <code
+                                                class="bg-red-100 px-1 rounded">deleted_at</code></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Contoh Soft Delete -->
+                            <div class="bg-purple-50 p-4 rounded-xl border border-purple-200">
+                                <h5 class="font-bold text-purple-800 mb-2 text-xs flex items-center">
+                                    <i class="fas fa-star mr-1"></i>Bonus: Soft Delete
+                                </h5>
+                                <p class="text-[10px] text-purple-700 mb-2">Ubah status menjadi "terhapus" tanpa
+                                    menghapus data:</p>
+                                <div class="bg-white p-2 rounded text-[10px]">
+                                    <code class="text-purple-900">
+                                        UPDATE siswa SET is_deleted=1 WHERE id='$id'
+                                    </code>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -503,8 +945,9 @@
                             <a href="DasarPHP.html"
                                 class="px-10 py-4 bg-secondary text-white rounded-2xl font-bold hover:bg-dark transition shadow-lg">
                                 <i class="fas fa-home mr-2"></i>Kembali ke Materi Dasar
-</a>
-                            <button onclick="currentSlide = 0; updateUI(); window.scrollTo({ top: 100, behavior: 'smooth' });"
+                            </a>
+                            <button
+                                onclick="currentSlide = 0; updateUI(); window.scrollTo({ top: 100, behavior: 'smooth' });"
                                 class="px-10 py-4 border-2 border-primary text-primary rounded-2xl font-bold hover:bg-primary hover:text-white transition">
                                 <i class="fas fa-redo mr-2"></i>Ulangi Tutorial
                             </button>
@@ -514,7 +957,7 @@
 
             </div>
 
-<!-- Footer Controls -->
+            <!-- Footer Controls -->
             <div id="footerControls"
                 class="bg-gray-50 border-t p-8 px-10 md:px-14 flex flex-col md:flex-row justify-between items-center gap-6">
                 <div class="flex items-center gap-4 order-2 md:order-1">
@@ -584,7 +1027,7 @@
             } else {
                 nextText.textContent = "NEXT";
             }
-            
+
             // Sembunyikan footer controls di slide terakhir
             const footerControls = document.getElementById('footerControls');
             if (footerControls) {
