@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas Proyek: Perpustakaan Sederhana - Kelas 10 RPL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        jakarta: ['"Plus Jakarta Sans"', "sans-serif"],
+                    },
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#1e293b',
+                        accent: '#f59e0b',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            overflow-x: auto;
+            position: relative;
+        }
+        .step-card {
+            transition: all 0.3s ease;
+        }
+        .step-card:hover {
+            transform: translateX(10px);
+            border-left-color: #f59e0b;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 leading-relaxed">
+
+    <!-- Header Navigation -->
+    <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200">
+        <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="index.html" class="flex items-center text-primary font-bold hover:opacity-80 transition">
+                <i class="fas fa-arrow-left mr-2"></i> Dashboard
+            </a>
+            <div class="flex items-center space-x-2">
+                <span class="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full uppercase tracking-tighter">Proyek Akhir</span>
+                <span class="bg-slate-100 text-slate-500 text-xs font-bold px-3 py-1 rounded-full">Kelas 10 RPL</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Content -->
+    <header class="bg-gradient-to-br from-primary to-indigo-900 text-white py-16 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="inline-block p-4 bg-white/10 rounded-3xl mb-6 backdrop-blur-sm border border-white/20">
+                <i class="fas fa-book-reader text-5xl text-accent"></i>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">Sistem Informasi Perpustakaan</h1>
+            <p class="text-xl text-blue-100/80 font-light max-w-2xl mx-auto">
+                Tantangan proyek mandiri: Terapkan kemampuan CRUD PHP untuk membangun aplikasi peminjaman buku sederhana.
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-12">
+        <!-- Section: Overview -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                <i class="fas fa-info-circle text-primary mr-3"></i> Deskripsi Proyek
+            </h2>
+            <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200">
+                <p class="text-slate-600 mb-6">
+                    Aplikasi ini bertujuan untuk mendigitalkan proses peminjaman buku di perpustakaan sekolah. Fitur utama mencakup manajemen data buku, anggota, dan pencatatan transaksi peminjaman.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                        <i class="fas fa-database text-blue-600 mb-2"></i>
+                        <h4 class="font-bold text-sm">MySQL Database</h4>
+                        <p class="text-xs text-slate-500">Penyimpanan data buku & anggota.</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                        <i class="fab fa-php text-indigo-600 mb-2"></i>
+                        <h4 class="font-bold text-sm">PHP Logic</h4>
+                        <p class="text-xs text-slate-500">Logika transaksi & validasi data.</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                        <i class="fas fa-laptop-code text-orange-600 mb-2"></i>
+                        <h4 class="font-bold text-sm">Responsive UI</h4>
+                        <p class="text-xs text-slate-500">Interface menggunakan CSS/Tailwind.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Database Schema -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                <i class="fas fa-sitemap text-primary mr-3"></i> Rencana Database
+            </h2>
+            <p class="text-slate-600 mb-6">Gunakan SQL berikut untuk membuat struktur database di phpMyAdmin Anda.</p>
+            
+            <div class="space-y-6">
+                <div>
+                    <h4 class="font-bold text-slate-700 mb-2">1. Tabel Buku</h4>
+                    <div class="code-block">
+<pre><code>CREATE TABLE buku (
+    id_buku INT PRIMARY KEY AUTO_INCREMENT,
+    judul VARCHAR(100),
+    penulis VARCHAR(50),
+    penerbit VARCHAR(50),
+    stok INT
+);</code></pre>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-slate-700 mb-2">2. Tabel Anggota</h4>
+                    <div class="code-block">
+<pre><code>CREATE TABLE anggota (
+    id_anggota INT PRIMARY KEY AUTO_INCREMENT,
+    nama VARCHAR(100),
+    alamat TEXT,
+    telp VARCHAR(15)
+);</code></pre>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-slate-700 mb-2">3. Tabel Peminjaman</h4>
+                    <div class="code-block">
+<pre><code>CREATE TABLE peminjaman (
+    id_pinjam INT PRIMARY KEY AUTO_INCREMENT,
+    id_buku INT,
+    id_anggota INT,
+    tgl_pinjam DATE,
+    tgl_kembali DATE,
+    FOREIGN KEY (id_buku) REFERENCES buku(id_buku),
+    FOREIGN KEY (id_anggota) REFERENCES anggota(id_anggota)
+);</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Steps -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                <i class="fas fa-tasks text-primary mr-3"></i> Langkah Pengerjaan
+            </h2>
+            <div class="space-y-4">
+                <div class="step-card bg-white p-6 rounded-2xl border-l-4 border-slate-200 shadow-sm">
+                    <h3 class="font-bold text-slate-800 mb-1">Tahap 1: Setup Koneksi</h3>
+                    <p class="text-slate-500 text-sm">Pastikan PHP terhubung ke database <code class="bg-slate-100 px-1">db_perpustakaan</code> melalui file koneksi.</p>
+                </div>
+                <div class="step-card bg-white p-6 rounded-2xl border-l-4 border-slate-200 shadow-sm">
+                    <h3 class="font-bold text-slate-800 mb-1">Tahap 2: Manajemen Master</h3>
+                    <p class="text-slate-500 text-sm">Buat halaman CRUD lengkap untuk data Buku dan Anggota.</p>
+                </div>
+                <div class="step-card bg-white p-6 rounded-2xl border-l-4 border-slate-200 shadow-sm">
+                    <h3 class="font-bold text-slate-800 mb-1">Tahap 3: Fitur Transaksi</h3>
+                    <p class="text-slate-500 text-sm">Buat form peminjaman yang mengambil data dari tabel buku dan anggota (Dropdown).</p>
+                </div>
+                <div class="step-card bg-white p-6 rounded-2xl border-l-4 border-slate-200 shadow-sm">
+                    <h3 class="font-bold text-slate-800 mb-1">Tahap 4: Finishing</h3>
+                    <p class="text-slate-500 text-sm">Tambahkan fitur "Kembalikan Buku" yang akan menghapus data dari tabel peminjaman.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Tips -->
+        <div class="bg-accent/10 border border-accent/20 p-8 rounded-3xl">
+            <h3 class="text-accent font-bold text-xl mb-4 flex items-center">
+                <i class="fas fa-lightbulb mr-3"></i> Tips Sukses Proyek
+            </h3>
+            <ul class="space-y-3 text-slate-700">
+                <li class="flex items-start">
+                    <i class="fas fa-check-circle text-accent mt-1 mr-3"></i>
+                    <span>Tulis kode secara bertahap, jangan langsung semuanya. Mulai dari Tampil Data.</span>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-check-circle text-accent mt-1 mr-3"></i>
+                    <span>Gunakan <code class="bg-white px-1">mysqli_error($conn)</code> untuk melacak kesalahan query SQL.</span>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-check-circle text-accent mt-1 mr-3"></i>
+                    <span>Eksperimenlah dengan tampilan (CSS) agar aplikasi terlihat profesional.</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Footer Call to Action -->
+        <div class="mt-16 text-center">
+            <p class="text-slate-500 mb-4 tracking-wide font-medium">SIAP MENERIMA TANTANGAN?</p>
+            <div class="flex justify-center space-x-4">
+                <a href="CRUD_PHP.html" class="px-8 py-3 bg-slate-200 text-slate-700 font-bold rounded-2xl hover:bg-slate-300 transition">
+                    Lihat Referensi CRUD
+                </a>
+                <button onclick="window.print()" class="px-8 py-3 bg-primary text-white font-bold rounded-2xl hover:bg-primary/90 transition shadow-lg shadow-primary/20">
+                    <i class="fas fa-print mr-2"></i> Cetak Panduan
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-12 text-center text-sm">
+        <p>&copy; 2024 Kelas 10 RPL - Pembelajaran Berbasis Proyek</p>
+    </footer>
+
+</body>
+</html>
