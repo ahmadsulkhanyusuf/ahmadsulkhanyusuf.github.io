@@ -41,6 +41,7 @@
             margin-bottom: 10px;
             background: linear-gradient(90deg, #6a11cb, #2575fc);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         
@@ -336,10 +337,14 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
-        <header>
+        <header style="position: relative;">
+            <a href="index.html" style="position: absolute; left: 0; top: 0; background: linear-gradient(90deg, #6a11cb, #2575fc); color: white; padding: 10px 20px; border-radius: 12px; text-decoration: none; font-size: 14px; font-weight: bold; box-shadow: 0 4px 15px rgba(106, 17, 203, 0.2); display: flex; align-items: center; gap: 8px;">
+                <i class="fas fa-home"></i> Dashboard
+            </a>
             <h1>📊 FLOWCHART</h1>
             <p class="subtitle">Belajar Membaca dan Membuat Diagram Alir dengan Mudah</p>
             <p>Materi untuk Kelas 10 Rekayasa Perangkat Lunak (RPL)</p>
