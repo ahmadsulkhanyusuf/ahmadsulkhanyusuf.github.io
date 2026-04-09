@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi 6: Cetak Laporan - E-Learning RPL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { jakarta: ['"Plus Jakarta Sans"', "sans-serif"] },
+                    colors: { primary: '#6d28d9', secondary: '#1e293b', accent: '#f59e0b' }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .code-block {
+            background: #1e293b; color: #e2e8f0; padding: 1.5rem; border-radius: 0.75rem;
+            font-family: 'Fira Code', monospace; font-size: 0.9rem; overflow-x: auto;
+        }
+        @media print {
+            .no-print { display: none; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+    <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200 no-print">
+        <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="index.html" class="flex items-center text-primary font-bold hover:opacity-80 transition">
+                <i class="fas fa-arrow-left mr-2"></i> Dashboard
+            </a>
+            <div class="flex items-center space-x-2">
+                <span class="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full uppercase">Materi 6 Lanjutan</span>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-gradient-to-br from-violet-600 to-purple-900 text-white py-16 px-4 text-center no-print">
+        <i class="fas fa-print text-5xl text-white mb-6"></i>
+        <h1 class="text-4xl font-extrabold mb-4">Fitur Cetak Laporan</h1>
+        <p class="text-xl text-violet-50/80 max-w-2xl mx-auto">Membuat output fisik dari data digital yang ada di aplikasi Anda.</p>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-12">
+        <section class="mb-12 no-print">
+            <h2 class="text-2xl font-bold mb-6 flex items-center"><i class="fas fa-desktop text-primary mr-3"></i> 1. Window Print (Browser)</h2>
+            <p class="mb-4 text-slate-600">Cara termudah adalah memanggil fungsi cetak bawaan browser menggunakan JavaScript.</p>
+            <div class="code-block text-yellow-300">
+                <pre>&lt;button onclick="window.print()"&gt;Cetak Laporan&lt;/button&gt;</pre>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6 flex items-center"><i class="fas fa-eye-slash text-primary mr-3"></i> 2. CSS Media Print</h2>
+            <p class="mb-4">Agar tombol atau navigasi tidak ikut tercetak, gunakan CSS `@media print`.</p>
+            <div class="code-block text-blue-300">
+                <pre>@media print {
+    .no-print { 
+        display: none !important; 
+    }
+}</pre>
+            </div>
+        </section>
+
+        <section class="mb-12 no-print">
+            <h2 class="text-2xl font-bold mb-6 flex items-center"><i class="fas fa-file-pdf text-primary mr-3"></i> 3. Library PDF (Opsional)</h2>
+            <p class="mb-4">Jika ingin file PDF yang lebih rapi dan bisa didownload secara otomatis, Anda bisa mengeksplorasi library seperti:</p>
+            <ul class="list-disc list-inside space-y-2 text-slate-600 ml-4">
+                <li><b>Dompdf:</b> Merubah HTML/CSS menjadi PDF.</li>
+                <li><b>TCPDF:</b> Library PHP klasik untuk generate PDF.</li>
+                <li><b>FPDF:</b> Library ringan dan mudah digunakan.</li>
+            </ul>
+        </section>
+
+        <div class="bg-slate-900 text-white p-8 rounded-3xl text-center no-print border-t-4 border-orange-500">
+            <h3 class="text-xl font-bold mb-4">Selamat! Anda telah menyelesaikan seluruh kurikulum.</h3>
+            <p class="mb-6 opacity-80">Gunakan ilmu ini untuk membangun project besar lainnya. Teruslah berkarya!</p>
+            <a href="index.html" class="inline-block px-8 py-3 bg-primary text-white font-bold rounded-xl hover:scale-105 transition">Kembali ke Dashboard <i class="fas fa-home ml-2"></i></a>
+        </div>
+    </main>
+
+    <footer class="py-12 text-center text-slate-400 text-sm no-print">
+        <p>&copy; 2026 E-Learning RPL - Materi Lanjutan Selesai</p>
+    </footer>
+</body>
+</html>

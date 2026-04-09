@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi 2: Sistem Login & Session - E-Learning RPL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { jakarta: ['"Plus Jakarta Sans"', "sans-serif"] },
+                    colors: { primary: '#f59e0b', secondary: '#1e293b', accent: '#6366f1' }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .code-block {
+            background: #1e293b; color: #e2e8f0; padding: 1.5rem; border-radius: 0.75rem;
+            font-family: 'Fira Code', monospace; font-size: 0.9rem; overflow-x: auto;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+    <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200">
+        <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="index.html" class="flex items-center text-primary font-bold hover:opacity-80 transition">
+                <i class="fas fa-arrow-left mr-2"></i> Dashboard
+            </a>
+            <div class="flex items-center space-x-2">
+                <span class="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full uppercase">Materi 2 Lanjutan</span>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-gradient-to-br from-amber-500 to-orange-600 text-white py-16 px-4 text-center">
+        <i class="fas fa-user-lock text-5xl text-white mb-6"></i>
+        <h1 class="text-4xl font-extrabold mb-4">Sistem Login & Session</h1>
+        <p class="text-xl text-orange-50/80 max-w-2xl mx-auto">Membatasi akses aplikasi agar hanya pengguna terdaftar yang bisa masuk.</p>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-12">
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6 flex items-center"><i class="fas fa-database text-primary mr-3"></i> 1. Persiapan Tabel User</h2>
+            <p class="mb-4">Buat tabel <code>users</code> di database Anda untuk menyimpan kredensial login.</p>
+            <div class="code-block">
+                <pre>CREATE TABLE users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) UNIQUE,
+    password VARCHAR(255),
+    nama_lengkap VARCHAR(100)
+);</pre>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6 flex items-center"><i class="fas fa-key text-primary mr-3"></i> 2. Mengenal Session</h2>
+            <p class="text-slate-600 mb-4">Session adalah cara menyimpan informasi pengguna di server agar tetap tersedia saat pindah halaman. Di PHP, kita memulainya dengan:</p>
+            <div class="code-block text-pink-400">
+                <pre>&lt;?php
+session_start();
+$_SESSION['username'] = "admin";
+?&gt;</pre>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6 flex items-center"><i class="fas fa-shield-alt text-primary mr-3"></i> 3. Cek Login</h2>
+            <p class="mb-4">Letakkan kode ini di bagian paling atas setiap halaman admin (index, tambah, hapus, dll).</p>
+            <div class="code-block">
+                <pre>&lt;?php
+session_start();
+if (!isset($_SESSION['login'])) {
+    header("Location: login.php");
+    exit;
+}
+?&gt;</pre>
+            </div>
+        </section>
+
+        <div class="bg-slate-900 text-white p-8 rounded-3xl text-center">
+            <h3 class="text-xl font-bold mb-4">Keamanan adalah prioritas!</h3>
+            <p class="mb-6 opacity-80">Pelajari cara mengamankan query login Anda dari serangan SQL Injection di materi berikutnya.</p>
+            <a href="Materi_Security.html" class="inline-block px-8 py-3 bg-accent text-white font-bold rounded-xl hover:scale-105 transition">Lanjut: Keamanan Web <i class="fas fa-arrow-right ml-2"></i></a>
+        </div>
+    </main>
+
+    <footer class="py-12 text-center text-slate-400 text-sm">
+        <p>&copy; 2026 E-Learning RPL - Materi Lanjutan</p>
+    </footer>
+</body>
+</html>
