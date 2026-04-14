@@ -38,54 +38,149 @@
     </nav>
 
     <header class="bg-gradient-to-br from-amber-500 to-orange-600 text-white py-16 px-4 text-center">
-        <i class="fas fa-user-lock text-5xl text-white mb-6"></i>
-        <h1 class="text-4xl font-extrabold mb-4">Sistem Login & Session</h1>
-        <p class="text-xl text-orange-50/80 max-w-2xl mx-auto">Membatasi akses aplikasi agar hanya pengguna terdaftar yang bisa masuk.</p>
+        <i class="fas fa-user-shield text-5xl text-white mb-6"></i>
+        <h1 class="text-4xl font-extrabold mb-4">Sistem Login & Session (Perpustakaan)</h1>
+        <p class="text-xl text-orange-50/80 max-w-2xl mx-auto">Langkah-langkah menambahkan fitur login untuk mengamankan data perpustakaan Anda.</p>
     </header>
 
     <main class="max-w-4xl mx-auto px-4 py-12">
         <section class="mb-12">
-            <h2 class="text-2xl font-bold mb-6 flex items-center"><i class="fas fa-database text-primary mr-3"></i> 1. Persiapan Tabel User</h2>
-            <p class="mb-4">Buat tabel <code>users</code> di database Anda untuk menyimpan kredensial login.</p>
-            <div class="code-block">
-                <pre>CREATE TABLE users (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+            <h2 class="text-2xl font-bold mb-6 flex items-center"><i class="fas fa-database text-primary mr-3"></i> Langkah 1: Persiapan Tabel Admin</h2>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-4">
+                <p class="text-slate-600 mb-4">Pastikan Anda sudah berada di database <code class="bg-primary/10 text-primary px-2 py-0.5 rounded font-bold">db_perpustakaan</code>. Buat tabel baru bernama <code class="font-bold">admin</code> untuk menyimpan data petugas perpustakaan.</p>
+                <div class="code-block">
+                    <pre>CREATE TABLE admin (
+    id_admin INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(50) UNIQUE,
     password VARCHAR(255),
     nama_lengkap VARCHAR(100)
-);</pre>
+);
+
+-- Masukkan satu data admin untuk percobaan (password: admin123)
+INSERT INTO admin (username, password, nama_lengkap) 
+VALUES ('admin', 'admin123', 'Administrator Perpustakaan');</pre>
+                </div>
+                <p class="mt-4 text-sm text-red-500 font-medium bg-red-50 p-3 rounded-lg"><i class="fas fa-exclamation-triangle mr-1 border-red-200"></i> <b>Catatan:</b> Pada aplikasi produksi/nyata, password HARUS di-hash (sandi diacak), namun untuk tahap belajar, kita gunakan teks biasa (plain text) terlebih dahulu.</p>
             </div>
         </section>
 
         <section class="mb-12">
-            <h2 class="text-2xl font-bold mb-6 flex items-center"><i class="fas fa-key text-primary mr-3"></i> 2. Mengenal Session</h2>
-            <p class="text-slate-600 mb-4">Session adalah cara menyimpan informasi pengguna di server agar tetap tersedia saat pindah halaman. Di PHP, kita memulainya dengan:</p>
-            <div class="code-block text-pink-400">
-                <pre>&lt;?php
-session_start();
-$_SESSION['username'] = "admin";
+            <h2 class="text-2xl font-bold mb-6 flex items-center"><i class="fas fa-sign-in-alt text-primary mr-3"></i> Langkah 2: Membuat Form Login (login.php)</h2>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-4">
+                <p class="text-slate-600 mb-4">Buat file baru bernama <strong>login.php</strong>. File ini berisi antarmuka form bagi petugas untuk memasukkan username dan password.</p>
+                <div class="code-block text-blue-300">
+                    <pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Login Perpustakaan&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h2&gt;Login Admin Perpustakaan&lt;/h2&gt;
+    &lt;form action="proses_login.php" method="POST"&gt;
+        &lt;label&gt;Username:&lt;/label&gt;&lt;br&gt;
+        &lt;input type="text" name="username" required&gt;&lt;br&gt;&lt;br&gt;
+        
+        &lt;label&gt;Password:&lt;/label&gt;&lt;br&gt;
+        &lt;input type="password" name="password" required&gt;&lt;br&gt;&lt;br&gt;
+        
+        &lt;button type="submit"&gt;Login&lt;/button&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6 flex items-center"><i class="fas fa-cogs text-primary mr-3"></i> Langkah 3: Membuat Proses Login (proses_login.php)</h2>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-4">
+                <p class="mb-4 text-slate-600">Buat file <strong>proses_login.php</strong>. File ini akan mengecek apakah username dan password yang dimasukkan cocok dengan data di tabel <code>admin</code>.</p>
+                <div class="code-block text-pink-300">
+                    <pre>&lt;?php
+session_start(); // Wajib dipanggil untuk memulai session
+include 'koneksi.php'; // Panggil file koneksi database Anda
+
+// Ambil data dari form login
+$username = $_POST['username'];
+$password = $_POST['password'];
+
+// Cek kecocokan data di database
+$query = mysqli_query($conn, "SELECT * FROM admin WHERE username='$username' AND password='$password'");
+
+// Menghitung jumlah baris yang ditemukan
+$cek = mysqli_num_rows($query);
+
+if($cek > 0) {
+    // Jika cocok, ambil data dan buat session
+    $data = mysqli_fetch_assoc($query);
+    $_SESSION['username'] = $username;
+    $_SESSION['nama_lengkap'] = $data['nama_lengkap'];
+    $_SESSION['status_login'] = true;
+    
+    // Alihkan ke halaman dashboard
+    header("Location: index.php");
+} else {
+    // Jika salah, kembalikan ke halaman login dengan pesan
+    echo "&lt;script&gt;
+            alert('Login gagal! Username atau password salah.');
+            window.location.href='login.php';
+          &lt;/script&gt;";
+}
 ?&gt;</pre>
+                </div>
             </div>
         </section>
 
         <section class="mb-12">
-            <h2 class="text-2xl font-bold mb-6 flex items-center"><i class="fas fa-shield-alt text-primary mr-3"></i> 3. Cek Login</h2>
-            <p class="mb-4">Letakkan kode ini di bagian paling atas setiap halaman admin (index, tambah, hapus, dll).</p>
-            <div class="code-block">
-                <pre>&lt;?php
+            <h2 class="text-2xl font-bold mb-6 flex items-center"><i class="fas fa-shield-alt text-primary mr-3"></i> Langkah 4: Melindungi Halaman (index.php, buku.php, dll)</h2>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-4">
+                <p class="mb-4 text-slate-600">Agar orang yang belum login tidak bisa membuka halaman utama perpustakaan langsung lewat URL, tambahkan kode ini pada <strong class="text-red-500">BARIS PERTAMA (paling atas)</strong> di setiap file yang ingin dilindungi.</p>
+                <div class="code-block">
+                    <pre>&lt;?php
 session_start();
-if (!isset($_SESSION['login'])) {
+
+// Cek apakah pengguna belum login
+if (!isset($_SESSION['status_login'])) {
     header("Location: login.php");
     exit;
 }
-?&gt;</pre>
+?&gt;
+
+&lt;!-- Lanjutkan dengan kode HTML/PHP Anda di bawah --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+    &lt;h1&gt;Beranda Perpustakaan&lt;/h1&gt;
+    &lt;p&gt;Selamat Datang, &lt;strong&gt;&lt;?php echo $_SESSION['nama_lengkap']; ?&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+                </div>
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mt-4">
+                    <p class="text-blue-800 text-sm">Tambahkan juga kode di atas pada file <strong>buku.php</strong>, <strong>anggota.php</strong>, dan halaman utama lainnya.</p>
+                </div>
             </div>
         </section>
 
-        <div class="bg-slate-900 text-white p-8 rounded-3xl text-center">
-            <h3 class="text-xl font-bold mb-4">Keamanan adalah prioritas!</h3>
-            <p class="mb-6 opacity-80">Pelajari cara mengamankan query login Anda dari serangan SQL Injection di materi berikutnya.</p>
-            <a href="Materi_Security.html" class="inline-block px-8 py-3 bg-accent text-white font-bold rounded-xl hover:scale-105 transition">Lanjut: Keamanan Web <i class="fas fa-arrow-right ml-2"></i></a>
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6 flex items-center"><i class="fas fa-sign-out-alt text-primary mr-3"></i> Langkah 5: Membuat Fitur Logout (logout.php)</h2>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-4">
+                <p class="mb-4 text-slate-600">Terakhir, buat file <strong>logout.php</strong> untuk menghapus session saat admin menekan tombol/link keluar.</p>
+                <div class="code-block text-pink-300">
+                    <pre>&lt;?php
+session_start(); // Mulai session
+session_destroy(); // Hapus semua data session
+
+// Alihkan kembali ke halaman login
+header("Location: login.php");
+?&gt;</pre>
+                </div>
+            </div>
+        </section>
+
+        <div class="bg-slate-900 text-white p-8 rounded-3xl text-center shadow-lg transform transition hover:-translate-y-1">
+            <h3 class="text-xl font-bold mb-4 flex items-center justify-center"><i class="fas fa-lock mr-2 text-accent"></i> Keamanan Lebih Lanjut!</h3>
+            <p class="mb-6 opacity-80 max-w-2xl mx-auto">Setelah Anda berhasil membuat sistem login dasar, sangat penting untuk memahami cara mencegah <strong>SQL Injection</strong> agar database perpustakaan Anda tidak mudah diretas oleh pihak luar.</p>
+            <a href="Materi_Security.html" class="inline-block px-8 py-3 bg-accent text-white font-bold rounded-xl hover:bg-amber-400 transition shadow-lg shadow-accent/30 text-shadow-sm">Pelajari Keamanan (SQL Injection) <i class="fas fa-arrow-right ml-2"></i></a>
         </div>
     </main>
 
