@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi 7: OOP Dasar - E-Learning RPL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { jakarta: ['"Plus Jakarta Sans"', "sans-serif"] },
+                    colors: { primary: '#ec4899', secondary: '#1e293b', accent: '#8b5cf6' }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-900">
+    <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200">
+        <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="index.html" class="flex items-center text-primary font-bold hover:opacity-80 transition">
+                <i class="fas fa-arrow-left mr-2"></i> Dashboard
+            </a>
+            <div class="flex items-center space-x-2">
+                <span class="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full uppercase">Materi 7
+                    Lanjutan</span>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-gradient-to-br from-pink-500 to-rose-600 text-white py-16 px-4 text-center">
+        <i class="fas fa-cubes text-5xl text-white mb-6"></i>
+        <h1 class="text-4xl font-extrabold mb-4">Object Oriented Programming (OOP) Dasar</h1>
+        <p class="text-xl text-pink-50/80 max-w-2xl mx-auto">Mengenal paradigma pemrograman berbasis objek dengan PHP
+            untuk struktur kode yang lebih baik.</p>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-12">
+        <!-- PENGANTAR -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6 flex items-center"><i class="fas fa-gamepad text-primary mr-3"></i>
+                Pengantar: Analogi Sistem Hero</h2>
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 mb-4 relative overflow-hidden">
+                <div class="absolute top-0 right-0 -mt-4 -mr-4 w-32 h-32 bg-primary/10 rounded-full blur-2xl"></div>
+
+                <p class="text-slate-600 leading-relaxed text-lg">
+                    Menggunakan analogi karakter atau <strong>Hero</strong> dalam game adalah cara termudah untuk memahami konsep OOP karena setiap elemennya sangat relevan dengan mekanik permainan. Berikut adalah penerapan konsep OOP PHP menggunakan analogi sistem Hero:
+                </p>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6 flex items-center"><i class="fas fa-box text-primary mr-3"></i> 1.
+                Class dan Object</h2>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-4">
+                <p class="text-slate-600 mb-4"><strong>Class</strong> adalah daftar status dan kemampuan umum seorang Hero. <strong>Object</strong> adalah hero spesifik yang kita pilih untuk dimainkan.</p>
+                <div class="code-block text-pink-300">
+                    <pre>&lt;?php
+class Hero {
+    public $nama;
+    public $darah;
+    public $mana;
+
+    public function __construct($nama, $darah, $mana) {
+        $this-&gt;nama = $nama;
+        $this-&gt;darah = $darah;
+        $this-&gt;mana = $mana;
+    }
+
+    public function gunakanSkill() {
+        return "$this-&gt;nama menggunakan skill dasar!";
+    }
+}
+
+// Membuat object hero spesifik
+$layla = new Hero("Layla", 2500, 400);
+$balmond = new Hero("Balmond", 4500, 0);
+?&gt;</pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6 flex items-center"><i class="fas fa-sitemap text-primary mr-3"></i> 2.
+                Inheritance (Pewarisan)</h2>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-4">
+                <p class="text-slate-600 mb-4">Kita bisa membuat kategori hero yang lebih spesifik (Sub-class) yang mewarisi sifat dasar dari class Hero.</p>
+                <div class="code-block text-amber-300">
+                    <pre>&lt;?php
+class Mage extends Hero {
+    public $magicDamage;
+
+    public function __construct($nama, $darah, $mana, $magic) {
+        parent::__construct($nama, $darah, $mana); // Ambil construct dari parent
+        $this-&gt;magicDamage = $magic;
+    }
+
+    // Overriding: Mengubah perilaku method parent khusus untuk Mage
+    public function gunakanSkill() {
+        return "$this-&gt;nama mengeluarkan serangan meteor (Magic Damage: $this-&gt;magicDamage)!";
+    }
+}
+
+$vale = new Mage("Vale", 2200, 600, 500);
+echo $vale-&gt;gunakanSkill();
+?&gt;</pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6 flex items-center"><i class="fas fa-lock text-primary mr-3"></i> 3.
+                Encapsulation (Enkapsulasi)</h2>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-4">
+                <p class="mb-4 text-slate-600">Kita tidak ingin darah hero diubah sembarangan oleh sistem luar tanpa melalui logika tertentu (misalnya, darah tidak boleh lebih dari batas maksimal).</p>
+                <div class="code-block text-green-300">
+                    <pre>&lt;?php
+class Assassin extends Hero {
+    private $exp = 0; // Tidak bisa diakses langsung dari luar
+
+    public function tambahExp($jumlah) {
+        $this-&gt;exp += $jumlah;
+        if ($this-&gt;exp &gt;= 100) {
+            return "$this-&gt;nama Level Up!";
+        }
+    }
+}
+?&gt;</pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6 flex items-center"><i class="fas fa-random text-primary mr-3"></i> 4.
+                Polymorphism (Polimorfisme)</h2>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-4">
+                <p class="mb-4 text-slate-600">Semua hero punya cara berbeda untuk melakukan aksi yang sama, misalnya "Attack". Kita bisa menggunakan Interface untuk memastikan setiap hero memiliki method tersebut.</p>
+                <div class="code-block text-blue-300">
+                    <pre>&lt;?php
+interface AksiHero {
+    public function attack();
+}
+
+class Archer implements AksiHero {
+    public function attack() {
+        return "Menembakkan panah dari jauh!";
+    }
+}
+
+class Fighter implements AksiHero {
+    public function attack() {
+        return "Memukul dengan jarak dekat!";
+    }
+}
+
+// Fungsi yang bisa menerima hero jenis apa saja selama mereka punya interface AksiHero
+function mulaiSerangan(AksiHero $hero) {
+    echo $hero-&gt;attack();
+}
+
+mulaiSerangan(new Archer()); // Output: Menembakkan panah...
+mulaiSerangan(new Fighter()); // Output: Memukul dengan jarak dekat...
+?&gt;</pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6 flex items-center"><i class="fas fa-table text-primary mr-3"></i> Tabel Analogi OOP Game</h2>
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden mb-4">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-700">
+                            <th class="p-4 border-b border-slate-200 font-semibold">Konsep OOP</th>
+                            <th class="p-4 border-b border-slate-200 font-semibold">Analogi dalam Game</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-slate-600">
+                        <tr>
+                            <td class="p-4 border-b border-slate-100 font-medium text-primary">Class</td>
+                            <td class="p-4 border-b border-slate-100">Template Hero (Stats, Skill Slot).</td>
+                        </tr>
+                        <tr class="bg-slate-50">
+                            <td class="p-4 border-b border-slate-100 font-medium text-primary">Object</td>
+                            <td class="p-4 border-b border-slate-100">Hero yang sedang spawn di dalam map.</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 border-b border-slate-100 font-medium text-primary">Property</td>
+                            <td class="p-4 border-b border-slate-100">HP, Mana, Attack Speed, Movement Speed.</td>
+                        </tr>
+                        <tr class="bg-slate-50">
+                            <td class="p-4 border-b border-slate-100 font-medium text-primary">Method</td>
+                            <td class="p-4 border-b border-slate-100">Skill 1, Skill 2, Ultimate, Recall.</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 border-b border-slate-100 font-medium text-primary">Inheritance</td>
+                            <td class="p-4 border-b border-slate-100">Role (Mage, Tank, Marksman) yang semuanya berasal dari class Hero.</td>
+                        </tr>
+                        <tr class="bg-slate-50">
+                            <td class="p-4 font-medium text-primary">Encapsulation</td>
+                            <td class="p-4">Status Buff atau Cooldown yang dikelola internal oleh sistem hero.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <div class="bg-slate-900 text-white p-8 rounded-3xl text-center shadow-lg">
+            <h3 class="text-xl font-bold mb-4 flex items-center justify-center"><i
+                    class="fas fa-check-circle mr-2 text-accent"></i> Kesimpulan</h3>
+            <p class="opacity-80 max-w-2xl mx-auto mb-4">Dengan struktur ini, kode program menjadi lebih rapi. Jika ingin menambah jenis hero baru (misalnya Healer), Anda cukup membuat class baru yang melakukan extends Hero tanpa harus menulis ulang kode dasar dari awal.</p>
+            <p class="opacity-100 font-medium text-pink-300">Bagaimana, apakah analogi ini membantu memperjelas perbedaan antara Class dan Inheritance?</p>
+        </div>
+    </main>
+
+    <footer class="py-12 text-center text-slate-400 text-sm">
+        <p>&copy; 2026 E-Learning RPL - Materi Lanjutan</p>
+    </footer>
+</body>
+
+</html>
